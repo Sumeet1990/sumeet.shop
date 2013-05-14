@@ -32,8 +32,8 @@ function check()
 <form id="forgotPass" action="sendPassword" method="GET" onsubmit="return check()">
     <h1>Forgot Password</h1>
 
-    <input id="inputs" name="phonenumber" type="text" placeholder="PhoneNumber"><br><br>
-    <input id="inputs" name="email" type="text" placeholder="EmailId"><br>
+    <input id="inputs" name="phonenumber" type="number" placeholder="PhoneNumber"><br><br>
+    <input id="inputs" name="email" type="email" placeholder="EmailId" ><br>
     <br><input id="inputs" name="username" type="text" placeholder="Username" required><br><br>   
    <fieldset id="actions">
         <input type="submit" id="submit" value="Reset">

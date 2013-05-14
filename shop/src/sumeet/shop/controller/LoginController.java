@@ -13,7 +13,7 @@ public class LoginController {
 	public String check(ModelMap map)
 	{
 		
-		System.out.print("Emtered into main  spring");
+		System.out.print("Entered into main  spring");
 		return "login";
 		
 	}
@@ -23,16 +23,25 @@ public class LoginController {
 	{
 		
 		System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+userName);
-		return "login";
+		return "main-welcome";
 		
 	}
 	
-	@RequestMapping(value="/registerUser", method=RequestMethod.GET )
+	@RequestMapping(value="/jsp/registerUser", method=RequestMethod.GET )
 	public String registerUser(@RequestParam("username") String userName,@RequestParam("password") String password,ModelMap map)
 	{
 		
 		System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+userName);
 		return "login";
+		
+	}
+	
+	@RequestMapping(value="/jsp/sendPassword", method=RequestMethod.GET )
+	public String sendPassword(ModelMap map)
+	{
+		
+		System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Send password");
+		return "password-sent";
 		
 	}
 	

@@ -4,7 +4,6 @@
 <script type="text/javascript">
 function checkFrSamePassword()
 {
-	alert("Entered");
 	try{
 	 var prevPass = document.forms["register"]["password"].value;
 	 var confirmPass = document.forms["register"]["confirmpassword"].value;
@@ -38,10 +37,13 @@ function checkFrSamePassword()
     <input id="inputs" name="name" type="text" placeholder="Name/Owner" autofocus required><br><br>
     <input id="inputs" name="company" type="text" placeholder="Company" required><br><br>
     <input id="inputs" name="phonenumber" type="text" placeholder="PhoneNumber"><br><br>
+  	<input id="inputs" name="address1" type="text" placeholder="Address Line 1" required><br>
+  	<input id="inputs" name="address2" type="text" placeholder="Address Line 2"><br>
+  	<input id="inputs" name="address3" type="text" placeholder="Address Line 3"><br><br>
     <input id="inputs" name="email" type="text" placeholder="EmailId"><br>
     <br><input id="inputs" name="username" type="text" placeholder="Username" required><br>   
     <br><input id="inputs" name="password" type="password" placeholder="Password" required><br><br>
-    <input id="inputs" name="confirmpassword" type="password" placeholder="Confirm Password" required><br><br><br><br>
+    <input id="inputs" name="confirmpassword" type="password" placeholder="Confirm Password" required><br><br>
 
     <fieldset id="actions">
         <input type="submit" id="submit" value="Submit">

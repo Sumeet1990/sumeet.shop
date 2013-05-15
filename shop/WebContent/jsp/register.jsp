@@ -47,6 +47,7 @@ function checkFrSamePassword()
 
     <fieldset id="actions">
         <input type="submit" id="submit" value="Submit">
+        <a href="./jsp/login.jsp">Back</a>
     </fieldset>
 
 </form>

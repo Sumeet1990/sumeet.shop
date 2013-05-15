@@ -37,6 +37,7 @@ function check()
     <br><input id="inputs" name="username" type="text" placeholder="Username" required><br><br>   
    <fieldset id="actions">
         <input type="submit" id="submit" value="Reset">
+        <a href="./jsp/login.jsp">Back</a>
     </fieldset>
 
 </form>

@@ -1,6 +1,6 @@
 <html><meta style="visibility: hidden !important; display: block !important; width: 0px !important; height: 0px !important; border-style: none !important;"></meta><head>
 <title>Reset Password</title>
-<link rel="stylesheet" href="../css/loginStylesheet.css" type="text/css"><script type="text/javascript">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/loginStylesheet.css" type="text/css"><script type="text/javascript">
 
  </script><style type="text/css"></style></head>
  
@@ -32,12 +32,12 @@ function check()
 <form id="forgotPass" action="sendPassword" method="GET" onsubmit="return check()">
     <h1>Forgot Password</h1>
 
-    <input id="inputs" name="phonenumber" type="number" placeholder="PhoneNumber"><br><br>
-    <input id="inputs" name="email" type="email" placeholder="EmailId" ><br>
-    <br><input id="inputs" name="username" type="text" placeholder="Username" required><br><br>   
+    <input id="inputsnormal" name="phonenumber" type="number" placeholder="PhoneNumber"><br><br>
+    <input id="inputsnormal" name="email" type="email" placeholder="EmailId" ><br>
+    <br><input id="inputsnormal" name="username" type="text" placeholder="Username" required><br><br>   
    <fieldset id="actions">
         <input type="submit" id="submit" value="Reset">
-        <a href="./jsp/login.jsp">Back</a>
+        <a href="${pageContext.request.contextPath}">Back</a>
     </fieldset>
 
 </form>

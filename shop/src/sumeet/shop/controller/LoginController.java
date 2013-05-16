@@ -5,6 +5,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginController {
@@ -18,12 +19,26 @@ public class LoginController {
 		
 	}
 	
-	@RequestMapping(value="/validate", method=RequestMethod.GET )
-	public String validateUser(@RequestParam("username") String userName,@RequestParam("password") String password,ModelMap map)
+	@RequestMapping(value="/validate", method=RequestMethod.POST )
+	public ModelAndView validateUser(@RequestParam("username") String userName,@RequestParam("password") String password,ModelMap map)
 	{
-		
 		System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+userName);
-		return "main-welcome";
+		ModelAndView view = new ModelAndView();
+		if(userName.trim().equals("admin") && password.equals("admin"))
+		{
+			view.setViewName("main-welcome");
+			view.addObject("Username",userName);
+			return view;
+		}
+		else
+		{
+			view.setViewName("login");
+			if(userName.trim().equals("admin"))
+				view.addObject("Error", "Password is incorrect");
+			else
+				view.addObject("Error", "Username and password are invalid please try again");
+			return view;
+		}
 		
 	}
 	

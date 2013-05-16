@@ -1,0 +1,336 @@
+		*{
+			margin:0;
+			padding:0;
+			list-style:none;
+			border:none;
+		}
+		body{
+			font-family:Verdana,Arial,Sans-Serif;
+			font-size:90%;
+			background:#333;
+			color:#ccc;
+		}
+		
+		div.domtab{
+			padding:0 3em;
+			width:80%;
+			font-size:90%;
+		}
+		ul.domtabs{
+			float:left;
+			width:100%;
+			margin:2em 0 0 0;				
+		}
+		ul.domtabs li{
+			float:left;
+			padding:0 .5em 0 0;
+		}
+		ul.domtabs a:link,
+		ul.domtabs a:visited,
+		ul.domtabs a:active,
+		ul.domtabs a:hover{
+			width:8em;
+			padding:.2em 1em;
+			display:block;
+			background:#666;
+			color:#ccc;
+			height:3em;
+			font-weight:bold;
+			text-decoration:none;
+		}
+		html>body ul.domtabs a:link,
+		html>body ul.domtabs a:visited,
+		html>body ul.domtabs a:active,
+		html>body ul.domtabs a:hover{
+			height:auto;
+			min-height:3em;
+		}
+		ul.domtabs a:hover{
+			background:#696;
+		}
+		div.domtab div{
+			clear:both;
+			width:auto;
+			background:#696;
+			color:#fff;
+			padding:1em 3em;
+		}
+		ul.domtabs li.active a:link,
+		ul.domtabs li.active a:visited,
+		ul.domtabs li.active a:active,
+		ul.domtabs li.active a:hover{
+			background:#696;
+			color:#fff;
+		}
+		#domtabprintview{
+			float:right;
+			padding-right:1em;
+			text-align:right;
+		}
+		#domtabprintview a:link,
+		#domtabprintview a:visited,
+		#domtabprintview a:active,
+		#domtabprintview a:hover{
+			color:#fff;
+		}
+		p{
+			margin:0 0 .5em 0;
+			line-height:1.3em;
+		}
+		h2{
+			font-size:1.3em;
+			color:#cfc;
+			text-transform:uppercase;
+			font-family:"Trebuchet MS",Arial,Sans-Serif;
+			padding:0 0 .7em .2em;
+		}
+		h1{
+			font-size:2em;
+			font-weight:normal;
+			font-family:"Trebuchet MS",Arial,Sans-Serif;
+			padding:.5em 0;
+			background:#000;
+			border-bottom:1px solid #666;
+		}
+		pre{
+			font-size:1.2em;
+			padding:1em;
+		}
+		div.domtab div a:link,
+		div.domtab div a:visited,
+		div.domtab div a:active
+		{
+			color:#fff;
+			display:block;
+			padding:1em .5em;
+			font-weight:bold;
+			font-size:1.3em;
+		}
+		div.domtab div h2 a,
+		div.domtab div h2 a:hover,
+		div.domtab div h2 a:active
+		{
+			color:#cfc;
+			display:inline;
+			padding:0;
+			font-weight:normal;
+			font-size:1em;
+		}
+		
+/* other scheme! */
+#other{
+
+	margin-left:.3em;
+	width:100%;
+	margin-bottom:3em;
+	float:left;
+}
+div#other.domtab div{
+	clear:both;
+	width:100%;
+	background:#669;
+	color:#fff;
+	padding:1em 3em;
+}
+		
+#other ul.domtabs a:hover{
+	background:#669;
+}
+div#other ul.domtabs li.active a:link,
+div#other ul.domtabs li.active a:visited,
+div#other ul.domtabs li.active a:active,
+div#other ul.domtabs li.active a:hover{
+	background:#669;
+	color:#fff;
+}
+#other div{
+	float:left;
+}
+ul.prevnext{
+	float:left;
+	width:100%;
+}
+ul.prevnext li{
+	float:left;
+	width:49%;
+}
+ul.prevnext li.next{
+	float:right;
+	text-align:right;
+}
+
+/*-----------For Input fields ----------*/
+
+#inputs
+{
+    padding: 15px 15px 15px 30px;
+    margin: 0 0 10px 0;
+    width: 353px; /* 353 + 2 + 45 = 400 */
+    border: 1px solid #ccc;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
+    -webkit-box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
+    box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
+}
+
+#inputs:focus
+{
+    background-color: #fff;
+    border-color: #e8c291;
+    outline: none;
+    -moz-box-shadow: 0 0 0 1px #e8c291 inset;
+    -webkit-box-shadow: 0 0 0 1px #e8c291 inset;
+    box-shadow: 0 0 0 1px #e8c291 inset;
+}
+
+
+#submit
+{		
+    background-color: #ffb94b;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#fddb6f), to(#ffb94b));
+    background-image: -webkit-linear-gradient(top, #fddb6f, #ffb94b);
+    background-image: -moz-linear-gradient(top, #fddb6f, #ffb94b);
+    background-image: -ms-linear-gradient(top, #fddb6f, #ffb94b);
+    background-image: -o-linear-gradient(top, #fddb6f, #ffb94b);
+    background-image: linear-gradient(top, #fddb6f, #ffb94b);
+    
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    
+     -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+     -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+     box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;    
+    
+    border-width: 1px;
+    border-style: solid;
+    border-color: #d69e31 #e3a037 #d5982d #e3a037;
+
+    float: left;
+    height: 35px;
+    padding: 0;
+    width: 120px;
+    cursor: pointer;
+    font: bold 15px Arial, Helvetica;
+    color: #8f5a0a;
+}
+
+#submit:hover,#submit:focus
+{		
+    background-color: #fddb6f;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ffb94b), to(#fddb6f));
+    background-image: -webkit-linear-gradient(top, #ffb94b, #fddb6f);
+    background-image: -moz-linear-gradient(top, #ffb94b, #fddb6f);
+    background-image: -ms-linear-gradient(top, #ffb94b, #fddb6f);
+    background-image: -o-linear-gradient(top, #ffb94b, #fddb6f);
+    background-image: linear-gradient(top, #ffb94b, #fddb6f);
+}	
+
+#submit:active
+{		
+    outline: none;
+   
+     -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
+     -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
+     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;		
+}
+
+#submit::-moz-focus-inner
+{
+  border: none;
+}
+/*---Buttons-*/
+
+#buttonAddDel
+{		
+    background-color: #ffb94b;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#fddb6f), to(#ffb94b));
+    background-image: -webkit-linear-gradient(top, #fddb6f, #ffb94b);
+    background-image: -moz-linear-gradient(top, #fddb6f, #ffb94b);
+    background-image: -ms-linear-gradient(top, #fddb6f, #ffb94b);
+    background-image: -o-linear-gradient(top, #fddb6f, #ffb94b);
+    background-image: linear-gradient(top, #fddb6f, #ffb94b);
+    
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    
+     -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+     -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+     box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;    
+    
+    border-width: 1px;
+    border-style: solid;
+    border-color: #d69e31 #e3a037 #d5982d #e3a037;
+
+    float: left;
+    height: 35px;
+    padding: 0;
+    width: 120px;
+    cursor: pointer;
+    font: bold 15px Arial, Helvetica;
+    color: #8f5a0a;
+}
+
+#buttonAddDel:hover,#submit:focus
+{		
+    background-color: #fddb6f;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ffb94b), to(#fddb6f));
+    background-image: -webkit-linear-gradient(top, #ffb94b, #fddb6f);
+    background-image: -moz-linear-gradient(top, #ffb94b, #fddb6f);
+    background-image: -ms-linear-gradient(top, #ffb94b, #fddb6f);
+    background-image: -o-linear-gradient(top, #ffb94b, #fddb6f);
+    background-image: linear-gradient(top, #ffb94b, #fddb6f);
+}	
+
+#buttonAddDel:active
+{		
+    outline: none;
+   
+     -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
+     -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
+     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;		
+}
+
+#buttonAddDel::-moz-focus-inner
+{
+  border: none;
+}
+/*-----*/
+#actions a
+{
+    color: #3151A2;    
+    float: right;
+    line-height: 35px;
+    margin-left: 10px;
+}
+/*-------Table inputs---*/
+#tableInputs,#quantityTab
+{
+  border: 1px solid;
+  border-color: #a8acbc #babdcc #c0c3d2;
+  border-radius: 13px;
+  -webkit-appearance: textfield;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-box-shadow: inset 0 1px #e5e7ed, 0 1px #fcfcfc;
+  box-shadow: inset 0 1px #e5e7ed, 0 1px #fcfcfc;
+  padding: 0px 12px 0px 25px;
+}
+#tableInputs
+{
+  background: white url("table-images/search.png") 3px 4px no-repeat;
+}
+#tableInputs:focus,#quantityTab:FOCUS{
+  outline: 0;
+  border-color: #66b1ee;
+  -webkit-box-shadow: 0 0 2px rgba(85, 168, 236, 0.9);
+  box-shadow: 0 0 2px rgba(85, 168, 236, 0.9);
+}

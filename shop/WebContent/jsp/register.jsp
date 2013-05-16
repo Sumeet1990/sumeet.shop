@@ -28,26 +28,26 @@ function checkFrSamePassword()
 }
  </script>
  </head>
- <link rel="stylesheet" href="../css/loginStylesheet.css" type="text/css">
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/css/loginStylesheet.css" type="text/css">
 <body>
 
 <form id="register" action="registerUser" method="GET" onsubmit="return checkFrSamePassword()">
     <h1>Register</h1>
 
-    <input id="inputs" name="name" type="text" placeholder="Name/Owner" autofocus required><br><br>
-    <input id="inputs" name="company" type="text" placeholder="Company" required><br><br>
-    <input id="inputs" name="phonenumber" type="number" placeholder="PhoneNumber"><br><br>
-  	<input id="inputs" name="address1" type="text" placeholder="Address Line 1" required><br>
-  	<input id="inputs" name="address2" type="text" placeholder="Address Line 2"><br>
-  	<input id="inputs" name="address3" type="text" placeholder="Address Line 3"><br><br>
-    <input id="inputs" name="email" type="email" placeholder="EmailId"><br>
-    <br><input id="inputs" name="username" type="text" placeholder="Username" required><br>   
-    <br><input id="inputs" name="password" type="password" placeholder="Password" required><br><br>
-    <input id="inputs" name="confirmpassword" type="password" placeholder="Confirm Password" required><br><br>
+    <input id="inputsnormal" name="name" type="text" placeholder="Name/Owner" autofocus required><br>
+    <input id="inputsnormal" name="company" type="text" placeholder="Company" required><br>
+    <input id="inputsnormal" name="phonenumber" type="number" placeholder="PhoneNumber"><br>
+  	<input id="inputsnormal" name="address1" type="text" placeholder="Address Line 1" required>
+  	<input id="inputsnormal" name="address2" type="text" placeholder="Address Line 2">
+  	<input id="inputsnormal" name="address3" type="text" placeholder="Address Line 3"><br>
+    <input id="inputsnormal" name="email" type="email" placeholder="EmailId"><br>
+    <input id="inputsnormal" name="username" type="text" placeholder="Username" required>   
+    <br><input id="inputsnormal" name="password" type="password" placeholder="Password" required><br>
+    <input id="inputsnormal" name="confirmpassword" type="password" placeholder="Confirm Password" required><br>
 
     <fieldset id="actions">
         <input type="submit" id="submit" value="Submit">
-        <a href="./jsp/login.jsp">Back</a>
+        <a href="${pageContext.request.contextPath}">Back</a>
     </fieldset>
 
 </form>

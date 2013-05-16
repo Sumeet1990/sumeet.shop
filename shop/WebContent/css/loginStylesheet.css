@@ -27,7 +27,6 @@ body
     background-image: -ms-linear-gradient(top, #fff, #eee);
     background-image: -o-linear-gradient(top, #fff, #eee);
     background-image: linear-gradient(top, #fff, #eee);  
-    height: 240px;
     width: 400px;
     margin: -150px 0 0 -230px;
     padding: 30px;
@@ -283,7 +282,31 @@ fieldset
     -webkit-box-shadow: 0 0 0 1px #e8c291 inset;
     box-shadow: 0 0 0 1px #e8c291 inset;
 }
+/*---------------Normal inputs------------*/
 
+#inputsnormal
+{
+    padding: 15px 15px 15px 30px;
+    margin: 0 0 10px 0;
+    width: 353px; /* 353 + 2 + 45 = 400 */
+    border: 1px solid #ccc;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
+    -webkit-box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
+    box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
+}
+
+#inputsnormal:focus
+{
+    background-color: #fff;
+    border-color: #e8c291;
+    outline: none;
+    -moz-box-shadow: 0 0 0 1px #e8c291 inset;
+    -webkit-box-shadow: 0 0 0 1px #e8c291 inset;
+    box-shadow: 0 0 0 1px #e8c291 inset;
+}
 /*--------------------*/
 #actions
 {

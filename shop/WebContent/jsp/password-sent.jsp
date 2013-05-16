@@ -20,6 +20,6 @@
     font: normal 26px/1 Verdana, Helvetica;
     position: relative;">Thank You!!!</h1>
     
-<a href="./jsp/login.jsp">Back</a>
+<a href="${pageContext.request.contextPath}">Back</a>
 </body>
 </html>

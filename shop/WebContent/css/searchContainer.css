@@ -9,11 +9,9 @@
   width: 300px;
 }
 .search input {
-  height: 26px;
   width: 100%;
-  padding: 0 12px 0 25px;
-  background: white url("table-images/search.png") 8px 6px no-repeat;
-  border: 1px solid;
+  padding: 0px 12px 0px 25px;
+  background: white url("table-images/search.png") 3px 4px no-repeat;
   border-color: #a8acbc #babdcc #c0c3d2;
   border-radius: 13px;
   -webkit-appearance: textfield;
@@ -36,7 +34,7 @@
 .search-ac {
   display: none;
   position: absolute;
-  top: 35px;
+  top: 30px;
   left: 0;
   right: 0;
   z-index: 10;

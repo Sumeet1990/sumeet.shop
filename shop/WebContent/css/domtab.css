@@ -48,13 +48,13 @@
 		ul.domtabs a:hover{
 			background:#696;
 		}
-		div.domtab div{
+		/* div.domtab div{
 			clear:both;
 			width:auto;
 			background:#696;
 			color:#fff;
 			padding:1em 3em;
-		}
+		} */
 		ul.domtabs li.active a:link,
 		ul.domtabs li.active a:visited,
 		ul.domtabs li.active a:active,
@@ -125,13 +125,13 @@
 	margin-bottom:3em;
 	float:left;
 }
-div#other.domtab div{
+/* div#other.domtab div{
 	clear:both;
 	width:100%;
 	background:#669;
 	color:#fff;
 	padding:1em 3em;
-}
+} */
 		
 #other ul.domtabs a:hover{
 	background:#669;

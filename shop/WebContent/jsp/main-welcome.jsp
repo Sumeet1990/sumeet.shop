@@ -31,14 +31,63 @@
 <![endif]-->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/javascript/domtab.js"></script>
+	<script type="text/javascript"
+	src="${pageContext.request.contextPath}/javascript/jQuery1.9.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+    $('body').on("keyup",'.numberOnly', function(){
+    	if(this.value.search(/^[A-Za-z\s]+$/) != -1)
+    		{
+    		if(!(this.value.replace(/^\s+|\s+$/g,'') == ''))
+    			{
+    			alert("Please enter number");
+    			this.value = this.value.replace(/[^0-9\.]/g,'');
+    			}
+    		}
+    	else
+	    	this.value = this.value.replace(/[^0-9\.]/g,'');
+    });
+});
+
+var count = 0;
+	function updatePrice(id)
+	{
+		try{
+		alert(id);
+		var quantity = document.getElementsByName("txtbox"+id).value;
+		var perprice = document.getElementsByName("price"+id).value;
+		document.getElementById("totalValue"+id).innerHTML = quantity * perprice;
+		}catch(err)
+		{
+			alert("Total--"+err);
+		}
+	}
+	function setItemCode(liId,inputsearchBxId)
+	{
+		
+		try{
+		var liIdin = 'liEll' + liId;
+		var inputSearchId = 'inputSearch' + inputsearchBxId;
+
+		var li = document.getElementById(liIdin).innerHTML;
+		
+		document.getElementById(inputSearchId).value = li;
+		$("#textbx"+inputsearchBxId).hide();
+		
+		}catch(err)
+		{
+			alert("Error ==="+err);
+		}
+	}
+
 	function checkItemExist(id) {
 		try {
 			var textBxId = 'textbx' + id;
 			var ul = document.getElementById(textBxId);
-			var value = document.getElementById('inputSearch' + id).value;
+			var inputsearchBx = 'inputSearch' + id;
+			var value = document.getElementById(inputsearchBx).value;
 			var valueArr = new Array("Saab", "Volvo", "BMW","Vorvo");
-			var lis = document.getElementById("liEll");
+			var lis = document.getElementsByName("liEll");
 			
 			if(lis != null)
 				{
@@ -49,14 +98,15 @@
 			
 			if(!(value.replace(/^\s+|\s+$/g,'') == ''))
 				{
+				$("#"+textBxId).show();
 					for ( var i = 0; i < valueArr.length; i++) {
 		
 						var singleVal = valueArr[i];
-						if (singleVal.toUpperCase().startsWith(value.toUpperCase())) {
+						if ((singleVal.toUpperCase().indexOf(value.toUpperCase()))==0) {
 							var li = document.createElement('li');
 		
 							ul.appendChild(li);
-							li.innerHTML = "<li id='liEll' ><a><span>"+ valueArr[i] +"</span></a></li>";
+							li.innerHTML = "<li class='liImageClass' name='liEll' id='liEll"+i+"' onclick='setItemCode("+i+","+id+")'>"+ valueArr[i] +"</li>";
 						}
 					}
 				}
@@ -78,7 +128,7 @@
 		document.getElementById('top1').innerHTML = curr_year + "  " + "   "
 				+ h + ":" + m + ":" + s;
 		t = setTimeout(function() {
-			startTime()
+			startTime();
 		}, 500);
 	}
 
@@ -92,7 +142,7 @@
 	function addRow(tableID) {
 
 		var table = document.getElementById(tableID);
-		var count = 0;
+		
 		var rowCount = table.rows.length;
 		var row = table.insertRow(rowCount);
 
@@ -104,19 +154,24 @@
 
 		var cell2 = row.insertCell(1);
 		count++;
-		cell2.innerHTML = '<form class="search" method="post" action="index.html">'
+		cell2.innerHTML = '<span class="search" >'
 				+ '<input type="search" id="inputSearch'
 				+ count
 				+ '" onKeyup="checkItemExist('
 				+ count
 				+ ')"  placeholder="Search..." autocomplete="off" size="30"/>'
-				+ ' <ul class="search-ac" id="textbx'+count+'">' + '</form>';
+				+ ' <ul name="ulHidden" class="search-ac" id="textbx'+count+'">' + '</span>';
+				
+				
 
 		var cell3 = row.insertCell(2);
-		cell3.innerHTML = '<input type="text" name="txtbox[]" id="quantityTab" size="30"/>';
+		cell3.innerHTML = '<input type="text" value="0.0" name="txtbox'+count+'" onchange="updatePrice('+count+')" class="numberOnly" id="quantityTab" size="30"/>';
 		var cell4 = row.insertCell(3);
-		cell4.innerHTML = '<input type="text" name="price" id="quantityTab" size="30"/>';
+		cell4.innerHTML = '<input type="text" value="0.0" name="price'+count+'" onchange="updatePrice('+count+')" class="numberOnly" id="quantityTab" size="30"/>';
+		var cell5 = row.insertCell(5);
+		cell5.innerHTML = '<span id="totalValue'+count+'">0.0 </span>';
 
+		$("#textbx'+count+'").hide();
 	}
 
 	function deleteRow(tableID) {
@@ -169,7 +224,7 @@
 
 				<input id="inputs" name="customername" type="text"
 					placeholder="Customer Name" autofocus required><br> <input
-					id="inputs" name="phonenumber" type="text"
+					id="inputs" name="phonenumber" type="text" class="numberOnly"
 					placeholder="Phone Number"><br> <INPUT
 					id="buttonAddDel" type="button" value="Add Row"
 					onclick="addRow('background-image')" />&nbsp;&nbsp; <INPUT
@@ -178,10 +233,11 @@
 				<table id="background-image" summary="Meeting Results">
 					<thead>
 						<tr>
-							<th scope="col">      </th>
+							<th scope="col"></th>
 							<th scope="col">Item Description</th>
 							<th scope="col">Quantity</th>
 							<th scope="col">Price</th>
+							<th scope="col">Total</th>
 						</tr>
 					</thead>
 				</table>

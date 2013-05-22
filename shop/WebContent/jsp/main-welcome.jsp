@@ -53,10 +53,11 @@ var count = 0;
 	function updatePrice(id)
 	{
 		try{
-		alert(id);
-		var quantity = document.getElementsByName("txtbox"+id).value;
-		var perprice = document.getElementsByName("price"+id).value;
-		document.getElementById("totalValue"+id).innerHTML = quantity * perprice;
+		
+		var quantity = $("[name='chekBx" + id + "']").val();
+		var perprice = $("[name='price" + id + "']").val();
+		$("#totalValue"+id).text(quantity * perprice) ;
+	
 		}catch(err)
 		{
 			alert("Total--"+err);
@@ -165,13 +166,13 @@ var count = 0;
 				
 
 		var cell3 = row.insertCell(2);
-		cell3.innerHTML = '<input type="text" value="0.0" name="txtbox'+count+'" onchange="updatePrice('+count+')" class="numberOnly" id="quantityTab" size="30"/>';
+		cell3.innerHTML = '<input type="text" value="0.0" name="chekBx'+count+'" onchange="updatePrice('+count+')" class="numberOnly" id="quantityTab" size="30"/>';
 		var cell4 = row.insertCell(3);
 		cell4.innerHTML = '<input type="text" value="0.0" name="price'+count+'" onchange="updatePrice('+count+')" class="numberOnly" id="quantityTab" size="30"/>';
-		var cell5 = row.insertCell(5);
-		cell5.innerHTML = '<span id="totalValue'+count+'">0.0 </span>';
+		var cell5 = row.insertCell(4);
+		cell5.innerHTML = '<span style="color:black" id="totalValue'+count+'">0.0 </span>';
 
-		$("#textbx'+count+'").hide();
+		$("#textbx"+count).hide();
 	}
 
 	function deleteRow(tableID) {

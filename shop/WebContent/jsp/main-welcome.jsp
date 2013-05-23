@@ -35,6 +35,7 @@
 	<script type="text/javascript"
 	src="${pageContext.request.contextPath}/javascript/jQuery1.9.js"></script>
 <script type="text/javascript">
+
 $(document).ready(function(){
     $('body').on("keyup",'.numberOnly', function(){
     	if(this.value.search(/^[A-Za-z\s]+$/) != -1)
@@ -180,9 +181,20 @@ var downKeyCount=0;
 		}
 		return i;
 	}
-	function hideUL(idForinput)
+	function hideUL(e,idForinput)
 	{
-		$("#textbx"+idForinput).hide();
+		var hide = true;
+
+		$(document).click(function(event) {
+		    if (event.target.nodeName == "LI") {
+		    	hide =false;
+		    }
+		});
+		
+		if(hide)
+		{
+			$("#textbx"+idForinput).hide();
+		}
 	}
 
 	function addRow(tableID) {
@@ -205,7 +217,7 @@ var downKeyCount=0;
 				+ count
 				+ '" onKeyup="checkItemExist(event,'
 				+ count
-				+ ')"  onblur="hideUL('+count+')" placeholder="Search..." autocomplete="off" size="30"/>'
+				+ ')"  onblur="hideUL(event,'+count+')" placeholder="Search..." autocomplete="off" size="30"/>'
 				+ ' <ul name="ulHidden" class="search-ac" id="textbx'+count+'">' + '</span>';
 				
 				

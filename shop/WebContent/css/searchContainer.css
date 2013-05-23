@@ -57,7 +57,7 @@
   height: 18px;
   background: url("table-images/arrow.png") 0 0 no-repeat;
 }
-.search-ac li:hover {
+.search-ac li:hover, .liJqeryDown {
   color: white;
   text-shadow: 0 -1px rgba(0, 0, 0, 0.3);
   background: #338cdf;

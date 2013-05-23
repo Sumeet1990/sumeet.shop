@@ -1,5 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <%@page import="java.util.Date"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html dir="ltr" lang="en">
 <head>
 <%
@@ -49,11 +50,11 @@ $(document).ready(function(){
     });
 });
 
-var count = 0;
+var count = -1;
+var downKeyCount=0;
 	function updatePrice(id)
 	{
 		try{
-		
 		var quantity = $("[name='chekBx" + id + "']").val();
 		var perprice = $("[name='price" + id + "']").val();
 		$("#totalValue"+id).text(quantity * perprice) ;
@@ -81,7 +82,7 @@ var count = 0;
 		}
 	}
 
-	function checkItemExist(id) {
+	function checkItemExist(e,id) {
 		try {
 			var textBxId = 'textbx' + id;
 			var ul = document.getElementById(textBxId);
@@ -89,6 +90,46 @@ var count = 0;
 			var value = document.getElementById(inputsearchBx).value;
 			var valueArr = new Array("Saab", "Volvo", "BMW","Vorvo");
 			var lis = document.getElementsByName("liEll");
+			
+			    if(e.which == 40)
+			    {
+			    	
+			    	if(downKeyCount == 0)
+			    		{ 
+			    			$('#'+textBxId).children('li').eq(downKeyCount).addClass("liJqeryDown");
+			    			$("#"+inputsearchBx).val($('#'+textBxId).children('li').eq(downKeyCount).text());
+			    			
+			    		}
+			    	else
+			    		{
+			    		//alert($('#'+textBxId).children('li').eq(downKeyCount));
+			    		if($('#'+textBxId).children('li').eq(downKeyCount).length > 0)
+			    			{
+			    			$('#'+textBxId).children('li').eq((downKeyCount-1)).removeClass("liJqeryDown");
+			    			$('#'+textBxId).children('li').eq(downKeyCount).addClass("liJqeryDown");
+			    			$("#"+inputsearchBx).val($('#'+textBxId).children('li').eq(downKeyCount).text());
+			    			}else
+			    				{
+			    				downKeyCount--;
+			    				}
+			    		}
+			    	downKeyCount++;
+			    }else if(e.which == 38)
+			    	{
+			    	if(!downKeyCount==0)
+			    		downKeyCount--;
+			    	if($('#'+textBxId).children('li').eq(downKeyCount).length > 0)
+			    		{
+			    		$('#'+textBxId).children('li').eq((downKeyCount+1)).removeClass("liJqeryDown");
+			    		$('#'+textBxId).children('li').eq(downKeyCount).addClass("liJqeryDown");
+			    		$("#"+inputsearchBx).val($('#'+textBxId).children('li').eq(downKeyCount).text());
+			    		}
+			    	}else if(e.which == 13)
+			    		{
+			    			$("#"+textBxId).hide();
+			    		}else
+			    			{
+			    			downKeyCount = 0;
 			
 			if(lis != null)
 				{
@@ -111,7 +152,7 @@ var count = 0;
 						}
 					}
 				}
-			
+			    			}
 		} catch (err) {
 			alert(err);
 		}
@@ -139,9 +180,13 @@ var count = 0;
 		}
 		return i;
 	}
+	function hideUL(idForinput)
+	{
+		$("#textbx"+idForinput).hide();
+	}
 
 	function addRow(tableID) {
-
+		downKeyCount = 0;
 		var table = document.getElementById(tableID);
 		
 		var rowCount = table.rows.length;
@@ -156,11 +201,11 @@ var count = 0;
 		var cell2 = row.insertCell(1);
 		count++;
 		cell2.innerHTML = '<span class="search" >'
-				+ '<input type="search" id="inputSearch'
+				+ '<input type="search" id="inputSearch' 
 				+ count
-				+ '" onKeyup="checkItemExist('
+				+ '" onKeyup="checkItemExist(event,'
 				+ count
-				+ ')"  placeholder="Search..." autocomplete="off" size="30"/>'
+				+ ')"  onblur="hideUL('+count+')" placeholder="Search..." autocomplete="off" size="30"/>'
 				+ ' <ul name="ulHidden" class="search-ac" id="textbx'+count+'">' + '</span>';
 				
 				
@@ -221,9 +266,9 @@ var count = 0;
 			<h2>
 				<a name="billing" id="billing">Billing</a>
 			</h2>
-			<form action="validate" method="GET">
+			<form action="makeBill" method="POST">
 
-				<input id="inputs" name="customername" type="text"
+				<input id="inputs" name="customername" type="text" 
 					placeholder="Customer Name" autofocus required><br> <input
 					id="inputs" name="phonenumber" type="text" class="numberOnly"
 					placeholder="Phone Number"><br> <INPUT
@@ -243,8 +288,7 @@ var count = 0;
 					</thead>
 				</table>
 				<fieldset id="actions">
-					<input type="submit" id="submit" value="Done"> <input
-						type="button" id="submit" value="Print">
+					<input type="submit" id="submit" value="Done">
 				</fieldset>
 			</form>
 		</div>

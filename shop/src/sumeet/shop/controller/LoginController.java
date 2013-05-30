@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import antlr.debug.NewLineEvent;
+
+import sumeet.shop.beans.Customer;
+
 @Controller
 public class LoginController {
 
@@ -15,29 +19,29 @@ public class LoginController {
 	{
 		
 		System.out.print("Entered into main  spring");
+		//map.addAttribute("customer", new Customer());
 		return "login";
 		
 	}
 	
 	@RequestMapping(value="/validate", method=RequestMethod.POST )
-	public ModelAndView validateUser(@RequestParam("username") String userName,@RequestParam("password") String password,ModelMap map)
+	public String validateUser(@RequestParam("username") String userName,@RequestParam("password") String password,ModelMap map)
 	{
 		System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+userName);
-		ModelAndView view = new ModelAndView();
+
 		if(userName.trim().equals("admin") && password.equals("admin"))
 		{
-			view.setViewName("main-welcome");
-			view.addObject("Username",userName);
-			return view;
+			Customer cust = new Customer();
+			map.addAttribute("Username",userName);
+			return "main-welcome";
 		}
 		else
 		{
-			view.setViewName("login");
 			if(userName.trim().equals("admin"))
-				view.addObject("Error", "Password is incorrect");
+				map.addAttribute("Error", "Password is incorrect");
 			else
-				view.addObject("Error", "Username and password are invalid please try again");
-			return view;
+				map.addAttribute("Error", "Username and password are invalid please try again");
+			return "login";
 		}
 		
 	}

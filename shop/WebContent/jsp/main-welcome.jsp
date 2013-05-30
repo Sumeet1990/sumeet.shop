@@ -1,6 +1,5 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <%@page import="java.util.Date"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html dir="ltr" lang="en">
 <head>
 <%
@@ -36,6 +35,14 @@
 	src="${pageContext.request.contextPath}/javascript/jQuery1.9.js"></script>
 <script type="text/javascript">
 
+var hide = true;
+
+$(document).click(function(event) {
+    if (event.target.nodeName == "LI") {
+    	hide =false;
+    }
+});
+
 $(document).ready(function(){
     $('body').on("keyup",'.numberOnly', function(){
     	if(this.value.search(/^[A-Za-z\s]+$/) != -1)
@@ -53,10 +60,21 @@ $(document).ready(function(){
 
 var count = -1;
 var downKeyCount=0;
+function hideTab(tabId)
+	{
+		if(tabId == "View")
+			{
+				$("#Add").hide();
+			}else
+				{
+					$("#View").hide();
+				}
+		$("#"+tabId).show();
+	}
 	function updatePrice(id)
 	{
 		try{
-		var quantity = $("[name='chekBx" + id + "']").val();
+		var quantity = $("[name='quantity" + id + "']").val();
 		var perprice = $("[name='price" + id + "']").val();
 		$("#totalValue"+id).text(quantity * perprice) ;
 	
@@ -181,22 +199,7 @@ var downKeyCount=0;
 		}
 		return i;
 	}
-	function hideUL(e,idForinput)
-	{
-		var hide = true;
-
-		$(document).click(function(event) {
-		    if (event.target.nodeName == "LI") {
-		    	hide =false;
-		    }
-		});
-		
-		if(hide)
-		{
-			$("#textbx"+idForinput).hide();
-		}
-	}
-
+	
 	function addRow(tableID) {
 		downKeyCount = 0;
 		var table = document.getElementById(tableID);
@@ -213,17 +216,17 @@ var downKeyCount=0;
 		var cell2 = row.insertCell(1);
 		count++;
 		cell2.innerHTML = '<span class="search" >'
-				+ '<input type="search" id="inputSearch' 
+				+ '<input type="search" name="itemCode'+count+'" id="inputSearch' 
 				+ count
 				+ '" onKeyup="checkItemExist(event,'
 				+ count
-				+ ')"  onblur="hideUL(event,'+count+')" placeholder="Search..." autocomplete="off" size="30"/>'
+				+ ')"   placeholder="Search..." autocomplete="off" size="30"/>'
 				+ ' <ul name="ulHidden" class="search-ac" id="textbx'+count+'">' + '</span>';
 				
 				
 
 		var cell3 = row.insertCell(2);
-		cell3.innerHTML = '<input type="text" value="0.0" name="chekBx'+count+'" onchange="updatePrice('+count+')" class="numberOnly" id="quantityTab" size="30"/>';
+		cell3.innerHTML = '<input type="text" value="0.0" name="quantity'+count+'" onchange="updatePrice('+count+')" class="numberOnly" id="quantityTab" size="30"/>';
 		var cell4 = row.insertCell(3);
 		cell4.innerHTML = '<input type="text" value="0.0" name="price'+count+'" onchange="updatePrice('+count+')" class="numberOnly" id="quantityTab" size="30"/>';
 		var cell5 = row.insertCell(4);
@@ -278,16 +281,17 @@ var downKeyCount=0;
 			<h2>
 				<a name="billing" id="billing">Billing</a>
 			</h2>
-			<form action="makeBill" method="POST">
+			<form action="makeBill" method="GET">
 
 				<input id="inputs" name="customername" type="text" 
-					placeholder="Customer Name" autofocus required><br> <input
-					id="inputs" name="phonenumber" type="text" class="numberOnly"
-					placeholder="Phone Number"><br> <INPUT
+					placeholder="Customer Name" autofocus="" required=""><br> <input
+					id="inputs" name="phonenumber" type="text" class="numberOnly" 
+					placeholder="Phone Number" ><br> <INPUT
 					id="buttonAddDel" type="button" value="Add Row"
 					onclick="addRow('background-image')" />&nbsp;&nbsp; <INPUT
 					id="buttonAddDel" type="button" value="Delete Row"
 					onclick="deleteRow('background-image')" /> <br />
+				
 				<table id="background-image" summary="Meeting Results">
 					<thead>
 						<tr>
@@ -299,9 +303,11 @@ var downKeyCount=0;
 						</tr>
 					</thead>
 				</table>
+				
 				<fieldset id="actions">
 					<input type="submit" id="submit" value="Done">
 				</fieldset>
+				
 			</form>
 		</div>
 		<div>
@@ -314,37 +320,28 @@ var downKeyCount=0;
 			<h2>
 				<a name="materialentry" id="materialentry">Material Entry</a>
 			</h2>
-		</div>
+			<!-- Start -->
+			<ul>
+				<li><p class="SearchA"  onclick="hideTab('View')">View/Search</p>
+				<span id="View"
+					class="AddAndSearchDiv">
+						<h2>
+							<a name="EntryView" id="EntryView">Search Add Update</a>
+						</h2>
 
-		<!-- <div id="other" class="domtab doprevnext">
-	<ul class="domtabs">
-		<li><a href="#t1">Test 1</a></li>
-		<li><a href="#t2">Test 2</a></li>
-		<li><a href="#t3">Test 3</a></li>
-		<li><a href="#t4">Test 4</a></li>
+				</span>
+				</li>
+				<li><p class="SearchA" onclick="hideTab('Add')">Add</p> 
+				<span id="Add"
+					class="AddAndSearchDiv">
+						<h2>
+							<a name="EntryAdd" id="EntryAdd">Add</a>
+						</h2>
+
+				</span></li>
 	</ul>
-	<h2>You can use content in between the tabs and the sections</h2>
-	<div>
-		<h2><a name="t1" id="t1">Proof 1</a></h2>
-		<p>Test to prove that more than one menu is possible</p>
-		<p><a href="#top">back to menu</a></p>
+			<!-- End -->
 	</div>
-	<div>
-		<h2><a name="t2" id="t2">Proof 2</a></h2>
-		<p>Test to prove that more than one menu is possible</p>
-		<p><a href="#top">back to menu</a></p>
-	</div>
-	<div>
-		<h2><a name="t3" id="t3">Proof 3</a></h2>
-		<p>Test to prove that more than one menu is possible</p>
-		<p><a href="#top">back to menu</a></p>
-	</div>
-	<div>
-		<h2><a name="t4" id="t4">Proof 4</a></h2>
-		<p>Test to prove that more than one menu is possible</p>
-		<p><a href="#top">back to menu</a></p>
-	</div>
-</div> -->
 	</div>
 </body>
 </html>

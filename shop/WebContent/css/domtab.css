@@ -328,3 +328,41 @@ ul.prevnext li.next{
   -webkit-box-shadow: 0 0 2px rgba(85, 168, 236, 0.9);
   box-shadow: 0 0 2px rgba(85, 168, 236, 0.9);
 }
+/*----------------------Inside Tabbs----------------------*/
+.SearchA:hover,
+.SearchA:LINK,
+.SearchA:VISITED,
+.SearchA:ACTIVE {
+    background: none repeat scroll 0% 0% rgb(102, 102, 153);
+   /* color: rgb(255, 255, 255);*/
+}
+
+.SearchA {
+   width: 8em;
+   height: 3em;
+    padding: 0.2em 1em;
+    display: block;
+    background: none repeat scroll 0% 0% rgb(102, 102, 102);
+    color: rgb(204, 204, 204);
+    font-weight: bold;
+    text-decoration: none;
+    margin: 2%;
+}
+.AddAndSearchDiv {
+   
+    padding: .7em 2em;
+    display: block;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 10px;
+    left: 220px;
+	position: absolute;
+	height: 100%;
+	top: 14em;
+	width: 80%;
+}
+.ulAddClass
+{
+	background: red;
+	position: relative;
+}

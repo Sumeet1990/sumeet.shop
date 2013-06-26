@@ -7,6 +7,11 @@
 	response.setHeader("Cache-Control", "no-store");
 	response.setHeader("Expires", "0");
 	response.setDateHeader("Expires", -1);
+
+	String user = (String)request.getAttribute("Username");
+	HttpSession ses = request.getSession();
+	session.setAttribute(user, ses);
+
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Main</title>
@@ -264,7 +269,7 @@ function hideTab(tabId)
 </script>
 </head>
 <body onload="startTime()">
-
+<a href="${pageContext.request.contextPath}/jsp/signout.jsp" style="float: right;color: white;" >Sign out</a>
 	<h1 style="text-align: center;">
 		<a name="top" id="top">Wellcome <%=request.getAttribute("Username")%>,
 			Have a great day!!!

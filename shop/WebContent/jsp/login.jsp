@@ -20,6 +20,5 @@
         <a href="${pageContext.request.contextPath}/jsp/forget-password.jsp">Forgot your password?</a><a href="${pageContext.request.contextPath}/jsp/register.jsp">Register</a>
     </fieldset>
 </form>
-
 </body>
 </html>

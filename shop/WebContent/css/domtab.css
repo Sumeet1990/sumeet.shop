@@ -185,6 +185,31 @@ ul.prevnext li.next{
     box-shadow: 0 0 0 1px #e8c291 inset;
 }
 
+/*-----------------Entrys-----------------------------*/
+#entrys
+{
+    padding: 15px 15px 15px 30px;
+    margin: 0 0 10px 0;
+    width: 25%;
+    border: 1px solid #ccc;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
+    -webkit-box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
+    box-shadow: 0 1px 1px #ccc inset, 0 1px 0 #fff;
+}
+
+#entrys:focus
+{
+    background-color: #fff;
+    border-color: #e8c291;
+    outline: none;
+    -moz-box-shadow: 0 0 0 1px #e8c291 inset;
+    -webkit-box-shadow: 0 0 0 1px #e8c291 inset;
+    box-shadow: 0 0 0 1px #e8c291 inset;
+}
+/*---------------------------------------------------------*/
 
 #submit
 {		

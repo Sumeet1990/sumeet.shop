@@ -31,7 +31,7 @@
 <![endif]-->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/javascript/domtab.js"></script>
-	<script type="text/javascript"
+<script type="text/javascript"
 	src="${pageContext.request.contextPath}/javascript/jQuery1.9.js"></script>
 <script type="text/javascript">
 
@@ -44,6 +44,9 @@ $(document).click(function(event) {
 });
 
 $(document).ready(function(){
+		
+	$("#Add").hide();
+	$("#View").hide();
     $('body').on("keyup",'.numberOnly', function(){
     	if(this.value.search(/^[A-Za-z\s]+$/) != -1)
     		{
@@ -283,15 +286,17 @@ function hideTab(tabId)
 			</h2>
 			<form action="makeBill" method="GET">
 
-				<input id="inputs" name="customername" type="text" 
-					placeholder="Customer Name" autofocus="" required=""><br> <input
-					id="inputs" name="phonenumber" type="text" class="numberOnly" 
-					placeholder="Phone Number" ><br> <INPUT
+				<input id="inputs" name="customername" type="text"
+					placeholder="Customer Name" autofocus="" required=""><br>
+				<input id="inputs" name="phonenumber" type="text" class="numberOnly"
+					placeholder="Phone Number"><br> 
+				<INPUT
 					id="buttonAddDel" type="button" value="Add Row"
-					onclick="addRow('background-image')" />&nbsp;&nbsp; <INPUT
+					onclick="addRow('background-image')" />&nbsp;&nbsp; 
+				<INPUT
 					id="buttonAddDel" type="button" value="Delete Row"
 					onclick="deleteRow('background-image')" /> <br />
-				
+
 				<table id="background-image" summary="Meeting Results">
 					<thead>
 						<tr>
@@ -303,18 +308,18 @@ function hideTab(tabId)
 						</tr>
 					</thead>
 				</table>
-				
+
 				<fieldset id="actions">
 					<input type="submit" id="submit" value="Done">
 				</fieldset>
-				
+
 			</form>
 		</div>
 		<div>
 			<h2>
 				<a name="accounts" id="accounts">How to use DOMtab</a>
 			</h2>
-			
+
 		</div>
 		<div>
 			<h2>
@@ -322,26 +327,68 @@ function hideTab(tabId)
 			</h2>
 			<!-- Start -->
 			<ul>
-				<li><p class="SearchA"  onclick="hideTab('View')">View/Search</p>
-				<span id="View"
-					class="AddAndSearchDiv">
+				<li><p class="SearchA" onclick="hideTab('View')">View/Search</p>
+					<span id="View" class="AddAndSearchDiv">
 						<h2>
 							<a name="EntryView" id="EntryView">Search Add Update</a>
 						</h2>
+						<form action="SearchUpdItem" method="GET">
 
-				</span>
-				</li>
-				<li><p class="SearchA" onclick="hideTab('Add')">Add</p> 
-				<span id="Add"
-					class="AddAndSearchDiv">
+							<input id="entrys" name="Itemname" type="text"
+								placeholder="Item Name">&nbsp;&nbsp; <input id="entrys"
+								name="Id" type="text" placeholder="Item Code"><br>
+							<INPUT id="entrys" name="Description" type="text"
+								placeholder="Item Description" />&nbsp;&nbsp; 
+							<INPUT
+								id="entrys" name="PerPrice" type="text" placeholder="Per Price" />
+							<br /> <INPUT id="entrys" name="Buy" type="text"
+								placeholder="Buy" />&nbsp;&nbsp; 
+							<INPUT id="entrys" name="Sell"
+								type="text" placeholder="Sell" /> <br /> <br />
+
+							<fieldset id="actions">
+								<table>
+									<tr>
+										<td><input type="submit" id="submit" value="Search">
+										</td>
+										<td>&nbsp;&nbsp;</td>
+										<td><input type="submit" id="submit" value="Update">
+										</td>
+									</tr>
+								</table>
+							</fieldset>
+
+						</form>
+				</span></li>
+				<li><p class="SearchA" onclick="hideTab('Add')">Add</p> <span
+					id="Add" class="AddAndSearchDiv">
 						<h2>
 							<a name="EntryAdd" id="EntryAdd">Add</a>
 						</h2>
+						<form action="AddItem" method="GET">
+
+							<input id="entrys" name="Itemname" type="text"
+								placeholder="Item Name" autofocus="" required="">&nbsp;&nbsp;
+							<input id="entrys" name="Id" type="text" placeholder="Item Code"><br>
+							<INPUT id="entrys" name="Description" type="text"
+								placeholder="Item Description" />&nbsp;&nbsp; 
+							<INPUT
+								id="entrys" name="PerPrice" type="text" placeholder="Per Price" />
+							<br /> 
+							<INPUT id="entrys" name="Buy" type="text"
+								placeholder="Buy" />&nbsp;&nbsp; <INPUT id="entrys" name="Sell"
+								type="text" placeholder="Sell" /> <br /> <br />
+
+							<fieldset id="actions">
+								<input type="submit" id="submit" value="Done">
+							</fieldset>
+
+						</form>
 
 				</span></li>
-	</ul>
+			</ul>
 			<!-- End -->
-	</div>
+		</div>
 	</div>
 </body>
 </html>

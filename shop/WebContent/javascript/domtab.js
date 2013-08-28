@@ -14,11 +14,11 @@ domtab={
 	backToLinks:/#top/, // pattern to check "back to top" links
 	printID:'domtabprintview', // id of the print all link
 	prevNextIndicator:'doprevnext', // class to trigger prev and next links
-	prevNextClass:'prevnext', // class of the prev and next list
-	prevLabel:'previous', // HTML content of the prev link
-	nextLabel:'next', // HTML content of the next link
-	prevClass:'prev', // class for the prev link
-	nextClass:'next', // class for the next link
+	//prevNextClass:'prevnext', // class of the prev and next list
+	//prevLabel:'previous', // HTML content of the prev link
+	//nextLabel:'next', // HTML content of the next link
+	//prevClass:'prev', // class for the prev link
+	//nextClass:'next', // class for the next link
 	init:function(){
 		var temp;
 		if(!document.getElementById || !document.createTextNode){return;}
@@ -140,7 +140,7 @@ domtab={
 			domtab.cssjs('add',links[0].parentNode,domtab.activeClass);
 		}
 	},
-	createPrevNext:function(){
+	/*createPrevNext:function(){
 		// this would be so much easier with innerHTML, darn you standards fetish!
 		var temp=document.createElement('ul');
 		temp.className=domtab.prevNextClass;
@@ -160,7 +160,7 @@ domtab={
 		temp.getElementsByTagName('a')[0].onclick=function(){return false;}
 		temp.getElementsByTagName('a')[1].onclick=function(){return false;}
 		return temp;
-	},
+	},*/
 	navTabs:function(e){
 		var li=domtab.getTarget(e);
 		var menu=li.parentNode.parentNode.menu;

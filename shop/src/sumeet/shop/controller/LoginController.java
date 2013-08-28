@@ -1,23 +1,22 @@
 package sumeet.shop.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
-import antlr.debug.NewLineEvent;
-
 import sumeet.shop.beans.Customer;
 
 @Controller
 public class LoginController {
 
+	Logger logger = Logger.getLogger(LoginController.class);
 	@RequestMapping(value="/", method=RequestMethod.GET )
 	public String check(ModelMap map)
 	{
 		
+		logger.info("Login page");
 		System.out.print("Entered into main  spring");
 		//map.addAttribute("customer", new Customer());
 		return "login";

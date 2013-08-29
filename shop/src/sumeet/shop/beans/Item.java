@@ -4,8 +4,14 @@ public class Item {
 
 	String itemCode;
 	Integer perPrice;
-	Integer Quantity;
+	Integer quantity;
 	
+	public Integer getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
 	public String getItemCode() {
 		return itemCode;
 	}
@@ -18,10 +24,5 @@ public class Item {
 	public void setPerPrice(Integer perPrice) {
 		this.perPrice = perPrice;
 	}
-	public Integer getQuantity() {
-		return Quantity;
-	}
-	public void setQuantity(Integer quantity) {
-		Quantity = quantity;
-	}
+	
 }

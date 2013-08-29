@@ -19,7 +19,7 @@ import sumeet.shop.beans.Item;
 @Controller
 public class MainPageController {
 
-	@RequestMapping(value="/makeBill", method=RequestMethod.GET)
+	@RequestMapping(value="/jsp/makeBill", method=RequestMethod.GET)
 	public String makeBillAndUpdateRecord(HttpServletRequest request, ModelMap map)
 	{
 		String customerName = request.getParameter("customername");
@@ -32,6 +32,7 @@ public class MainPageController {
 		System.out.println(">>>>>>>>>>>>>>>>>"+customerName );
 		boolean moveOut = true;
 		int i = 0;
+		int total = 0;
 		List<Item> itemLst = customer.getItemsLst();
 		
 		while (moveOut) {
@@ -41,8 +42,11 @@ public class MainPageController {
 			{
 				Item item = new Item();
 				item.setItemCode(itemCode);
-				item.setPerPrice(Integer.valueOf(request.getParameter("quantity"+i)));
-				item.setQuantity(Integer.valueOf(request.getParameter("price"+i)));
+				int price = Integer.valueOf(request.getParameter("price"+i));
+				int quant = Integer.valueOf(request.getParameter("quantity"+i));
+				total += price * quant;
+				item.setPerPrice(price);
+				item.setQuantity(quant);
 	
 				itemLst.add(item);
 			}
@@ -50,8 +54,9 @@ public class MainPageController {
 				moveOut = false;
 			i++;
 		}
-		
+		map.addAttribute("total", total);
 		map.addAttribute("billCustObj", customer);
-		return "bill";
+		map.addAttribute("list", customer.getItemsLst());
+		return "printBill";
 	}
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 	<head>
 		<title></title>
@@ -31,7 +32,7 @@
 		</br>
 		</br>
 		</br>
-		<table border="1" cellpadding="1" cellspacing="1" style="width: 100%;">
+		<table border="1" cellpadding="1" cellspacing="1" style="width: 70%;">
 			<thead>
 				<tr>
 					<th scope="col">
@@ -42,23 +43,26 @@
 						Quantity</th>
 					<th scope="col">
 						Price/perItem</th>
-					<th scope="col">
-						Total</th>
-				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>
-						&nbsp;</td>
-					<td>
-						&nbsp;</td>
-					<td>
-						&nbsp;</td>
-					<td>
-						&nbsp;</td>
-					<td>
-						&nbsp;</td>
+			<% int count = 0;%>
+			<%Integer totalVal = request.getAttribute("total") == null ? 0 : (Integer)request.getAttribute("total");	%>
+			<c:forEach items="${list}" var="element"> 
+  <tr>
+  	<td><%=++count %></td>
+    <td>${element.itemCode}</td>
+     <td>${element.quantity}</td>
+    <td>${element.perPrice}</td>
+  </tr>
+</c:forEach>
+
+				<tr align="right" >
+				<td ></td>
+				<td ></td>
+					<td>Total:</td>
+					<td><%=totalVal %></td>
 				</tr>
+				
 			</tbody>
 		</table>
 		<p style="text-align: right;">

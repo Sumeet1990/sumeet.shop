@@ -3,6 +3,17 @@
 <head>
 <title></title>
 </head>
+<script type="text/javascript">
+function printpage()
+{
+window.print()
+}
+
+function goBack()
+{
+window.history.back()
+}
+</script>
 <body>
 	<h1 style="text-align: center;">Welcome</h1>
 	<div>
@@ -59,8 +70,8 @@
 		</tbody>
 	</table>
 	<p style="text-align: right;">
-		<input name="Done" type="button" value="Done" /><input name="Print"
-			type="button" value="Print" />
+		<input name="Done" type="button" onclick="goBack()" value="Close" />
+		<input name="Print"type="button" onclick="printpage()" value="Print" />
 	</p>
 </body>
 </html>

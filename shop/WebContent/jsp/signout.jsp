@@ -1,6 +1,5 @@
 <%
-String user = (String)request.getAttribute("Username");
-HttpSession sess = (HttpSession)session.getAttribute(user);
-sess.invalidate();
-response.sendRedirect("${pageContext.request.contextPath}");
+HttpSession sessionUsr = request.getSession();
+sessionUsr.invalidate();/* setAttribute((String)sessionUsr.getAttribute("Username"), "signOut"); */
+response.sendRedirect("/shop/");
 %>

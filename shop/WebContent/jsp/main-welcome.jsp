@@ -3,14 +3,14 @@
 <html dir="ltr" lang="en">
 <head>
 <%
-	response.setHeader("Pragma", "no-cache");
+ 	response.setHeader("Pragma", "no-cache");
 	response.setHeader("Cache-Control", "no-store");
 	response.setHeader("Expires", "0");
 	response.setDateHeader("Expires", -1);
-
+	/*
 	String user = (String)request.getAttribute("Username");
 	HttpSession ses = request.getSession();
-	session.setAttribute(user, ses);
+	session.setAttribute(user, ses); */
 
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -271,7 +271,7 @@ function hideTab(tabId)
 <body onload="startTime()">
 <a href="${pageContext.request.contextPath}/jsp/signout.jsp" style="float: right;color: white;" >Sign out</a>
 	<h1 style="text-align: center;">
-		<a name="top" id="top">Wellcome <%=request.getAttribute("Username")%>,
+		<a name="top" id="top">Wellcome <%=request.getSession().getAttribute("Username")%>,
 			Have a great day!!!
 		</a>
 	</h1>

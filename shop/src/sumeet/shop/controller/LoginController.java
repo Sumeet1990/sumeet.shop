@@ -1,5 +1,7 @@
 package sumeet.shop.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,11 +30,11 @@ public class LoginController {
 	{
 		System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+userName);
 
-		if(userName.trim().equals("admin") && password.equals("admin"))
+		if(true/*userName.trim().equals("admin") && password.equals("admin")*/)
 		{
 			Customer cust = new Customer();
 			map.addAttribute("Username",userName);
-			return "main-welcome";
+			return "SessionValidation";
 		}
 		else
 		{
@@ -43,6 +45,18 @@ public class LoginController {
 			return "login";
 		}
 		
+	}
+	@RequestMapping(value="/jsp/validationSucess", method=RequestMethod.GET )
+	public String validationSucess(HttpSession session, ModelMap map)
+	{
+		String status = (String)session.getAttribute((String)session.getAttribute("Username"));
+		if(status != null && status.equals("logIn"))
+		{
+			return "main-welcome";
+		}else
+		{
+			return "sendTologin";
+		}
 	}
 	
 	@RequestMapping(value="/jsp/registerUser", method=RequestMethod.GET )

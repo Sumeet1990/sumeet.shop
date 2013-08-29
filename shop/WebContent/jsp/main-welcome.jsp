@@ -3,7 +3,7 @@
 <html dir="ltr" lang="en">
 <head>
 <%
- 	response.setHeader("Pragma", "no-cache");
+	response.setHeader("Pragma", "no-cache");
 	response.setHeader("Cache-Control", "no-store");
 	response.setHeader("Expires", "0");
 	response.setDateHeader("Expires", -1);
@@ -11,7 +11,6 @@
 	String user = (String)request.getAttribute("Username");
 	HttpSession ses = request.getSession();
 	session.setAttribute(user, ses); */
-
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Main</title>
@@ -39,147 +38,141 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/javascript/jQuery1.9.js"></script>
 <script type="text/javascript">
+	var hide = true;
 
-var hide = true;
+	$(document).click(function(event) {
+		if (event.target.nodeName == "LI") {
+			hide = false;
+		}
+	});
 
-$(document).click(function(event) {
-    if (event.target.nodeName == "LI") {
-    	hide =false;
-    }
-});
+	$(document).ready(function() {
 
-$(document).ready(function(){
-		
-	$("#Add").hide();
-	$("#View").hide();
-    $('body').on("keyup",'.numberOnly', function(){
-    	if(this.value.search(/^[A-Za-z\s]+$/) != -1)
-    		{
-    		if(!(this.value.replace(/^\s+|\s+$/g,'') == ''))
-    			{
-    			alert("Please enter number");
-    			this.value = this.value.replace(/[^0-9\.]/g,'');
-    			}
-    		}
-    	else
-	    	this.value = this.value.replace(/[^0-9\.]/g,'');
-    });
-});
-
-var count = -1;
-var downKeyCount=0;
-function hideTab(tabId)
-	{
-		if(tabId == "View")
-			{
-				$("#Add").hide();
-			}else
-				{
-					$("#View").hide();
+		$("#Add").hide();
+		$("#View").hide();
+		$('body').on("keyup", '.numberOnly', function() {
+			if (this.value.search(/^[A-Za-z\s]+$/) != -1) {
+				if (!(this.value.replace(/^\s+|\s+$/g, '') == '')) {
+					alert("Please enter number");
+					this.value = this.value.replace(/[^0-9\.]/g, '');
 				}
-		$("#"+tabId).show();
+			} else
+				this.value = this.value.replace(/[^0-9\.]/g, '');
+		});
+	});
+
+	var count = -1;
+	var downKeyCount = 0;
+	function hideTab(tabId) {
+		if (tabId == "View") {
+			$("#Add").hide();
+		} else {
+			$("#View").hide();
+		}
+		$("#" + tabId).show();
 	}
-	function updatePrice(id)
-	{
-		try{
-		var quantity = $("[name='quantity" + id + "']").val();
-		var perprice = $("[name='price" + id + "']").val();
-		$("#totalValue"+id).text(quantity * perprice) ;
-	
-		}catch(err)
-		{
-			alert("Total--"+err);
+	function updatePrice(id) {
+		try {
+			var quantity = $("[name='quantity" + id + "']").val();
+			var perprice = $("[name='price" + id + "']").val();
+			$("#totalValue" + id).text(quantity * perprice);
+
+		} catch (err) {
+			alert("Total--" + err);
 		}
 	}
-	function setItemCode(liId,inputsearchBxId)
-	{
-		
-		try{
-		var liIdin = 'liEll' + liId;
-		var inputSearchId = 'inputSearch' + inputsearchBxId;
+	function setItemCode(liId, inputsearchBxId) {
 
-		var li = document.getElementById(liIdin).innerHTML;
-		
-		document.getElementById(inputSearchId).value = li;
-		$("#textbx"+inputsearchBxId).hide();
-		
-		}catch(err)
-		{
-			alert("Error ==="+err);
+		try {
+			var liIdin = 'liEll' + liId;
+			var inputSearchId = 'inputSearch' + inputsearchBxId;
+
+			var li = document.getElementById(liIdin).innerHTML;
+
+			document.getElementById(inputSearchId).value = li;
+			$("#textbx" + inputsearchBxId).hide();
+
+		} catch (err) {
+			alert("Error ===" + err);
 		}
 	}
 
-	function checkItemExist(e,id) {
+	function checkItemExist(e, id) {
 		try {
 			var textBxId = 'textbx' + id;
 			var ul = document.getElementById(textBxId);
 			var inputsearchBx = 'inputSearch' + id;
 			var value = document.getElementById(inputsearchBx).value;
-			var valueArr = new Array("Saab", "Volvo", "BMW","Vorvo");
+			var valueArr = new Array("Saab", "Volvo", "BMW", "Vorvo");
 			var lis = document.getElementsByName("liEll");
-			
-			    if(e.which == 40)
-			    {
-			    	
-			    	if(downKeyCount == 0)
-			    		{ 
-			    			$('#'+textBxId).children('li').eq(downKeyCount).addClass("liJqeryDown");
-			    			$("#"+inputsearchBx).val($('#'+textBxId).children('li').eq(downKeyCount).text());
-			    			
-			    		}
-			    	else
-			    		{
-			    		//alert($('#'+textBxId).children('li').eq(downKeyCount));
-			    		if($('#'+textBxId).children('li').eq(downKeyCount).length > 0)
-			    			{
-			    			$('#'+textBxId).children('li').eq((downKeyCount-1)).removeClass("liJqeryDown");
-			    			$('#'+textBxId).children('li').eq(downKeyCount).addClass("liJqeryDown");
-			    			$("#"+inputsearchBx).val($('#'+textBxId).children('li').eq(downKeyCount).text());
-			    			}else
-			    				{
-			    				downKeyCount--;
-			    				}
-			    		}
-			    	downKeyCount++;
-			    }else if(e.which == 38)
-			    	{
-			    	if(!downKeyCount==0)
-			    		downKeyCount--;
-			    	if($('#'+textBxId).children('li').eq(downKeyCount).length > 0)
-			    		{
-			    		$('#'+textBxId).children('li').eq((downKeyCount+1)).removeClass("liJqeryDown");
-			    		$('#'+textBxId).children('li').eq(downKeyCount).addClass("liJqeryDown");
-			    		$("#"+inputsearchBx).val($('#'+textBxId).children('li').eq(downKeyCount).text());
-			    		}
-			    	}else if(e.which == 13)
-			    		{
-			    			$("#"+textBxId).hide();
-			    		}else
-			    			{
-			    			downKeyCount = 0;
-			
-			if(lis != null)
-				{
-				while (ul.firstChild) {
-				      ul.removeChild(ul.firstChild);
-				    }
+
+			if (e.which == 40) {
+
+				if (downKeyCount == 0) {
+					$('#' + textBxId).children('li').eq(downKeyCount).addClass(
+							"liJqeryDown");
+					$("#" + inputsearchBx).val(
+							$('#' + textBxId).children('li').eq(downKeyCount)
+									.text());
+
+				} else {
+					//alert($('#'+textBxId).children('li').eq(downKeyCount));
+					if ($('#' + textBxId).children('li').eq(downKeyCount).length > 0) {
+						$('#' + textBxId).children('li').eq((downKeyCount - 1))
+								.removeClass("liJqeryDown");
+						$('#' + textBxId).children('li').eq(downKeyCount)
+								.addClass("liJqeryDown");
+						$("#" + inputsearchBx).val(
+								$('#' + textBxId).children('li').eq(
+										downKeyCount).text());
+					} else {
+						downKeyCount--;
+					}
 				}
-			
-			if(!(value.replace(/^\s+|\s+$/g,'') == ''))
-				{
-				$("#"+textBxId).show();
+				downKeyCount++;
+			} else if (e.which == 38) {
+				if (!downKeyCount == 0)
+					downKeyCount--;
+				if ($('#' + textBxId).children('li').eq(downKeyCount).length > 0) {
+					$('#' + textBxId).children('li').eq((downKeyCount + 1))
+							.removeClass("liJqeryDown");
+					$('#' + textBxId).children('li').eq(downKeyCount).addClass(
+							"liJqeryDown");
+					$("#" + inputsearchBx).val(
+							$('#' + textBxId).children('li').eq(downKeyCount)
+									.text());
+				}
+			} else if (e.which == 13) {
+				$("#" + textBxId).hide();
+			} else {
+				downKeyCount = 0;
+
+				if (lis != null) {
+					while (ul.firstChild) {
+						ul.removeChild(ul.firstChild);
+					}
+				}
+
+				if (!(value.replace(/^\s+|\s+$/g, '') == '')) {
+					$("#" + textBxId).show();
 					for ( var i = 0; i < valueArr.length; i++) {
-		
+
 						var singleVal = valueArr[i];
-						if ((singleVal.toUpperCase().indexOf(value.toUpperCase()))==0) {
+						if ((singleVal.toUpperCase().indexOf(value
+								.toUpperCase())) == 0) {
 							var li = document.createElement('li');
-		
+
 							ul.appendChild(li);
-							li.innerHTML = "<li class='liImageClass' name='liEll' id='liEll"+i+"' onclick='setItemCode("+i+","+id+")'>"+ valueArr[i] +"</li>";
+							li.innerHTML = "<li class='liImageClass' name='liEll' id='liEll"
+									+ i
+									+ "' onclick='setItemCode("
+									+ i
+									+ ","
+									+ id + ")'>" + valueArr[i] + "</li>";
 						}
 					}
 				}
-			    			}
+			}
 		} catch (err) {
 			alert(err);
 		}
@@ -207,11 +200,11 @@ function hideTab(tabId)
 		}
 		return i;
 	}
-	
+
 	function addRow(tableID) {
 		downKeyCount = 0;
 		var table = document.getElementById(tableID);
-		
+
 		var rowCount = table.rows.length;
 		var row = table.insertRow(rowCount);
 
@@ -224,23 +217,28 @@ function hideTab(tabId)
 		var cell2 = row.insertCell(1);
 		count++;
 		cell2.innerHTML = '<span class="search" >'
-				+ '<input type="search" name="itemCode'+count+'" id="inputSearch' 
+				+ '<input type="search" name="itemCode'
+				+ count
+				+ '" id="inputSearch'
 				+ count
 				+ '" onKeyup="checkItemExist(event,'
 				+ count
 				+ ')"   placeholder="Search..." autocomplete="off" size="30"/>'
-				+ ' <ul name="ulHidden" class="search-ac" id="textbx'+count+'">' + '</span>';
-				
-				
+				+ ' <ul name="ulHidden" class="search-ac" id="textbx'+count+'">'
+				+ '</span>';
 
 		var cell3 = row.insertCell(2);
-		cell3.innerHTML = '<input type="text" value="0.0" name="quantity'+count+'" onchange="updatePrice('+count+')" class="numberOnly" id="quantityTab" size="30"/>';
+		cell3.innerHTML = '<input type="text" value="0.0" name="quantity'
+				+ count + '" onchange="updatePrice(' + count
+				+ ')" class="numberOnly" id="quantityTab" size="30"/>';
 		var cell4 = row.insertCell(3);
-		cell4.innerHTML = '<input type="text" value="0.0" name="price'+count+'" onchange="updatePrice('+count+')" class="numberOnly" id="quantityTab" size="30"/>';
+		cell4.innerHTML = '<input type="text" value="0.0" name="price' + count
+				+ '" onchange="updatePrice(' + count
+				+ ')" class="numberOnly" id="quantityTab" size="30"/>';
 		var cell5 = row.insertCell(4);
 		cell5.innerHTML = '<span style="color:black" id="totalValue'+count+'">0.0 </span>';
 
-		$("#textbx"+count).hide();
+		$("#textbx" + count).hide();
 	}
 
 	function deleteRow(tableID) {
@@ -269,7 +267,8 @@ function hideTab(tabId)
 </script>
 </head>
 <body onload="startTime()">
-<a href="${pageContext.request.contextPath}/jsp/signout.jsp" style="float: right;color: white;" >Sign out</a>
+	<a href="${pageContext.request.contextPath}/jsp/signout.jsp"
+		style="float: right; color: white;">Sign out</a>
 	<h1 style="text-align: center;">
 		<a name="top" id="top">Wellcome <%=request.getSession().getAttribute("Username")%>,
 			Have a great day!!!
@@ -294,11 +293,9 @@ function hideTab(tabId)
 				<input id="inputs" name="customername" type="text"
 					placeholder="Customer Name" autofocus="" required=""><br>
 				<input id="inputs" name="phonenumber" type="text" class="numberOnly"
-					placeholder="Phone Number"><br> 
-				<INPUT
+					placeholder="Phone Number"><br> <INPUT
 					id="buttonAddDel" type="button" value="Add Row"
-					onclick="addRow('background-image')" />&nbsp;&nbsp; 
-				<INPUT
+					onclick="addRow('background-image')" />&nbsp;&nbsp; <INPUT
 					id="buttonAddDel" type="button" value="Delete Row"
 					onclick="deleteRow('background-image')" /> <br />
 
@@ -343,12 +340,10 @@ function hideTab(tabId)
 								placeholder="Item Name">&nbsp;&nbsp; <input id="entrys"
 								name="Id" type="text" placeholder="Item Code"><br>
 							<INPUT id="entrys" name="Description" type="text"
-								placeholder="Item Description" />&nbsp;&nbsp; 
-							<INPUT
+								placeholder="Item Description" />&nbsp;&nbsp; <INPUT
 								id="entrys" name="PerPrice" type="text" placeholder="Per Price" />
 							<br /> <INPUT id="entrys" name="Buy" type="text"
-								placeholder="Buy" />&nbsp;&nbsp; 
-							<INPUT id="entrys" name="Sell"
+								placeholder="Buy" />&nbsp;&nbsp; <INPUT id="entrys" name="Sell"
 								type="text" placeholder="Sell" /> <br /> <br />
 
 							<fieldset id="actions">
@@ -376,11 +371,9 @@ function hideTab(tabId)
 								placeholder="Item Name" autofocus="" required="">&nbsp;&nbsp;
 							<input id="entrys" name="Id" type="text" placeholder="Item Code"><br>
 							<INPUT id="entrys" name="Description" type="text"
-								placeholder="Item Description" />&nbsp;&nbsp; 
-							<INPUT
+								placeholder="Item Description" />&nbsp;&nbsp; <INPUT
 								id="entrys" name="PerPrice" type="text" placeholder="Per Price" />
-							<br /> 
-							<INPUT id="entrys" name="Buy" type="text"
+							<br /> <INPUT id="entrys" name="Buy" type="text"
 								placeholder="Buy" />&nbsp;&nbsp; <INPUT id="entrys" name="Sell"
 								type="text" placeholder="Sell" /> <br /> <br />
 

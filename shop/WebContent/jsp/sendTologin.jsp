@@ -1,3 +1,4 @@
+
 <%
-response.sendRedirect("/shop/");
+	response.sendRedirect("/shop/");
 %>

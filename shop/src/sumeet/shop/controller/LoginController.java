@@ -14,67 +14,66 @@ import sumeet.shop.beans.Customer;
 public class LoginController {
 
 	Logger logger = Logger.getLogger(LoginController.class);
-	@RequestMapping(value="/", method=RequestMethod.GET )
-	public String check(ModelMap map)
-	{
-		
+
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String check(ModelMap map) {
+
 		logger.info("Login page");
 		System.out.print("Entered into main  spring");
-		//map.addAttribute("customer", new Customer());
+		// map.addAttribute("customer", new Customer());
 		return "login";
-		
-	}
-	
-	@RequestMapping(value="/validate", method=RequestMethod.POST )
-	public String validateUser(@RequestParam("username") String userName,@RequestParam("password") String password,ModelMap map)
-	{
-		System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+userName);
 
-		if(true/*userName.trim().equals("admin") && password.equals("admin")*/)
-		{
+	}
+
+	@RequestMapping(value = "/validate", method = RequestMethod.POST)
+	public String validateUser(@RequestParam("username") String userName,
+			@RequestParam("password") String password, ModelMap map) {
+		System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+				+ userName);
+
+		if (true/* userName.trim().equals("admin") && password.equals("admin") */) {
 			Customer cust = new Customer();
-			map.addAttribute("Username",userName);
+			map.addAttribute("Username", userName);
 			return "SessionValidation";
-		}
-		else
-		{
-			if(userName.trim().equals("admin"))
+		} else {
+			if (userName.trim().equals("admin"))
 				map.addAttribute("Error", "Password is incorrect");
 			else
-				map.addAttribute("Error", "Username and password are invalid please try again");
+				map.addAttribute("Error",
+						"Username and password are invalid please try again");
 			return "login";
 		}
-		
+
 	}
-	@RequestMapping(value="/jsp/validationSucess", method=RequestMethod.GET )
-	public String validationSucess(HttpSession session, ModelMap map)
-	{
-		String status = (String)session.getAttribute((String)session.getAttribute("Username"));
-		if(status != null && status.equals("logIn"))
-		{
+
+	@RequestMapping(value = "/jsp/validationSucess", method = RequestMethod.GET)
+	public String validationSucess(HttpSession session, ModelMap map) {
+		String status = (String) session.getAttribute((String) session
+				.getAttribute("Username"));
+		if (status != null && status.equals("logIn")) {
 			return "main-welcome";
-		}else
-		{
+		} else {
 			return "sendTologin";
 		}
 	}
-	
-	@RequestMapping(value="/jsp/registerUser", method=RequestMethod.GET )
-	public String registerUser(@RequestParam("username") String userName,@RequestParam("password") String password,ModelMap map)
-	{
-		
-		System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+userName);
+
+	@RequestMapping(value = "/jsp/registerUser", method = RequestMethod.GET)
+	public String registerUser(@RequestParam("username") String userName,
+			@RequestParam("password") String password, ModelMap map) {
+
+		System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+				+ userName);
 		return "login";
-		
+
 	}
-	
-	@RequestMapping(value="/jsp/sendPassword", method=RequestMethod.GET )
-	public String sendPassword(ModelMap map)
-	{
-		
-		System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Send password");
+
+	@RequestMapping(value = "/jsp/sendPassword", method = RequestMethod.GET)
+	public String sendPassword(ModelMap map) {
+
+		System.out
+				.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Send password");
 		return "password-sent";
-		
+
 	}
-	
+
 }

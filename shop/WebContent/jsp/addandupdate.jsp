@@ -1,6 +1,6 @@
 <input id="entrys" name="Itemname" type="text" placeholder="Item Name">
 &nbsp;&nbsp;
-<input id="entrys" name="ItemCode" type="text" placeholder="Item Code">
+<input id="entrys" name="ItemCodeUpd" type="text" placeholder="Item Code">
 <br>
 <INPUT id="entrys" name="Description" type="text"	placeholder="Item Description" />
 &nbsp;&nbsp;

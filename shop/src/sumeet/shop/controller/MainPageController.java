@@ -59,13 +59,13 @@ public class MainPageController {
 	
 	@RequestMapping(value = "/SearchUpdItem", method = RequestMethod.GET)
 	@ResponseBody
-	public String searchItem(@RequestParam("itemCd") String itemcode,HttpServletRequest request, ModelMap map) {
-		
-		String itemCode = (String) request.getAttribute("itemCd");
-		String itemDesc = (String) request.getAttribute("itemDesc");
-		String itemName = (String) request.getAttribute("itemName");
-		int count =0;
-		String table ="<table id=\"background-image\">"+
+	public String searchItem(@RequestParam("itemCd") String itemCode,
+							@RequestParam("itemDesc") String itemDesc,
+							@RequestParam("itemName") String itemName,
+								HttpServletRequest request, ModelMap map) {
+
+		int count =1;
+		String table ="<table id=\"searchtable\">"+
 				"<thead>"
 				+"<tr>"
 				+"<th scope=\"col\">SNO</th>"
@@ -75,16 +75,30 @@ public class MainPageController {
 				+"<th scope=\"col\">Action</th>"
 				+"</thead>"
 				+"<tbody >"
-				+"<tr> <hr>"
+				+"<tr>"
 				+"	<td align=\"right\">"+count+"</td>"
-				+"	<td >"+itemCode+"</td>"
-				+"	<td >"+itemcode+"</td>"
+				+"	<td id=\"itemCode"+count+"\">"+itemCode+"</td>"
+				+"	<td >"+itemDesc+"</td>"
 				+"	<td >"+itemName+"</td>"
-				+"	<td align=\"right\"><input type=\"button\" id=\"buttonAddDel\" value=\"Update\"></td>"
+				+"	<td align=\"right\"><input type=\"button\" onclick=\"updateRecord("+count+")\" id=\"buttonAddDel\" value=\"Update\"></td>"
+				+"</tr>"
+				+"<tr>"
+				+"	<td align=\"right\">"+2+"</td>"
+				+"	<td id=\"itemCode"+2+"\">"+itemCode+"2</td>"
+				+"	<td >"+itemDesc+"2</td>"
+				+"	<td >"+itemName+"2</td>"
+				+"	<td align=\"right\"><input type=\"button\" onclick=\"updateRecord("+2+")\" id=\"buttonAddDel\" value=\"Update\"></td>"
 				+"</tr>"
 				+"</tbody>"
 				+"</table>";
 		
 		return table;
+	}
+	
+	@RequestMapping(value = "/getItemDetails", method = RequestMethod.GET)
+	@ResponseBody
+	public String getItemDetails(@RequestParam("itemCd") String itemCode, ModelMap map) {
+		return itemCode;
+	
 	}
 }

@@ -67,6 +67,9 @@
 	function hideTab(tabId) {
 		if (tabId == "View") {
 			$("#Add").hide();
+			$("#searchResults").hide();
+			$("#updateSection").hide();
+			$("#searchOption").show();
 		} else {
 			$("#View").hide();
 		}
@@ -313,7 +316,7 @@
 				</table>
 
 				<fieldset id="actions">
-					<input type="submit" id="submit" value="Done">
+					<input type="submit" id="submit"  value="Done">
 				</fieldset>
 
 			</form>
@@ -337,7 +340,6 @@
 						</h2>
 						<form action="SearchUpdItem" method="GET">
 						<li id="searchResults">
-						
 						</li>
 						<li id="searchOption">
 						<input id="entrys" name="Itemname" type="text" placeholder="Item Name">
@@ -349,7 +351,9 @@
 							<input type="button" id="submit" onclick="search()" value="Search">
 						</fieldset>
 						</li>
-							<%-- <%@include file="/jsp/addandupdate.jsp"%> --%>
+						<li id="updateSection">
+						<%@include file="/jsp/addandupdate.jsp"%>
+						</li>
 						</form>
 				</span></li>
 				<li><p class="SearchA" onclick="hideTab('Add')">Add</p> <span

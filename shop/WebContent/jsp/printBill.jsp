@@ -1,3 +1,4 @@
+<%@page import="sumeet.shop.beans.Customer"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
@@ -6,27 +7,46 @@
 <script type="text/javascript">
 function printpage()
 {
-window.print()
+window.print();
 }
 
 function goBack()
 {
-window.history.back()
+window.history.back();
+}
+
+function displayTime()
+{
+var today = new Date();
+
+var curr_year = today.toDateString();
+var h = today.getHours();
+var m = today.getMinutes();
+
+document.getElementById("displayTime").innerHTML = curr_year+" "+h+":"+m;
 }
 </script>
-<body>
+<%
+Customer cust = (Customer)request.getAttribute("billCustObj");
+%>
+<body onload="displayTime()">
+	<p style="text-align: right;">
+		<input name="Print"type="button" onclick="printpage()" value="Print" />
+		<input name="Done" type="button" onclick="goBack()" value="Close" />
+	</p>
 	<h1 style="text-align: center;">Welcome</h1>
+	<h3 id="displayTime" style="text-align: right;"></h3>
 	<div>
 		<table align="left" border="1" cellpadding="1" cellspacing="1"
 			style="width: 500px;">
 			<tbody>
-				<tr>
-					<td>Name:&nbsp;</td>
-					<td>&nbsp;Sumeet&nbsp;</td>
+				<tr >
+					<td>Name:</td>
+					<td>&nbsp;<%=cust.getCustomername()%>&nbsp;</td>
 				</tr>
 				<tr>
-					<td>Details:&nbsp;</td>
-					<td>&nbsp;Details&nbsp;</td>
+					<td>Mobile No:</td>
+					<td>&nbsp;<%=cust.getPhonenumber() %>&nbsp;</td>
 				</tr>
 			</tbody>
 		</table>
@@ -47,31 +67,30 @@ window.history.back()
 				<th scope="col">Description&nbsp;</th>
 				<th scope="col">Quantity</th>
 				<th scope="col">Price/perItem</th>
+				<th scope="col">Total</th>
 		</thead>
-		<tbody>
+		<tbody >
 			<% int count = 0;%>
 			<%Integer totalVal = request.getAttribute("total") == null ? 0 : (Integer)request.getAttribute("total");	%>
 			<c:forEach items="${list}" var="element">
 				<tr>
-					<td><%=++count %></td>
+					<td  align="right"><%=++count %></td>
 					<td>${element.itemCode}</td>
-					<td>${element.quantity}</td>
-					<td>${element.perPrice}</td>
+					<td align="right">${element.quantity}</td>
+					<td align="right">${element.perPrice}</td>
+					<td align="right">${element.perPrice * element.quantity}</td>
 				</tr>
 			</c:forEach>
 
-			<tr align="right">
-				<td></td>
-				<td></td>
+			<tr >
+				<td align="center">-</td>
+				<td align="center">-</td>
+				<td align="center">-</td>
 				<td>Total:</td>
-				<td><%=totalVal %></td>
+				<td  align="right"><%=totalVal %></td>
 			</tr>
 
 		</tbody>
 	</table>
-	<p style="text-align: right;">
-		<input name="Done" type="button" onclick="goBack()" value="Close" />
-		<input name="Print"type="button" onclick="printpage()" value="Print" />
-	</p>
 </body>
 </html>

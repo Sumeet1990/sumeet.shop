@@ -1,4 +1,3 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <%@page import="java.util.Date"%>
 <html dir="ltr" lang="en">
 <head>
@@ -37,6 +36,8 @@
 	src="${pageContext.request.contextPath}/javascript/domtab.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/javascript/jQuery1.9.js"></script>
+	<script type="text/javascript"
+	src="${pageContext.request.contextPath}/javascript/searchandupd.js"></script>
 <script type="text/javascript">
 	var hide = true;
 
@@ -335,29 +336,20 @@
 							<a name="EntryView" id="EntryView">Search Add Update</a>
 						</h2>
 						<form action="SearchUpdItem" method="GET">
-
-							<input id="entrys" name="Itemname" type="text"
-								placeholder="Item Name">&nbsp;&nbsp; <input id="entrys"
-								name="Id" type="text" placeholder="Item Code"><br>
-							<INPUT id="entrys" name="Description" type="text"
-								placeholder="Item Description" />&nbsp;&nbsp; <INPUT
-								id="entrys" name="PerPrice" type="text" placeholder="Per Price" />
-							<br /> <INPUT id="entrys" name="Buy" type="text"
-								placeholder="Buy" />&nbsp;&nbsp; <INPUT id="entrys" name="Sell"
-								type="text" placeholder="Sell" /> <br /> <br />
-
-							<fieldset id="actions">
-								<table>
-									<tr>
-										<td><input type="submit" id="submit" value="Search">
-										</td>
-										<td>&nbsp;&nbsp;</td>
-										<td><input type="submit" id="submit" value="Update">
-										</td>
-									</tr>
-								</table>
-							</fieldset>
-
+						<li id="searchResults">
+						
+						</li>
+						<li id="searchOption">
+						<input id="entrys" name="Itemname" type="text" placeholder="Item Name">
+						&nbsp;&nbsp;
+						<input id="entrys" name="ItemCode" type="text" placeholder="Item Code">
+						&nbsp;&nbsp;
+						<INPUT id="entrys" name="Description" type="text"	placeholder="Item Description" />
+						<fieldset id="actions">
+							<input type="button" id="submit" onclick="search()" value="Search">
+						</fieldset>
+						</li>
+							<%-- <%@include file="/jsp/addandupdate.jsp"%> --%>
 						</form>
 				</span></li>
 				<li><p class="SearchA" onclick="hideTab('Add')">Add</p> <span

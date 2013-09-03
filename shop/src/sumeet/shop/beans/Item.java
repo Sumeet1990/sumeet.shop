@@ -3,14 +3,14 @@ package sumeet.shop.beans;
 public class Item {
 
 	String itemCode;
-	Integer perPrice;
-	Integer quantity;
+	Double perPrice;
+	Double quantity;
 
-	public Integer getQuantity() {
+	public Double getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(Integer quantity) {
+	public void setQuantity(Double quantity) {
 		this.quantity = quantity;
 	}
 
@@ -22,11 +22,11 @@ public class Item {
 		this.itemCode = itemCode;
 	}
 
-	public Integer getPerPrice() {
+	public Double getPerPrice() {
 		return perPrice;
 	}
 
-	public void setPerPrice(Integer perPrice) {
+	public void setPerPrice(Double perPrice) {
 		this.perPrice = perPrice;
 	}
 

@@ -38,9 +38,9 @@ public class MainPageController {
 
 			if (itemCode != null) {
 				Item item = new Item();
-				item.setItemCode(itemCode);
-				int price = Integer.valueOf(request.getParameter("price" + i));
-				int quant = Integer.valueOf(request
+				item.setItemCode(itemCode.equals("") ? "No item selected" : itemCode);
+				Double price = Double.valueOf(request.getParameter("price" + i));
+				Double quant = Double.valueOf(request
 						.getParameter("quantity" + i));
 				total += price * quant;
 				item.setPerPrice(price);

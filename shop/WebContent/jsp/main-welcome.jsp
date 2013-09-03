@@ -266,7 +266,25 @@
 			alert(e);
 		}
 	}
-
+function validateInputs()
+{
+try{
+	var val = $(".search :first-child").val();
+	if (val.replace(/^\s+|\s+$/g, '') == '')
+		{
+			alert("Please select at least one item.");
+			return false;
+		}else
+			{
+			return true;
+			}
+	return false;
+}catch(err)
+{
+	alert("Please select a valid item. Error:"+err);
+	return false;
+	}
+}
 	document.write('<style type="text/css">');
 	document.write('div.domtab div{display:none;}<');
 	document.write('/s' + 'tyle>');
@@ -294,7 +312,7 @@
 			<h2>
 				<a name="billing" id="billing">Billing</a>
 			</h2>
-			<form action="makeBill" method="GET">
+			<form action="makeBill" onsubmit="return validateInputs();" method="GET" id="makeBillSubmit">
 
 				<input id="inputs" name="customername" type="text"
 					placeholder="Customer Name" autofocus="" required=""><br>

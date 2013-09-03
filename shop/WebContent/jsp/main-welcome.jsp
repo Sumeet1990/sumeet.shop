@@ -71,6 +71,7 @@
 			$("#updateSection").hide();
 			$("#searchOption").show();
 		} else {
+			resetFeilds();
 			$("#View").hide();
 			$('[name="submitUpdate"]').prop('value','Add');
 			$('[name="backToList"]').hide();

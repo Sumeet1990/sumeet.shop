@@ -30,7 +30,7 @@ public class MainPageController {
 		System.out.println(">>>>>>>>>>>>>>>>>" + customerName);
 		boolean moveOut = true;
 		int i = 0;
-		int total = 0;
+		double total = 0;
 		List<Item> itemLst = customer.getItemsLst();
 
 		while (moveOut) {

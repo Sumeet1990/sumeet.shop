@@ -48,7 +48,9 @@ xmlhttp.onreadystatechange=function()
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
-	  $('[name="Itemname"]').val(xmlhttp.responseText);
+	  var val = xmlhttp.responseText;
+	  $('[name="ItemnameUpd"]').val(val);
+	  $('[name="ItemCodeUpd"]').val(val);
     /*document.getElementById("ItemCodeUpd").innerHTML=xmlhttp.responseText;*/
     }
   }
@@ -77,4 +79,13 @@ function showList()
 {
 	$("#updateSection").hide();	
 	search();
+}
+function resetFeilds()
+{
+	$("[name='ItemCodeUpd']").val("");
+	$("[name='ItemnameUpd']").val("");
+	$("[name='DescriptionUpd']").val("");
+	$("[name='PerPriceUpd']").val("");
+	$("[name='BuyUpd']").val("");
+	$("[name='SellUpd']").val("");
 }

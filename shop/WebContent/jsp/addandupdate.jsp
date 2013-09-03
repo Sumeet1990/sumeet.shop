@@ -4,7 +4,7 @@
 Item Name:
 </td>
 <td > 
-<input style="width: 100%;" id="entrys"  name="Itemname" type="text" placeholder="Item Name">
+<input style="width: 100%;" id="entrys"  name="ItemnameUpd" type="text" placeholder="Item Name">
 </td>
 <td align="right">
 Item Code:
@@ -18,13 +18,13 @@ Item Code:
 Item Description:
 </td>
 <td align="right">
- <INPUT style="width: 100%;" id="entrys"  name="Description" type="text"	placeholder="Item Description" />
+ <INPUT style="width: 100%;" id="entrys"  name="DescriptionUpd" type="text"	placeholder="Item Description" />
 </td>
 <td align="right">
 Per Price:
 </td>
 <td> 
-<INPUT style="width: 100%;" id="entrys"  name="PerPrice" type="text" placeholder="Per Price" />
+<INPUT style="width: 100%;" id="entrys"  name="PerPriceUpd" type="text" placeholder="Per Price" />
 </td>
 </tr>
 <tr>
@@ -32,13 +32,13 @@ Per Price:
 Buy:
 </td>
 <td>
- <INPUT style="width: 100%;" id="entrys"  name="Buy" type="text" placeholder="Buy" />
+ <INPUT style="width: 100%;" id="entrys"  name="BuyUpd" type="text" placeholder="Buy" />
 </td>
 <td align="right">
 Sell:
 </td>
 <td>
-<INPUT style="width: 100%;" id="entrys"name="Sell" type="text" placeholder="Sell" />
+<INPUT style="width: 100%;" id="entrys"name="SellUpd" type="text" placeholder="Sell" />
 </td>
 </tr>
 </table>

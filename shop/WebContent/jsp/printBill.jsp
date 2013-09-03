@@ -71,7 +71,7 @@ Customer cust = (Customer)request.getAttribute("billCustObj");
 		</thead>
 		<tbody >
 			<% int count = 0;%>
-			<%Integer totalVal = request.getAttribute("total") == null ? 0 : (Integer)request.getAttribute("total");	%>
+			<%Double totalVal = request.getAttribute("total") == null ? 0 : (Double)request.getAttribute("total");	%>
 			<c:forEach items="${list}" var="element">
 				<tr>
 					<td  align="right"><%=++count %></td>

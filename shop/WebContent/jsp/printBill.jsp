@@ -29,7 +29,7 @@ document.getElementById("displayTime").innerHTML = curr_year+" "+h+":"+m;
 <%
 Customer cust = (Customer)request.getAttribute("billCustObj");
 %>
-<body onload="displayTime()">
+<body onload="displayTime()" style="background: none repeat scroll 0% 0% lightblue;">
 	<p style="text-align: right;">
 		<input name="Print"type="button" onclick="printpage()" value="Print" />
 		<input name="Done" type="button" onclick="goBack()" value="Close" />
@@ -38,15 +38,15 @@ Customer cust = (Customer)request.getAttribute("billCustObj");
 	<h3 id="displayTime" style="text-align: right;"></h3>
 	<div>
 		<table align="left" border="1" cellpadding="1" cellspacing="1"
-			style="width: 500px;">
+			style="width: 500px; background: none repeat scroll 0% 0% lightgrey;">
 			<tbody>
 				<tr >
-					<td>Name:</td>
-					<td>&nbsp;<%=cust.getCustomername()%>&nbsp;</td>
+					<td style="width: 30%;">Name:</td>
+					<td style="width: 50%;">&nbsp;<%=cust.getCustomername()%>&nbsp;</td>
 				</tr>
 				<tr>
-					<td>Mobile No:</td>
-					<td>&nbsp;<%=cust.getPhonenumber() %>&nbsp;</td>
+					<td style="width: 30%;">Mobile No:</td>
+					<td style="width: 50%;">&nbsp;<%=cust.getPhonenumber() %>&nbsp;</td>
 				</tr>
 			</tbody>
 		</table>
@@ -60,7 +60,7 @@ Customer cust = (Customer)request.getAttribute("billCustObj");
 	</br>
 	</br>
 	</br>
-	<table border="1" cellpadding="1" cellspacing="1" style="width: 70%;">
+	<table border="1" cellpadding="1" cellspacing="1" style="width: 70%; background: none repeat scroll 0% 0% lightgrey;">
 		<thead>
 			<tr>
 				<th scope="col">SNO</th>
@@ -86,7 +86,7 @@ Customer cust = (Customer)request.getAttribute("billCustObj");
 				<td align="center">-</td>
 				<td align="center">-</td>
 				<td align="center">-</td>
-				<td>Total:</td>
+				<td align="right">Total:</td>
 				<td  align="right"><%=totalVal %></td>
 			</tr>
 

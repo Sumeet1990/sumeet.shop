@@ -31,6 +31,9 @@ function updateRecord(itemCodeNo)
 {
 	$("#searchResults").hide();
 	$("#updateSection").show();	
+	$('[name="submitUpdate"]').prop('value','Edit');
+	$("#updateTable :input").attr("disabled","disabled");
+
 	var itemCodeVal = $("#itemCode"+itemCodeNo).html();	
 var xmlhttp;
 if (window.XMLHttpRequest)
@@ -45,11 +48,33 @@ xmlhttp.onreadystatechange=function()
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
-	  alert($('[name="Itemname"]').val(xmlhttp.responseText));
+	  $('[name="Itemname"]').val(xmlhttp.responseText);
     /*document.getElementById("ItemCodeUpd").innerHTML=xmlhttp.responseText;*/
     }
   }
 
 xmlhttp.open("GET","/shop/getItemDetails?itemCd="+itemCodeVal,true);
 xmlhttp.send();
+}
+
+function changeButton()
+{
+	try{
+	$('[name="submitUpdate"]').prop('value','Update');
+	$("#updateTable :input").removeAttr("disabled");
+	}catch(err)
+	{
+		alert(err);
+	}
+/*	try{
+	$('[name="submitUpdate"]' ).val('Update');
+}catch(err)
+{
+	alert(err);
+}*/
+}
+function showList()
+{
+	$("#updateSection").hide();	
+	search();
 }

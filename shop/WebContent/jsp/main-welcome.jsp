@@ -72,6 +72,8 @@
 			$("#searchOption").show();
 		} else {
 			$("#View").hide();
+			$('[name="submitUpdate"]').prop('value','Add');
+			$('[name="backToList"]').hide();
 		}
 		$("#" + tabId).show();
 	}
@@ -363,19 +365,9 @@
 						</h2>
 						<form action="AddItem" method="GET">
 
-							<input id="entrys" name="Itemname" type="text"
-								placeholder="Item Name" autofocus="" required="">&nbsp;&nbsp;
-							<input id="entrys" name="Id" type="text" placeholder="Item Code"><br>
-							<INPUT id="entrys" name="Description" type="text"
-								placeholder="Item Description" />&nbsp;&nbsp; <INPUT
-								id="entrys" name="PerPrice" type="text" placeholder="Per Price" />
-							<br /> <INPUT id="entrys" name="Buy" type="text"
-								placeholder="Buy" />&nbsp;&nbsp; <INPUT id="entrys" name="Sell"
-								type="text" placeholder="Sell" /> <br /> <br />
-
-							<fieldset id="actions">
-								<input type="submit" id="submit" value="Done">
-							</fieldset>
+						<li id="AddSection">
+						<%@include file="/jsp/addandupdate.jsp"%>
+						</li>
 
 						</form>
 

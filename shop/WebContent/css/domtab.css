@@ -1,6 +1,6 @@
 		*{
 			margin:0;
-			padding:0;
+			padding:2;
 			list-style:none;
 			border:none;
 		}
@@ -9,6 +9,7 @@
 			font-size:90%;
 			background:#333;
 			color:#ccc;
+			background: url('table-images/best-abstract-wallpaper-112.jpg');/*#669;*/
 		}
 		
 		div.domtab{
@@ -89,8 +90,7 @@
 			font-weight:normal;
 			font-family:"Trebuchet MS",Arial,Sans-Serif;
 			padding:.5em 0;
-			background:#669;
-			border-bottom:1px solid #666;
+		/*	background: url('table-images/best-abstract-wallpaper-736.jpg');#669;*/
 		}
 		pre{
 			font-size:1.2em;

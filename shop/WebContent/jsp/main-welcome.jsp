@@ -298,10 +298,10 @@ try{
 		<a name="top" id="top">Wellcome <%=request.getSession().getAttribute("Username")%>,
 			Have a great day!!!
 		</a>
+		<br>
+		<a style="float: right;" name="top" id="top1"></a>
 	</h1>
-	<h1 style="text-align: right;">
-		<a name="top" id="top1"></a>
-	</h1>
+
 	<p id="domtabprintview"></p>
 	<div id="other" class="domtab doprevnext">
 		<ul class="domtabs">

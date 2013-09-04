@@ -1,6 +1,6 @@
 		*{
 			margin:0;
-			padding:2;
+			/* padding:2; */
 			list-style:none;
 			border:none;
 		}
@@ -20,7 +20,8 @@
 		ul.domtabs{
 			float:left;
 			width:100%;
-			margin:2em 0 0 0;				
+			margin:2em 0 0 0;	
+			padding:.1%;			
 		}
 		ul.domtabs li{
 			float:left;
@@ -380,10 +381,10 @@ ul.prevnext li.next{
     font-weight: bold;
     text-decoration: none;
     margin: 10px;
-    left: 220px;
+    left: 13%;
 	position: absolute;
 	height: 100%;
-	top: 14em;
+	top:23%;
 	width: 80%;
 }
 .ulAddClass

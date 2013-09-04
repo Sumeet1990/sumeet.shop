@@ -62,7 +62,14 @@ xmlhttp.send();
 function changeButton()
 {
 	try{
-	$('[name="submitUpdate"]').prop('value','Update');
+		if($('[name="submitUpdate"]').val() == 'Add')
+			{
+			$('[name="submitUpdate"]').prop('value','Done');
+			}
+		else if($('[name="submitUpdate"]').val() == 'Edit')
+			{
+			$('[name="submitUpdate"]').prop('value','Update');
+			}
 	$("#updateTable :input").removeAttr("disabled");
 	}catch(err)
 	{

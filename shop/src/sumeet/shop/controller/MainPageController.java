@@ -1,5 +1,6 @@
 package sumeet.shop.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -72,21 +73,21 @@ public class MainPageController {
 				+"<th scope=\"col\">Item Code&nbsp;</th>"
 				+"<th scope=\"col\">Description</th>"
 				+"<th scope=\"col\">Item Name</th>"
-				+"<th scope=\"col\">Action</th>"
+				+"<th scope=\"col\" style=\"width: 15%;\">Action</th>"
 				+"</thead>"
 				+"<tbody >"
 				+"<tr>"
 				+"	<td align=\"right\">"+count+"</td>"
-				+"	<td id=\"itemCode"+count+"\">"+itemCode+"</td>"
-				+"	<td >"+itemDesc+"</td>"
-				+"	<td >"+itemName+"</td>"
+				+"	<td id=\"itemCode"+count+"\" align=\"center\">"+itemCode+"</td>"
+				+"	<td align=\"center\">"+itemDesc+"</td>"
+				+"	<td align=\"center\">"+itemName+"</td>"
 				+"	<td align=\"right\"><input type=\"button\" onclick=\"updateRecord("+count+")\" id=\"buttonAddDel\" value=\"View\"></td>"
 				+"</tr>"
 				+"<tr>"
 				+"	<td align=\"right\">"+2+"</td>"
-				+"	<td id=\"itemCode"+2+"\">"+itemCode+"2</td>"
-				+"	<td >"+itemDesc+"2</td>"
-				+"	<td >"+itemName+"2</td>"
+				+"	<td id=\"itemCode"+2+"\" align=\"center\">"+itemCode+"2</td>"
+				+"	<td align=\"center\">"+itemDesc+"2</td>"
+				+"	<td align=\"center\" >"+itemName+"2</td>"
 				+"	<td align=\"right\"><input type=\"button\" onclick=\"updateRecord("+2+")\" id=\"buttonAddDel\" value=\"View\"></td>"
 				+"</tr>"
 				+"</tbody>"
@@ -100,5 +101,105 @@ public class MainPageController {
 	public String getItemDetails(@RequestParam("itemCd") String itemCode, ModelMap map) {
 		return itemCode;
 	
+	}
+	
+	@RequestMapping(value = "/CustomerAccList", method = RequestMethod.GET)
+	@ResponseBody
+	public String searchCustomerAccount(@RequestParam("Customername") String Customername,
+							@RequestParam("MobileNo") String MobileNo,
+								HttpServletRequest request, ModelMap map) {
+
+		int count =1;
+		String table ="<table id=\"searchtable\">"+
+				"<thead>"
+				+"<tr>"
+				+"<th scope=\"col\">SNO</th>"
+				+"<th scope=\"col\">Customer Name</th>"
+				+"<th scope=\"col\">Mobile Number</th>"
+				+"<th scope=\"col\" style=\"width: 15%;\">Action</th>"
+				+"</thead>"
+				+"<tbody >"
+				+"<tr>"
+				+"	<td align=\"right\">"+count+"</td>"
+				+"	<td id=\"CustId"+count+"\" align=\"center\">"+Customername+"</td>"
+				+"	<td align=\"center\">"+MobileNo+"</td>"
+				+"	<td align=\"right\"><input type=\"button\" onclick=\"viewCustomerAcc("+count+")\" id=\"buttonAddDel\" value=\"View\"></td>"
+				+"</tr>"
+				+"<tr>"
+				+"	<td align=\"right\">"+2+"</td>"
+				+"	<td id=\"CustId"+2+"\" align=\"center\">"+Customername+"2</td>"
+				+"	<td align=\"center\">"+MobileNo+"2</td>"
+				+"	<td align=\"right\"><input type=\"button\" onclick=\"viewCustomerAcc("+2+")\" id=\"buttonAddDel\" value=\"View\"></td>"
+				+"</tr>"
+				+"</tbody>"
+				+"</table>";
+		
+		return table;
+	}
+	
+	@RequestMapping(value = "/getCustomerAccDetails", method = RequestMethod.GET)
+	@ResponseBody
+	public String getCustomerAccDetails(@RequestParam("custIdVal") String custIdVal, ModelMap map) {
+		return custIdVal;
+	
+	}
+	
+	@RequestMapping(value = "/getCustomerAccStatement", method = RequestMethod.GET)
+	@ResponseBody
+	public String getCustomerAccStatement(@RequestParam("custId") String custId,
+								HttpServletRequest request, ModelMap map) {
+
+		int count =1;
+		String credit = "<tr>"
+				+"	<td align=\"right\">"+2+"</td>"
+				+"	<td id=\"CustId"+2+"\" align=\"center\">"+new Date()+"2</td>"
+				+"	<td align=\"center\">-</td>"
+				+"	<td align=\"right\">342</td>"
+				+"</tr>";
+		String Paid = "<tr>"
+				+"	<td align=\"right\">"+2+"</td>"
+				+"	<td id=\"CustId"+2+"\" align=\"center\">"+new Date()+"2</td>"
+				+"	<td align=\"center\">-</td>"
+				+"	<td align=\"right\">342</td>"
+				+"</tr>";
+		String table ="<table id=\"searchtable\" style=\"width: 185%;\">"+
+				"<thead>"
+				+"<tr>"
+				+"<th scope=\"col\">SNO</th>"
+				+"<th scope=\"col\">Date</th>"
+				+"<th scope=\"col\">Item Details</th>"
+				+"<th scope=\"col\">Amount</th>"
+				+"</thead>"
+				+"<tbody >"
+				+"<tr>"
+				+"	<td align=\"right\">"+count+"</td>"
+				+"	<td id=\"CustId"+count+"\" align=\"center\">"+new Date()+"</td>"
+				+"	<td align=\"center\">Item Details</td>"
+				+"	<td align=\"right\">123</td>"
+				+"</tr>"
+				+"<tr>"
+				+"	<td align=\"right\">"+2+"</td>"
+				+"	<td id=\"CustId"+2+"\" align=\"center\">"+new Date()+"2</td>"
+				+"	<td align=\"center\">ItemDetails2</td>"
+				+"	<td align=\"right\">342</td>"
+				+"</tr>"
+				+"<tr>"
+				+"	<td>-</td>"
+				+"	<td align=\"center\">Paid</td>"
+				+"	<td>-</td>"
+				+"	<td>-</td>"
+				+"</tr>"
+				+Paid
+				+"<tr>"
+				+"	<td>-</td>"
+				+"	<td align=\"center\">Credit</td>"
+				+"	<td>-</td>"
+				+"	<td >-</td>"
+				+"</tr>"
+				+credit
+				+"</tbody>"
+				+"</table>";
+		
+		return table;
 	}
 }

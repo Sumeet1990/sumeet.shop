@@ -48,9 +48,11 @@
 	});
 
 	$(document).ready(function() {
-
+		$("#CustUpdateSection").hide();
 		$("#Add").hide();
 		$("#View").hide();
+		$("#CustomerView").hide();
+		$("#CustomerAdd").hide();
 		$('body').on("keyup", '.numberOnly', function() {
 			if (this.value.search(/^[A-Za-z\s]+$/) != -1) {
 				if (!(this.value.replace(/^\s+|\s+$/g, '') == '')) {
@@ -70,7 +72,7 @@
 			$("#searchResults").hide();
 			$("#updateSection").hide();
 			$("#searchOption").show();
-		} else {
+		} else if(tabId == "Add") {
 			resetFeilds();
 			$("#View").hide();
 			$('[name="submitUpdate"]').prop('value','Add');
@@ -344,16 +346,16 @@ try{
 		</div>
 		<div>
 			<h2>
-				<a name="accounts" id="accounts">How to use DOMtab</a>
+				<a name="accounts" id="accounts">Mange customer accounts</a>
 			</h2>
-
+			<%@include file="/jsp/customerAccounts.jsp"%>
 		</div>
 		<div>
 			<h2>
 				<a name="materialentry" id="materialentry">Material Entry</a>
 			</h2>
 			<!-- Start -->
-			<ul>
+			<ul style="padding: 0.1%;">
 				<li><p class="SearchA" onclick="hideTab('View')">View/Search</p>
 					<span id="View" class="AddAndSearchDiv">
 						<h2>

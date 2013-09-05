@@ -17,15 +17,15 @@
 
   CREATE TABLE "ITEM_DETAILS" ("ITEM_ID" NUMBER, "ITEM_NAME" VARCHAR2(20), "ITEM_DESC" VARCHAR2(20), "BUY" NUMBER, "SALE" NUMBER, "DATE" DATE)
 --------------------------------------------------------
---  DDL for Table LOGIN
---------------------------------------------------------
-
-  CREATE TABLE "LOGIN" ("USER_NAME" VARCHAR2(20), "PASSWORD" VARCHAR2(20), "NAME" VARCHAR2(20), "CONTACT_NO" NUMBER, "COMPANY" VARCHAR2(20), "ADDRESS" VARCHAR2(20), "EMAIL" VARCHAR2(20), "OWNER_ID" NUMBER)
---------------------------------------------------------
 --  DDL for Table TRANSCATION_TYPE
 --------------------------------------------------------
 
   CREATE TABLE "TRANSCATION_TYPE" ("TRANS_TYPE_ID" NUMBER, "TRANS_TYPE_DESC" VARCHAR2(20))
+--------------------------------------------------------
+--  DDL for Table USER_DETAILS
+--------------------------------------------------------
+
+  CREATE TABLE "USER_DETAILS" ("USER_NAME" VARCHAR2(20), "PASSWORD" VARCHAR2(20), "NAME" VARCHAR2(20), "CONTACT_NO" NUMBER, "COMPANY" VARCHAR2(20), "ADDRESS" VARCHAR2(20), "EMAIL" VARCHAR2(20), "OWNER_ID" NUMBER)
 --------------------------------------------------------
 --  Constraints for Table BILLING_ENTRY
 --------------------------------------------------------
@@ -60,16 +60,16 @@
  
   ALTER TABLE "CUSTOMER_ACCOUNTS" MODIFY ("CUST_ID" NOT NULL ENABLE)
 --------------------------------------------------------
---  Constraints for Table LOGIN
+--  Constraints for Table USER_DETAILS
 --------------------------------------------------------
 
-  ALTER TABLE "LOGIN" ADD CONSTRAINT "LOGIN_PK" PRIMARY KEY ("OWNER_ID") ENABLE
+  ALTER TABLE "USER_DETAILS" ADD CONSTRAINT "LOGIN_PK" PRIMARY KEY ("OWNER_ID") ENABLE
  
-  ALTER TABLE "LOGIN" MODIFY ("USER_NAME" NOT NULL ENABLE)
+  ALTER TABLE "USER_DETAILS" MODIFY ("USER_NAME" NOT NULL ENABLE)
  
-  ALTER TABLE "LOGIN" MODIFY ("PASSWORD" NOT NULL ENABLE)
+  ALTER TABLE "USER_DETAILS" MODIFY ("PASSWORD" NOT NULL ENABLE)
  
-  ALTER TABLE "LOGIN" MODIFY ("OWNER_ID" NOT NULL ENABLE)
+  ALTER TABLE "USER_DETAILS" MODIFY ("OWNER_ID" NOT NULL ENABLE)
 --------------------------------------------------------
 --  Constraints for Table ITEM_DETAILS
 --------------------------------------------------------
@@ -96,7 +96,7 @@
 --  DDL for Index LOGIN_PK
 --------------------------------------------------------
 
-  CREATE UNIQUE INDEX "LOGIN_PK" ON "LOGIN" ("OWNER_ID")
+  CREATE UNIQUE INDEX "LOGIN_PK" ON "USER_DETAILS" ("OWNER_ID")
 --------------------------------------------------------
 --  DDL for Index CUSTOMER_ACCOUNTS_PK
 --------------------------------------------------------

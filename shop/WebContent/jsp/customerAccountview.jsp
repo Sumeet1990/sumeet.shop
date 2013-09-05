@@ -50,17 +50,17 @@ function printCustomerAccStmt()
 
 function payCreditAmount()
 {
-	var amount = prompt("Pelase enter amount to be paid","0.0");
+	var amount = prompt("Please enter amount to be paid \n In Rupees: ","0.0");
 	if(amount == null || amount == '0.0')
 		{
-		alert("No payement done !");
+		alert("No payment was done !");
 		}else if(amount.search(/^[A-Za-z\s]+$/) != -1)
 			{
 			alert("Enter a valid amount !");
 			}
 		else
 			{
-			alert("Amount: "+amount+" Payement done !");
+			alert("Amount: "+amount+"\nPayment done !");
 			}
 	}
 

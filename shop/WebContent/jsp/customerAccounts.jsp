@@ -103,9 +103,6 @@ xmlhttp.send();
 						</h2>
 						<form action="AddItem" method="GET">
 
-						<%-- <li id="AddSection">
-						<%@include file="/jsp/addandupdate.jsp"%>
-						</li> --%>
 
 						</form>
 

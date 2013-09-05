@@ -162,7 +162,7 @@ public class MainPageController {
 				+"	<td align=\"center\">-</td>"
 				+"	<td align=\"right\">342</td>"
 				+"</tr>";
-		String table ="<table id=\"searchtable\" style=\"width: 185%;\">"+
+		String table ="<table id=\"searchtable\" style=\"width: 140%;\">"+
 				"<thead>"
 				+"<tr>"
 				+"<th scope=\"col\">SNO</th>"
@@ -185,14 +185,14 @@ public class MainPageController {
 				+"</tr>"
 				+"<tr>"
 				+"	<td>-</td>"
-				+"	<td align=\"center\">Paid</td>"
+				+"	<td align=\"center\" style=\"color: darkgreen;\" >Paid</td>"
 				+"	<td>-</td>"
 				+"	<td>-</td>"
 				+"</tr>"
 				+Paid
 				+"<tr>"
 				+"	<td>-</td>"
-				+"	<td align=\"center\">Credit</td>"
+				+"	<td align=\"center\" style=\"color: red;\" >Credit</td>"
 				+"	<td>-</td>"
 				+"	<td >-</td>"
 				+"</tr>"

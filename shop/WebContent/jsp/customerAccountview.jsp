@@ -64,7 +64,14 @@ Details:
 </td>
 </tr>
 </table>
+<div id="AccountStatement">
+</div>
 <table style="width: 80%;">
+<tr>
+<td>
+&nbsp;
+</td>
+</tr>
 <tr>
 <td style="width: 110%;">
 &nbsp;
@@ -74,5 +81,3 @@ Details:
 </td>
 </tr>
 </table>
-<div id="AccountStatement">
-</div>

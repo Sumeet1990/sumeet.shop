@@ -198,7 +198,17 @@ public class MainPageController {
 				+"</tr>"
 				+credit
 				+"</tbody>"
-				+"</table>";
+				+"</table>"
+				+"<table id=\"searchtable\" style=\"width: 140%;\">"
+				+"</tbody>"
+				+"<tr>"
+				+"	<td style=\"width: 100%;\"></td>"
+				+"	<td></td>"
+				+"<td align=\"right\"><input type=\"button\" name=\"payAmount\" onclick=\"payCreditAmount()\"  id=\"buttonAddDel\" value=\"Pay\"></td>"
+				+"<td> <input type=\"button\"  id=\"buttonAddDel\"  onclick=\"printCustomerAccStmt()\"  value=\"Print\"></td>"
+				+"</tr>"
+				+"</tbody>"
+				+"</tbody>";
 		
 		return table;
 	}

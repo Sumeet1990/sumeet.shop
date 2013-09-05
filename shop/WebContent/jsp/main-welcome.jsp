@@ -67,13 +67,13 @@
 	var count = -1;
 	var downKeyCount = 0;
 	function hideTab(tabId) {
+		resetSearch();
 		if (tabId == "View") {
 			$("#Add").hide();
 			$("#searchResults").hide();
 			$("#updateSection").hide();
 			$("#searchOption").show();
 		} else if(tabId == "Add") {
-			resetFeilds();
 			$("#View").hide();
 			$('[name="submitUpdate"]').prop('value','Add');
 			$('[name="backToList"]').hide();

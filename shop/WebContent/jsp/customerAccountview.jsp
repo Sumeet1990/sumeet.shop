@@ -2,11 +2,11 @@
 function showCustList() {
 	searchCustomers();
 	$("#CustUpdateSection").hide();
+	$("#AccountStatement").hide();
 	
 }
 function showStatementInDetail()
 {
-alert("Hii");
 var custId = $('[name="CustNameUpd"]').val();
 var xmlhttp;
 if (window.XMLHttpRequest)
@@ -31,6 +31,39 @@ xmlhttp.open("GET","/shop/getCustomerAccStatement?custId="+custId,true);
 xmlhttp.send();
 $('#AccountStatement').show();
 }
+
+function printCustomerAccStmt()
+{
+	$('[name="showStatement"]').hide();
+	$('[name="payAmount"]').hide();
+	 var mywindow = window.open('', 'CustUpdateSection', 'height=400,width=600');
+     mywindow.document.write('<html><head><title>Account Details</title>');
+     mywindow.document.write('</head><body >');
+     //mywindow.document.write('<link rel="stylesheet" href="css/print.css" type="text/css" media="print"/>');
+     mywindow.document.write($('#CustUpdateSection').html());
+     mywindow.document.write('</body></html>');
+      mywindow.print();
+      mywindow.close();
+     $('[name="showStatement"]').show();
+     $('[name="payAmount"]').show();
+	}
+
+function payCreditAmount()
+{
+	var amount = prompt("Pelase enter amount to be paid","0.0");
+	if(amount == null || amount == '0.0')
+		{
+		alert("No payement done !");
+		}else if(amount.search(/^[A-Za-z\s]+$/) != -1)
+			{
+			alert("Enter a valid amount !");
+			}
+		else
+			{
+			alert("Amount: "+amount+" Payement done !");
+			}
+	}
+
 </script>
 
 <table  id="AccountsTable" style="width: 80%;">
@@ -64,7 +97,7 @@ Details:
 </td>
 </tr>
 </table>
-<div id="AccountStatement">
+<div id="AccountStatement" style="width: 57%;">
 </div>
 <table style="width: 80%;">
 <tr>

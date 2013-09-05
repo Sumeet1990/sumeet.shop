@@ -51,7 +51,6 @@ xmlhttp.onreadystatechange=function()
 	  var val = xmlhttp.responseText;
 	  $('[name="ItemnameUpd"]').val(val);
 	  $('[name="ItemCodeUpd"]').val(val);
-    /*document.getElementById("ItemCodeUpd").innerHTML=xmlhttp.responseText;*/
     }
   }
 
@@ -95,4 +94,12 @@ function resetFeilds()
 	$("[name='PerPriceUpd']").val("");
 	$("[name='BuyUpd']").val("");
 	$("[name='SellUpd']").val("");
+}
+
+function resetSearch()
+{
+	$("[name='Itemname']").val("");
+	$("[name='ItemCode']").val("");
+	$("[name='Description']").val("");
+	resetFeilds();
 }

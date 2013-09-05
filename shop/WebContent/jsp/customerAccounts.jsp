@@ -2,6 +2,7 @@
 
 function custShowView(tabId)
 {
+	resetCustomerSearch();
 	if(tabId == "CustomerView") {
 		
 		$("#CustomerAdd").hide();
@@ -72,6 +73,21 @@ xmlhttp.onreadystatechange=function()
 xmlhttp.open("GET","/shop/getCustomerAccDetails?custIdVal="+custIdVal,true);
 xmlhttp.send();
 }
+
+function resetCustomerUpdFeilds()
+{
+	$("[name='CustNameUpd']").val("");
+	$("[name='MobileNoUpd']").val("");
+	$("[name='CreditUpd']").val("");
+}
+
+function resetCustomerSearch()
+{
+	$("[name='Customername']").val("");
+	$("[name='MobileNo']").val("");
+	resetCustomerUpdFeilds();
+}
+
 </script>
 
 <ul style="padding: 0.1%;">
@@ -91,7 +107,7 @@ xmlhttp.send();
 							<input type="button" id="submit" onclick="searchCustomers()" value="Search">
 						</fieldset> 
 						</li>
-						<li id="CustUpdateSection">
+						<li id="CustUpdateSection" style=" width: 100%;">
 						<%@include file="/jsp/customerAccountview.jsp"%>
 						</li>
 						</form>

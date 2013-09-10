@@ -372,7 +372,7 @@ ul.prevnext li.next{
     color: rgb(204, 204, 204);
     font-weight: bold;
     text-decoration: none;
-    margin: 2%;
+   /*  margin: 2%; */
 }
 .AddAndSearchDiv {
    

@@ -70,6 +70,7 @@
 		$("[name='CustNameUpd']").val("");
 		$("[name='MobileNoUpd']").val("");
 		$("[name='CreditUpd']").val("");
+		$("#AccountStatement").hide();
 	}
 
 	function resetCustomerSearch() {
@@ -90,7 +91,7 @@
 				<li id="CustsearchOption"><input id="entrys"
 					name="Customername" type="text" placeholder="Customer Name">
 					&nbsp;&nbsp; <input id="entrys" name="MobileNo" type="text"
-					onkeypress="checkNumberOnly('MobileNo')"
+					onkeyup="checkNumberOnly('MobileNo')"
 					placeholder="Mobile Number">
 					<fieldset id="actions">
 						<input type="button" id="submit" onclick="searchCustomers()"

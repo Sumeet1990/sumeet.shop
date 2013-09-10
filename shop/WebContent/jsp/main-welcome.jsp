@@ -53,6 +53,8 @@
 		$("#View").hide();
 		$("#CustomerView").hide();
 		$("#CustomerAdd").hide();
+		$("#CustsearchOption").hide();
+		$('[name="dontDisplay"]').hide();
 		$('body').on("keyup", '.numberOnly', function() {
 			if (this.value.search(/^[A-Za-z\s]+$/) != -1) {
 				if (!(this.value.replace(/^\s+|\s+$/g, '') == '')) {
@@ -108,13 +110,16 @@
 
 	function checkItemExist(e, id) {
 		try {
+			$('#noItemInfo'+id).html("");
 			var textBxId = 'textbx' + id;
 			var ul = document.getElementById(textBxId);
 			var inputsearchBx = 'inputSearch' + id;
 			var value = document.getElementById(inputsearchBx).value;
 			var valueArr = new Array("Saab", "Volvo", "BMW", "Vorvo");
 			var lis = document.getElementsByName("liEll");
-
+			
+			$("#" + inputsearchBx).unbind('blur');
+			
 			if (e.which == 40) {
 
 				if (downKeyCount == 0) {
@@ -123,6 +128,9 @@
 					$("#" + inputsearchBx).val(
 							$('#' + textBxId).children('li').eq(downKeyCount)
 									.text());
+					$("#" + inputsearchBx).blur(function() {
+						  $('#' + textBxId).hide();
+						});
 
 				} else {
 					//alert($('#'+textBxId).children('li').eq(downKeyCount));
@@ -137,6 +145,9 @@
 					} else {
 						downKeyCount--;
 					}
+					$("#" + inputsearchBx).blur(function() {
+						  $('#' + textBxId).hide();
+						});
 				}
 				downKeyCount++;
 			} else if (e.which == 38) {
@@ -180,7 +191,17 @@
 									+ id + ")'>" + valueArr[i] + "</li>";
 						}
 					}
-				}
+					if(ul.firstChild == null)
+						{
+						$("#" + textBxId).hide();
+						var inputval = $('#inputSearch'+id).val();
+						$('#inputSearch'+id).val(inputval.substring(0, inputval.length-1));
+						$('#noItemInfo'+id).html("No item exist for: "+inputval);
+						}
+				}else
+					{
+						$("#" + textBxId).hide();
+					}
 			}
 		} catch (err) {
 			alert(err);
@@ -217,15 +238,15 @@
 		var rowCount = table.rows.length;
 		var row = table.insertRow(rowCount);
 
-		var cell1 = row.insertCell(0);
-		var element1 = document.createElement("input");
+		/*var cell1 = row.insertCell(0);
+		 var element1 = document.createElement("input");
 		element1.type = "checkbox";
 		element1.name = "chkbox[]";
-		cell1.appendChild(element1);
+		cell1.appendChild(element1); */
 
-		var cell2 = row.insertCell(1);
+		var cell2 = row.insertCell(0);
 		count++;
-		cell2.innerHTML = '<span class="search" >'
+		cell2.innerHTML = '<li name="dontDisplay" style="color: red;" id="noItemInfo'+count+'"></li><span class="search" >'
 				+ '<input type="search" name="itemCode'
 				+ count
 				+ '" id="inputSearch'
@@ -236,20 +257,20 @@
 				+ ' <ul name="ulHidden" class="search-ac" id="textbx'+count+'">'
 				+ '</span>';
 
-		var cell3 = row.insertCell(2);
+		var cell3 = row.insertCell(1);
 		cell3.innerHTML = '<input type="text" value="0.0" name="quantity'
 				+ count + '" onchange="updatePrice(' + count
 				+ ')" class="numberOnly" id="quantityTab" size="30"/>';
-		var cell4 = row.insertCell(3);
+		var cell4 = row.insertCell(2);
 		cell4.innerHTML = '<input type="text" value="0.0" name="price' + count
 				+ '" onchange="updatePrice(' + count
 				+ ')" class="numberOnly" id="quantityTab" size="30"/>';
-		var cell5 = row.insertCell(4);
+		var cell5 = row.insertCell(3);
 		cell5.innerHTML = '<span style="color:black" id="totalValue'+count+'">0.0 </span>';
 
 		$("#textbx" + count).hide();
 	}
-
+/* 
 	function deleteRow(tableID) {
 		try {
 			var table = document.getElementById(tableID);
@@ -268,12 +289,13 @@
 		} catch (e) {
 			alert(e);
 		}
-	}
+	} */
 function validateInputs()
 {
 try{
 	var val = $(".search :first-child").val();
-	if (val.replace(/^\s+|\s+$/g, '') == '')
+	var error = $("[name='dontDisplay']").html();
+	if ((val.replace(/^\s+|\s+$/g, '') == '') || error != '')
 		{
 			alert("Please select at least one item.");
 			return false;
@@ -308,8 +330,8 @@ try{
 	<div id="other" class="domtab doprevnext">
 		<ul class="domtabs">
 			<li><a href="#billing">Billing</a></li>
-			<li><a href="#accounts">Accounts</a></li>
-			<li><a href="#materialentry">Material Entry</a></li>
+			<li><a href="#accounts" style="width: 85%;">Customer accounts</a></li>
+			<li><a href="#materialentry" >Material entry</a></li>
 		</ul>
 		<div>
 			<h2>
@@ -322,14 +344,15 @@ try{
 				<input id="inputs" name="phonenumber" type="text" class="numberOnly"
 					placeholder="Phone Number"><br> <INPUT
 					id="buttonAddDel" type="button" value="Add Row"
-					onclick="addRow('background-image')" />&nbsp;&nbsp; <INPUT
+					onclick="addRow('background-image')" />&nbsp;&nbsp; 
+					<!-- <INPUT
 					id="buttonAddDel" type="button" value="Delete Row"
-					onclick="deleteRow('background-image')" /> <br />
+					onclick="deleteRow('background-image')" />  --><br />
 
 				<table id="background-image" summary="Meeting Results">
 					<thead>
 						<tr>
-							<th scope="col"></th>
+							 <!-- <th scope="col"></th>  -->
 							<th scope="col">Item Description</th>
 							<th scope="col">Quantity</th>
 							<th scope="col">Price</th>

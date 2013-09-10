@@ -7,9 +7,11 @@
 			$("#CustsearchOption").show();
 			$("#CustUpdateSection").hide();
 			$("#CustsearchResults").hide();
+			$("#CustAddSection").hide();
 		} else if (tabId == "CustomerAdd") {
 
 			$("#CustomerView").hide();
+			$("#CustAddSection").show();
 		}
 		$("#" + tabId).show();
 	}
@@ -106,7 +108,9 @@
 			<h2>
 				<a name="EntryAdd" id="EntryAdd">Add</a>
 			</h2>
-			<form action="AddItem" method="GET"></form>
-
+			<form action="AddItem" method="GET">
+			<li id="CustAddSection" style="width: 100%;"><%@include
+						file="/jsp/addCustomerAcc.jsp"%></li>
+			</form>
 	</span></li>
 </ul>

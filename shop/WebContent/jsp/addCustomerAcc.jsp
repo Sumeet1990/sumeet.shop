@@ -10,7 +10,7 @@ Customer Name:
 Mobile Number:
 </td>
 <td> 
-<input style="width: 100%;" id="entrys"  name="MobileNoAdd" type="text" placeholder="Mobile Number">
+<input style="width: 100%;" id="entrys"  name="MobileNoAdd" onkeyup="checkNumberOnly('MobileNoAdd','Please enter a valid mobile number !')" type="text" placeholder="Mobile Number">
 </td>
 </tr>
 <tr>
@@ -18,7 +18,7 @@ Mobile Number:
 Credit:
 </td>
 <td align="right">
- <INPUT style="width: 100%;" id="entrys"  name="CreditAdd" type="text"	placeholder="Credit" />
+ <INPUT style="width: 100%;" id="entrys"  name="CreditAdd" onkeyup="checkNumberOnly('CreditAdd','Please enter a valid credit amount !')" type="text"	placeholder="Credit" />
   <INPUT type="hidden" name="CustId" type="text"/>
 </td>
 </tr>

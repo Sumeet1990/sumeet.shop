@@ -1,31 +1,38 @@
 <html><meta style="visibility: hidden !important; display: block !important; width: 0px !important; height: 0px !important; border-style: none !important;"></meta><head>
 <title>Reset Password</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/loginStylesheet.css" type="text/css"><script type="text/javascript">
-
- </script><style type="text/css"></style></head>
- 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/loginStylesheet.css" type="text/css">
+<style type="text/css"></style></head>
+<script type="text/javascript"	src="${pageContext.request.contextPath}/javascript/jQuery1.9.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/javascript/commonfuctions.js">
+</script>
  <script type="text/javascript">
 function check()
 {
 	try{
-	 var prevPass = document.forms["forgotPass"]["phonenumber"].value.trim();
-	 var confirmPass = document.forms["forgotPass"]["email"].value.trim();
-
-	  if(prevPass == "" || confirmPass == "")
-		 {
-		  alert("Please enter phone number or email id for getting password");
-		  return false;
-		 }
-	  else
-		  {
-		 	return true;
-		  }
+		if(checkNumberOnly('phonenumber','Please enter a valid phone number !'))
+		{
+			 var prevPass = document.forms["forgotPass"]["phonenumber"].value.trim();
+			 var confirmPass = document.forms["forgotPass"]["email"].value.trim();
+		
+			  if(prevPass == "" || confirmPass == "")
+				 {
+				  alert("Please enter phone number or email id for getting password");
+				  return false;
+				 }
+			  else
+				  {
+				 	return true;
+				  }
+		}else
+			{
+				return false;
+			}
 
 	}catch(err) {
 	
 		alert(err.message);
+		return false;}
 	}
-}
  </script>
 <body>
 

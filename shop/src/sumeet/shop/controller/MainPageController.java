@@ -26,7 +26,7 @@ public class MainPageController {
 
 		Customer customer = new Customer();
 		customer.setCustomername(customerName);
-		customer.setPhonenumber(Integer.valueOf(phNm));
+		customer.setPhonenumber(Integer.valueOf(phNm.trim().equals("") ? "0" : phNm));
 
 		System.out.println(">>>>>>>>>>>>>>>>>" + customerName);
 		boolean moveOut = true;
@@ -39,15 +39,19 @@ public class MainPageController {
 
 			if (itemCode != null) {
 				Item item = new Item();
-				item.setItemCode(itemCode.equals("") ? "No item selected" : itemCode);
-				Double price = Double.valueOf(request.getParameter("price" + i));
-				Double quant = Double.valueOf(request
-						.getParameter("quantity" + i));
-				total += price * quant;
-				item.setPerPrice(price);
-				item.setQuantity(quant);
-
-				itemLst.add(item);
+				if(!itemCode.equals(""))
+				{
+					item.setItemCode(itemCode);
+					String priceStr = request.getParameter("price" + i);
+					Double price = Double.valueOf(priceStr.replace(",", ""));
+					Double quant = Double.valueOf(request
+							.getParameter("quantity" + i));
+					total += price * quant;
+					item.setPerPrice(price);
+					item.setQuantity(quant);
+	
+					itemLst.add(item);
+				}
 			} else
 				moveOut = false;
 			i++;

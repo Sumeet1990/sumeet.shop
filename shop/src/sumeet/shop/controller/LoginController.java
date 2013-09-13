@@ -1,7 +1,6 @@
 package sumeet.shop.controller;
 
 import javax.servlet.http.HttpSession;
-
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -57,13 +56,15 @@ public class LoginController {
 		}
 	}
 
-	@RequestMapping(value = "/jsp/registerUser", method = RequestMethod.GET)
+	@RequestMapping(value = "/jsp/registerUser", method = RequestMethod.POST)
 	public String registerUser(@RequestParam("username") String userName,
-			@RequestParam("password") String password, ModelMap map) {
+			@RequestParam("password") String password,HttpSession session, ModelMap map) {
 
 		System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 				+ userName);
-		return "login";
+		
+		map.addAttribute("Username", userName);
+		return "SessionValidation";
 
 	}
 

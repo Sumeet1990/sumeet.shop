@@ -1,10 +1,15 @@
 <html>
 <head>
 <title>Register</title>
+<script type="text/javascript"	src="${pageContext.request.contextPath}/javascript/jQuery1.9.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/javascript/commonfuctions.js">
+</script>
 <script type="text/javascript">
 function checkFrSamePassword()
 {
 	try{
+		if(checkNumberOnly('phonenumber','Please enter a valid phone number !'))
+		{
 	 var prevPass = document.forms["register"]["password"].value;
 	 var confirmPass = document.forms["register"]["confirmpassword"].value;
 
@@ -20,10 +25,14 @@ function checkFrSamePassword()
 		 	return false;
 		  
 		  }
-
+		}else
+			{
+				return false;
+			}
 	}catch(err) {
 	
 		alert(err.message);
+		return false;
 	}
 }
  </script>
@@ -31,7 +40,7 @@ function checkFrSamePassword()
  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/loginStylesheet.css" type="text/css">
 <body>
 
-<form id="register" action="registerUser" method="GET" onsubmit="return checkFrSamePassword()">
+<form id="register" action="registerUser" method="POST" onsubmit="return checkFrSamePassword()">
     <h1>Register</h1>
 
     <input id="inputsnormal" name="name" type="text" placeholder="Name/Owner" autofocus required><br>

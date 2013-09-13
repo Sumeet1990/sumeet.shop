@@ -63,19 +63,7 @@ function payCreditAmount()
 			alert("Amount: "+amount+"\nPayment done !");
 			}
 	}
-function checkNumberOnly(nameTextBx){
-	var value = $("[name='"+nameTextBx+"']").val();
-	if((value.search(/^[A-Za-z\s]+$/)) != -1)
-	{
-		alert("Please enter valid number !")
-		$("[name='"+nameTextBx+"']").val("");
-		return false;
-		}
-	else
-	{
-		return true;
-		}
-}
+
 </script>
 
 <table  id="AccountsTable" style="width: 80%;">

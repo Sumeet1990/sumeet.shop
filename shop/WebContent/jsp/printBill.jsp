@@ -46,7 +46,7 @@ Customer cust = (Customer)request.getAttribute("billCustObj");
 				</tr>
 				<tr>
 					<td style="width: 30%;">Mobile No:</td>
-					<td style="width: 50%;">&nbsp;<%=cust.getPhonenumber() %>&nbsp;</td>
+					<td style="width: 50%;">&nbsp;<%=cust.getPhonenumber() == 0 ? "-" : cust.getPhonenumber() %>&nbsp;</td>
 				</tr>
 			</tbody>
 		</table>

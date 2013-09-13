@@ -24,7 +24,7 @@ Item Description:
 Per Price:
 </td>
 <td> 
-<INPUT style="width: 100%;" id="entrys"  name="PerPriceUpd" type="text" placeholder="Per Price" />
+<INPUT style="width: 100%;" id="entrys"  onkeyup="checkNumberOnly('PerPriceUpd','Please enter a valid per price !')" name="PerPriceUpd" type="text" placeholder="Per Price" />
 </td>
 </tr>
 <tr>
@@ -32,13 +32,13 @@ Per Price:
 Buy:
 </td>
 <td>
- <INPUT style="width: 100%;" id="entrys"  name="BuyUpd" type="text" placeholder="Buy" />
+ <INPUT style="width: 100%;" id="entrys"  onkeyup="checkNumberOnly('BuyUpd','Please enter a buy value !')" name="BuyUpd" type="text" placeholder="Buy" />
 </td>
 <td align="right">
 Sell:
 </td>
 <td>
-<INPUT style="width: 100%;" id="entrys"name="SellUpd" type="text" placeholder="Sell" />
+<INPUT style="width: 100%;" id="entrys" onkeyup="checkNumberOnly('SellUpd','Please enter a valid sell value !')" name="SellUpd" type="text" placeholder="Sell" />
 </td>
 </tr>
 </table>

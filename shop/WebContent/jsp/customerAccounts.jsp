@@ -33,7 +33,7 @@
 				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 					document.getElementById("CustsearchResults").innerHTML = xmlhttp.responseText;
 				}
-			}
+			};
 
 			xmlhttp.open("GET", "/shop/CustomerAccList?Customername="
 					+ Customername + "&MobileNo=" + MobileNo, true);
@@ -61,7 +61,7 @@
 				$('[name="MobileNoUpd"]').val(val);
 				/*document.getElementById("ItemCodeUpd").innerHTML=xmlhttp.responseText;*/
 			}
-		}
+		};
 
 		xmlhttp.open("GET", "/shop/getCustomerAccDetails?custIdVal="
 				+ custIdVal, true);
@@ -86,14 +86,14 @@
 	<li><p class="SearchA" onclick="custShowView('CustomerView')">View/Search</p>
 		<span id="CustomerView" class="AddAndSearchDiv">
 			<h2>
-				<a name="EntryView" id="EntryView">Search Add Update</a>
+				<a name="EntryView" id="EntryView">Search and Update</a>
 			</h2>
 			<form action="CustomerAccList" method="GET">
 				<li id="CustsearchResults"></li>
 				<li id="CustsearchOption"><input id="entrys"
 					name="Customername" type="text" placeholder="Customer Name">
 					&nbsp;&nbsp; <input id="entrys" name="MobileNo" type="text"
-					onkeyup="checkNumberOnly('MobileNo')"
+					onkeyup="checkNumberOnly('MobileNo','Please enter a valid mobile number !')"
 					placeholder="Mobile Number">
 					<fieldset id="actions">
 						<input type="button" id="submit" onclick="searchCustomers()"

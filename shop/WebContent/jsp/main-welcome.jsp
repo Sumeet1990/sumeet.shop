@@ -36,10 +36,13 @@
 	src="${pageContext.request.contextPath}/javascript/domtab.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/javascript/jQuery1.9.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/javascript/commonfuctions.js"></script>
 	<script type="text/javascript"
 	src="${pageContext.request.contextPath}/javascript/searchandupd.js"></script>
 <script type="text/javascript">
 	var hide = true;
+	var valueArr = new Array("Armani","Box","Saab", "Volvo", "BMW", "Vorvo");
+	var valuePriceArr = new Array("50,000","50","1,200", "12,53,42,000", "2,53,00,000", "30,000");
 
 	$(document).click(function(event) {
 		if (event.target.nodeName == "LI") {
@@ -77,15 +80,13 @@
 			$("#searchOption").show();
 		} else if(tabId == "Add") {
 			$("#View").hide();
-			$('[name="submitUpdate"]').prop('value','Add');
-			$('[name="backToList"]').hide();
 		}
 		$("#" + tabId).show();
 	}
 	function updatePrice(id) {
 		try {
 			var quantity = $("[name='quantity" + id + "']").val();
-			var perprice = $("[name='price" + id + "']").val();
+			var perprice = $("[name='price" + id + "']").val().replace(/,/g,"");
 			$("#totalValue" + id).text(quantity * perprice);
 
 		} catch (err) {
@@ -102,7 +103,7 @@
 
 			document.getElementById(inputSearchId).value = li;
 			$("#textbx" + inputsearchBxId).hide();
-
+			setPrice(li,inputsearchBxId);
 		} catch (err) {
 			alert("Error ===" + err);
 		}
@@ -115,7 +116,6 @@
 			var ul = document.getElementById(textBxId);
 			var inputsearchBx = 'inputSearch' + id;
 			var value = document.getElementById(inputsearchBx).value;
-			var valueArr = new Array("Saab", "Volvo", "BMW", "Vorvo");
 			var lis = document.getElementsByName("liEll");
 			
 			$("#" + inputsearchBx).unbind('blur');
@@ -125,9 +125,10 @@
 				if (downKeyCount == 0) {
 					$('#' + textBxId).children('li').eq(downKeyCount).addClass(
 							"liJqeryDown");
-					$("#" + inputsearchBx).val(
-							$('#' + textBxId).children('li').eq(downKeyCount)
-									.text());
+					var inputitmcd = $('#' + textBxId).children('li').eq(downKeyCount).text();
+					$("#" + inputsearchBx).val(inputitmcd);
+					setPrice(inputitmcd,id);
+					
 					$("#" + inputsearchBx).blur(function() {
 						  $('#' + textBxId).hide();
 						});
@@ -139,9 +140,10 @@
 								.removeClass("liJqeryDown");
 						$('#' + textBxId).children('li').eq(downKeyCount)
 								.addClass("liJqeryDown");
-						$("#" + inputsearchBx).val(
-								$('#' + textBxId).children('li').eq(
-										downKeyCount).text());
+						var iputitemCd = $('#' + textBxId).children('li').eq(
+								downKeyCount).text();
+						$("#" + inputsearchBx).val(iputitemCd);
+						setPrice(iputitemCd,id);
 					} else {
 						downKeyCount--;
 					}
@@ -158,9 +160,10 @@
 							.removeClass("liJqeryDown");
 					$('#' + textBxId).children('li').eq(downKeyCount).addClass(
 							"liJqeryDown");
-					$("#" + inputsearchBx).val(
-							$('#' + textBxId).children('li').eq(downKeyCount)
-									.text());
+					var inputitemcode = $('#' + textBxId).children('li').eq(downKeyCount).text();
+					$("#" + inputsearchBx).val(inputitemcode);
+					
+					setPrice(inputitemcode,id);
 				}
 			} else if (e.which == 13) {
 				$("#" + textBxId).hide();
@@ -197,6 +200,7 @@
 						var inputval = $('#inputSearch'+id).val();
 						$('#inputSearch'+id).val(inputval.substring(0, inputval.length-1));
 						$('#noItemInfo'+id).html("No item exist for: "+inputval);
+						$('[name="price'+id+'"]').val("0.0");
 						}
 				}else
 					{
@@ -207,6 +211,19 @@
 			alert(err);
 		}
 	}
+	
+	function setPrice(inputitemcode,idPrice)
+	{
+
+		for ( var i = 0; i < valueArr.length; i++) {
+
+			var singleVal = valueArr[i];
+			if (singleVal == inputitemcode){
+				$("[name='price"+idPrice+"']").val(valuePriceArr[i]);
+					}
+			}
+	}
+	
 	function startTime() {
 		var today = new Date();
 
@@ -262,7 +279,7 @@
 				+ count + '" onchange="updatePrice(' + count
 				+ ')" class="numberOnly" id="quantityTab" size="30"/>';
 		var cell4 = row.insertCell(2);
-		cell4.innerHTML = '<input type="text" value="0.0" name="price' + count
+		cell4.innerHTML = '<input type="text" class="priceTab" value="0.0" disabled="disabled" name="price' + count
 				+ '" onchange="updatePrice(' + count
 				+ ')" class="numberOnly" id="quantityTab" size="30"/>';
 		var cell5 = row.insertCell(3);
@@ -295,12 +312,14 @@ function validateInputs()
 try{
 	var val = $(".search :first-child").val();
 	var error = $("[name='dontDisplay']").html();
-	if ((val.replace(/^\s+|\s+$/g, '') == '') || error != '')
+	var hiddenVisible = $("[name='ulHidden']").is(":visible");
+	if ((val.replace(/^\s+|\s+$/g, '') == '') || error != '' || hiddenVisible)
 		{
 			alert("Please select at least one item.");
 			return false;
 		}else
 			{
+			$(".priceTab").removeAttr("disabled");
 			return true;
 			}
 	return false;
@@ -319,11 +338,12 @@ try{
 	<a href="${pageContext.request.contextPath}/jsp/signout.jsp"
 		style="float: right; color: white;">Sign out</a>
 	<h1 style="text-align: center;">
-		<a name="top" id="top">Wellcome <%=request.getSession().getAttribute("Username")%>,
-			Have a great day!!!
+	<% String userNameCamelcase = (String)request.getSession().getAttribute("Username"); 
+		      userNameCamelcase = userNameCamelcase.toUpperCase().charAt(0)+userNameCamelcase.substring(1);%>
+		<a style="color: white;" name="top" id="top">Wellcome <%=userNameCamelcase%>,Have a great day!!!
 		</a>
 		<br>
-		<a style="float: right;" name="top" id="top1"></a>
+		<a name="top" style="float: right; color: blue; font-size: 22px;" id="top1"></a>
 	</h1>
 
 	<p id="domtabprintview"></p>
@@ -382,7 +402,7 @@ try{
 				<li><p class="SearchA" onclick="hideTab('View')">View/Search</p>
 					<span id="View" class="AddAndSearchDiv">
 						<h2>
-							<a name="EntryView" id="EntryView">Search Add Update</a>
+							<a name="EntryView" id="EntryView">Search and Update</a>
 						</h2>
 						<form action="SearchUpdItem" method="GET">
 						<li id="searchResults">
@@ -398,7 +418,7 @@ try{
 						</fieldset>
 						</li>
 						<li id="updateSection">
-						<%@include file="/jsp/addandupdate.jsp"%>
+						<%@include file="/jsp/updateEnrty.jsp"%>
 						</li>
 						</form>
 				</span></li>
@@ -410,7 +430,7 @@ try{
 						<form action="AddItem" method="GET">
 
 						<li id="AddSection">
-						<%@include file="/jsp/addandupdate.jsp"%>
+						<%@include file="/jsp/addEnrty.jsp"%>
 						</li>
 
 						</form>

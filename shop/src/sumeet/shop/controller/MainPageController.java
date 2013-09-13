@@ -1,5 +1,6 @@
 package sumeet.shop.controller;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -47,8 +48,8 @@ public class MainPageController {
 					Double quant = Double.valueOf(request
 							.getParameter("quantity" + i));
 					total += price * quant;
-					item.setPerPrice(price);
-					item.setQuantity(quant);
+					item.setPerPrice(new BigDecimal(price).toPlainString());
+					item.setQuantity(new BigDecimal(quant).toPlainString());
 	
 					itemLst.add(item);
 				}
@@ -56,7 +57,7 @@ public class MainPageController {
 				moveOut = false;
 			i++;
 		}
-		map.addAttribute("total", total);
+		map.addAttribute("total", new BigDecimal(total).toPlainString());
 		map.addAttribute("billCustObj", customer);
 		map.addAttribute("list", customer.getItemsLst());
 		return "printBill";

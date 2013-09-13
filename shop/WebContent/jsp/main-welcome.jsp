@@ -49,7 +49,7 @@
 			hide = false;
 		}
 	});
-
+  
 	$(document).ready(function() {
 		$("#CustUpdateSection").hide();
 		$("#Add").hide();

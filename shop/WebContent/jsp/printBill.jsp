@@ -37,8 +37,8 @@ Customer cust = (Customer)request.getAttribute("billCustObj");
 	<h1 style="text-align: center;">Welcome</h1>
 	<h3 id="displayTime" style="text-align: right;"></h3>
 	<div>
-		<table align="left" border="1" cellpadding="1" cellspacing="1"
-			style="width: 500px; background: none repeat scroll 0% 0% lightgrey;">
+		<table align="left" cellpadding="1" cellspacing="1"
+			style="width: 500px;">
 			<tbody>
 				<tr >
 					<td style="width: 30%;">Name:</td>

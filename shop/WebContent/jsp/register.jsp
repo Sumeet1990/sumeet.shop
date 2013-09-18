@@ -1,3 +1,4 @@
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 <head>
 <title>Register</title>
@@ -8,7 +9,7 @@
 function checkFrSamePassword()
 {
 	try{
-		if(checkNumberOnly('phonenumber','Please enter a valid phone number !'))
+		if(checkNumberOnly('contact_no','Please enter a valid phone number !'))
 		{
 	 var prevPass = document.forms["register"]["password"].value;
 	 var confirmPass = document.forms["register"]["confirmpassword"].value;
@@ -40,17 +41,17 @@ function checkFrSamePassword()
  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/loginStylesheet.css" type="text/css">
 <body>
 
-<form id="register" action="registerUser" method="POST" onsubmit="return checkFrSamePassword()">
+<form:form  commandName="userDetails" id="register" action="registerUser" method="POST" onsubmit="return checkFrSamePassword()">
     <h1>Register</h1>
 
     <input id="inputsnormal" name="name" type="text" placeholder="Name/Owner" autofocus required><br>
     <input id="inputsnormal" name="company" type="text" placeholder="Company" required><br>
-    <input id="inputsnormal" name="phonenumber" type="number" placeholder="PhoneNumber"><br>
+    <input id="inputsnormal" name="contact_no" type="number" placeholder="PhoneNumber"><br>
   	<input id="inputsnormal" name="address1" type="text" placeholder="Address Line 1" required>
   	<input id="inputsnormal" name="address2" type="text" placeholder="Address Line 2">
   	<input id="inputsnormal" name="address3" type="text" placeholder="Address Line 3"><br>
     <input id="inputsnormal" name="email" type="email" placeholder="EmailId"><br>
-    <input id="inputsnormal" name="username" type="text" placeholder="Username" required>   
+    <input id="inputsnormal" name="user_name" type="text" placeholder="Username" required>   
     <br><input id="inputsnormal" name="password" type="password" placeholder="Password" required><br>
     <input id="inputsnormal" name="confirmpassword" type="password" placeholder="Confirm Password" required><br>
 
@@ -59,7 +60,7 @@ function checkFrSamePassword()
         <a href="${pageContext.request.contextPath}">Back</a>
     </fieldset>
 
-</form>
+</form:form>
 
 
 

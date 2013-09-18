@@ -1,13 +1,18 @@
 package sumeet.shop.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import sumeet.shop.beans.Customer;
+import sumeet.shop.datamodel.DatabaseController;
+import sumeet.shop.datamodel.UserDetails;
 
 @Controller
 public class LoginController {
@@ -29,19 +34,22 @@ public class LoginController {
 			@RequestParam("password") String password, ModelMap map) {
 		System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 				+ userName);
+		String passwordDB = DatabaseController.getPassFruser(userName);
 
-		if (true/* userName.trim().equals("admin") && password.equals("admin") */) {
+		if (passwordDB.equals(password)) {
 			Customer cust = new Customer();
 			map.addAttribute("Username", userName);
 			return "SessionValidation";
-		} else {
-			if (userName.trim().equals("admin"))
-				map.addAttribute("Error", "Password is incorrect");
-			else
-				map.addAttribute("Error",
-						"Username and password are invalid please try again");
+		} else if(passwordDB.equals("no user")){
+
+				map.addAttribute("Error","Username and password are invalid please try again");
+				return "login";
+		} else
+		{
+			map.addAttribute("Error", "Password is incorrect");
 			return "login";
 		}
+		
 
 	}
 
@@ -57,12 +65,12 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/jsp/registerUser", method = RequestMethod.POST)
-	public String registerUser(@RequestParam("username") String userName,
+	public String registerUser(@ModelAttribute("userDetails") UserDetails user,@RequestParam("user_name") String userName,
 			@RequestParam("password") String password,HttpSession session, ModelMap map) {
 
-		System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-				+ userName);
 		
+		int val = DatabaseController.insertUser(user);
+		logger.info("-------Insert Status----------------"+val);
 		map.addAttribute("Username", userName);
 		return "SessionValidation";
 

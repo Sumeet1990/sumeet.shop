@@ -15,7 +15,7 @@
 --  DDL for Table ITEM_DETAILS
 --------------------------------------------------------
 
-  CREATE TABLE "ITEM_DETAILS" ("ITEM_ID" NUMBER, "ITEM_NAME" VARCHAR2(20), "ITEM_DESC" VARCHAR2(20), "BUY" NUMBER, "SALE" NUMBER, "DATE" DATE)
+  CREATE TABLE "ITEM_DETAILS" ("ITEM_ID" NUMBER, "ITEM_NAME" VARCHAR2(20), "ITEM_DESC" VARCHAR2(20), "BUY" NUMBER, "SALE" NUMBER, "ADDED_DATE" VARCHAR2(30))
 --------------------------------------------------------
 --  DDL for Table TRANSCATION_TYPE
 --------------------------------------------------------
@@ -122,4 +122,7 @@
 --------------------------------------------------------
 
   CREATE SEQUENCE  "SHOP"."OWNR_SEQ_ID"  MINVALUE 1 MAXVALUE 99999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  CYCLE ;
-
+--------------------------------------------------------
+--  SEQUENCE FOR Item ID
+--------------------------------------------------------
+CREATE SEQUENCE  "SHOP"."ITEM_SEQ_ID"  MINVALUE 1 MAXVALUE 999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;

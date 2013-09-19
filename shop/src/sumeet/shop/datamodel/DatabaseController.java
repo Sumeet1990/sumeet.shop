@@ -1,5 +1,7 @@
 package sumeet.shop.datamodel;
 
+import java.sql.Types;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class DatabaseController {
@@ -37,5 +39,20 @@ public class DatabaseController {
 			return "no user";
 		}
 		return pass;
+	}
+	
+	public static int insertItem( ItemDetails item)
+	{
+		String getItemId = "select ITEM_SEQ_ID.nextval from dual";
+		item.setItem_id(jdbcTemplate.queryForInt(getItemId));
+		item.setDate(new java.util.Date());
+		String sql = "insert into item_details( item_id,  item_name, item_desc, buy, sale, ADDED_DATE ) values (?, ?, ?, ?, ?, ?)";
+		
+		Object[] args = {item.getItem_id(),item.getItem_name(),item.getItem_desc(),item.getBuy(),item.getSale(),item.getDate()};
+		
+		//int[] argtypes = {Types.INTEGER,Types.VARCHAR,Types.VARCHAR,Types.INTEGER,Types.INTEGER,Types.DATE};
+		jdbcTemplate.update(sql, args );
+		
+		return 1;
 	}
 }

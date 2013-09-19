@@ -1,4 +1,5 @@
 <%@page import="java.util.Date"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html dir="ltr" lang="en">
 <head>
 <%
@@ -427,13 +428,13 @@ try{
 						<h2>
 							<a name="EntryAdd" id="EntryAdd">Add</a>
 						</h2>
-						<form action="AddItem" method="GET">
+						<form:form id="saveItemForm" commandName="addItemObj" action="addItem" method="GET">
 
 						<li id="AddSection">
 						<%@include file="/jsp/addEnrty.jsp"%>
 						</li>
 
-						</form>
+						</form:form>
 
 				</span></li>
 			</ul>

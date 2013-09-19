@@ -3,6 +3,8 @@ package sumeet.shop.beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import sumeet.shop.datamodel.ItemDetails;
+
 public class Customer {
 	String customername;
 	Integer phonenumber;

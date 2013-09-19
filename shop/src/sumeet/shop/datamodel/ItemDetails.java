@@ -1,5 +1,6 @@
 package sumeet.shop.datamodel;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ItemDetails {
@@ -7,9 +8,10 @@ public class ItemDetails {
 	Integer item_id;
 	String item_name;
 	String item_desc;
+	String item_code;
 	Integer buy;
 	Integer sale;
-	Date date;
+	String date;
 	public Integer getItem_id() {
 		return item_id;
 	}
@@ -40,11 +42,17 @@ public class ItemDetails {
 	public void setSale(Integer sale) {
 		this.sale = sale;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 	public void setDate(Date date) {
-		this.date = date;
+		SimpleDateFormat format = new SimpleDateFormat("EEE-MMM-dd-yyyy hh:mm");
+		this.date = format.format(date);
 	}
-
+	public String getItem_code() {
+		return item_code;
+	}
+	public void setItem_code(String item_code) {
+		this.item_code = item_code;
+	}
 }

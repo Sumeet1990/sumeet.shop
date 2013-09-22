@@ -1,5 +1,8 @@
+<%@page import="java.util.List"%>
+<%@page import="sumeet.shop.datamodel.ItemDetails"%>
 <%@page import="java.util.Date"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html dir="ltr" lang="en">
 <head>
 <%
@@ -42,8 +45,9 @@
 	src="${pageContext.request.contextPath}/javascript/searchandupd.js"></script>
 <script type="text/javascript">
 	var hide = true;
-	var valueArr = new Array("Armani","Box","Saab", "Volvo", "BMW", "Vorvo");
-	var valuePriceArr = new Array("50,000","50","1,200", "12,53,42,000", "2,53,00,000", "30,000");
+	var valueArr = new Array();
+	var valuePriceArr = new Array();
+	var valueId = new Array();
 
 	$(document).click(function(event) {
 		if (event.target.nodeName == "LI") {
@@ -72,6 +76,26 @@
 
 	var count = -1;
 	var downKeyCount = 0;
+	
+	function loadItemLs()
+	{
+		<% List<ItemDetails> itemLst = (List<ItemDetails>)session.getAttribute("itemlstobj");
+		for(int i= 0; i<itemLst.size(); i++)
+		{
+			ItemDetails item = itemLst.get(i);
+			Integer id = item.getItem_id();
+			String name = item.getItem_name();
+			String desc = item.getItem_desc();
+			Integer sale = item.getSale();
+			%>
+			valueId[<%=i%>] = <%='\''+id+'\''%>
+			valueArr[<%=i%>] = <%='\''+name+"-"+desc+'\''%>
+			valuePriceArr[<%=i%>] = <%='\''+sale+'\''%>
+			<%
+			}
+		%>
+		
+	}
 	function hideTab(tabId) {
 		resetSearch();
 		if (tabId == "View") {
@@ -240,6 +264,8 @@
 		t = setTimeout(function() {
 			startTime();
 		}, 500);
+		
+		loadItemLs();
 	}
 
 	function checkTime(i) {

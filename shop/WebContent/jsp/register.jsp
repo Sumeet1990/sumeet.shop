@@ -16,6 +16,8 @@ function checkFrSamePassword()
 
 	  if(prevPass == confirmPass)
 		 {
+		  $('#submit').css("background","none");
+		  $('#submit').attr("disabled","disabled");
 		  return true;
 		 }
 	  else
@@ -36,10 +38,14 @@ function checkFrSamePassword()
 		return false;
 	}
 }
+function resestSubmit()
+{
+	$('#submit').css("background","");
+	}
  </script>
  </head>
  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/loginStylesheet.css" type="text/css">
-<body>
+<body onload="resestSubmit()">
 
 <form:form  commandName="userDetails" id="register" action="registerUser" method="POST" onsubmit="return checkFrSamePassword()">
     <h1>Register</h1>

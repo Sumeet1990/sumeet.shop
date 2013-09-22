@@ -1,13 +1,15 @@
 package sumeet.shop.datamodel;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CustomerAccounts {
 	Integer cust_id;
 	String cust_name;
 	Integer contact_no;
-	Integer trans_type_id;
-	Date date;
+	Integer credit;
+	String date;
+	
 	public Integer getCust_id() {
 		return cust_id;
 	}
@@ -26,17 +28,19 @@ public class CustomerAccounts {
 	public void setContact_no(Integer contact_no) {
 		this.contact_no = contact_no;
 	}
-	public Integer getTrans_type_id() {
-		return trans_type_id;
+	
+	public Integer getCredit() {
+		return credit;
 	}
-	public void setTrans_type_id(Integer trans_type_id) {
-		this.trans_type_id = trans_type_id;
+	public void setCredit(Integer credit) {
+		this.credit = credit;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 	public void setDate(Date date) {
-		this.date = date;
+		SimpleDateFormat format = new SimpleDateFormat("EEE-MMM-dd-yyyy hh:mm");
+		this.date = format.format(date);
 	}
 
 }

@@ -1,5 +1,8 @@
 package sumeet.shop.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
@@ -10,8 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import sumeet.shop.beans.Customer;
 import sumeet.shop.datamodel.DatabaseController;
+import sumeet.shop.datamodel.ItemDetails;
 import sumeet.shop.datamodel.UserDetails;
 
 @Controller
@@ -31,13 +37,14 @@ public class LoginController {
 
 	@RequestMapping(value = "/validate", method = RequestMethod.POST)
 	public String validateUser(@RequestParam("username") String userName,
-			@RequestParam("password") String password, ModelMap map) {
+			@RequestParam("password") String password,HttpSession session, ModelMap map) {
 		System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 				+ userName);
 		String passwordDB = DatabaseController.getPassFruser(userName);
 
 		if (passwordDB.equals(password)) {
-			Customer cust = new Customer();
+			List<ItemDetails> itemLst = getItemsList();
+			session.setAttribute("itemlstobj",itemLst);
 			map.addAttribute("Username", userName);
 			return "SessionValidation";
 		} else if(passwordDB.equals("no user")){
@@ -49,7 +56,6 @@ public class LoginController {
 			map.addAttribute("Error", "Password is incorrect");
 			return "login";
 		}
-		
 
 	}
 
@@ -84,5 +90,13 @@ public class LoginController {
 		return "password-sent";
 
 	}
+	public List<ItemDetails> getItemsList() {
 
+		List<ItemDetails> itemLst = new ArrayList<ItemDetails>();
+		
+		itemLst = DatabaseController.getAllTheItemsLst();
+		
+		return itemLst;
+
+	}
 }

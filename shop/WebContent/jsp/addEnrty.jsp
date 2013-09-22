@@ -3,7 +3,19 @@
 <script type="text/javascript">
 function saveItem()
 {
-	$('#saveItemForm').ajaxSubmit();
+	$("[name='submitAddate']").css("background","none");
+	$("[name='submitAddate']").attr("disabled","disabled")
+	 $.ajax({
+         type: "GET",
+         url: '/shop/jsp/addItem',
+         data: $("#saveItemForm").serialize(), // serializes the form's elements.
+         success: function(data)
+         {
+             alert(data); // show response from the php script.
+             $("[name='submitAddate']").removeAttr("disabled");
+             $("[name='submitAddate']").css("background","");
+         }
+       });
 
 	}
 
@@ -60,7 +72,7 @@ Sell:
 &nbsp;
 </td>
 <td align="right">
-	<input type="submit" id="buttonAddDel" value="Save" name="submitAddate" onclick="saveItem()" >
+	<input type="button" id="buttonAddDel" value="Save" name="submitAddate" onclick="saveItem()" >
 </td>
 </tr>
 </table>

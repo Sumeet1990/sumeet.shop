@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import sumeet.shop.beans.Customer;
 import sumeet.shop.beans.Item;
+import sumeet.shop.datamodel.CustomerAccounts;
 import sumeet.shop.datamodel.DatabaseController;
 import sumeet.shop.datamodel.ItemDetails;
 
@@ -226,6 +227,16 @@ public class MainPageController {
 	public String saveItemDetails(@ModelAttribute("addItemObj") ItemDetails itemDtls, ModelMap map) {
 
 		DatabaseController.insertItem(itemDtls );
+		
+		return "Saved sucessfully !";
+	
+	}
+	
+	@RequestMapping(value = "/jsp/addCustomer", method = RequestMethod.GET)
+	@ResponseBody
+	public String saveCustomerDetails(@ModelAttribute("saveCustomerObj") CustomerAccounts custAcc, ModelMap map) {
+
+		DatabaseController.insertCustomer(custAcc );
 		
 		return "Saved sucessfully !";
 	

@@ -4,13 +4,13 @@
 Customer Name:
 </td>
 <td > 
-<input style="width: 100%;" id="entrys"  name="CustNameAdd" type="text" placeholder="Customer Name">
+<input style="width: 100%;" id="entrys"  name="cust_name" type="text" placeholder="Customer Name">
 </td>
 <td align="right">
 Mobile Number:
 </td>
 <td> 
-<input style="width: 100%;" id="entrys"  name="MobileNoAdd" onkeyup="checkNumberOnly('MobileNoAdd','Please enter a valid mobile number !')" type="text" placeholder="Mobile Number">
+<input style="width: 100%;" id="entrys"  name="contact_no" onkeyup="checkNumberOnly('contact_no','Please enter a valid mobile number !')" type="text" placeholder="Mobile Number">
 </td>
 </tr>
 <tr>
@@ -18,7 +18,7 @@ Mobile Number:
 Credit:
 </td>
 <td align="right">
- <INPUT style="width: 100%;" id="entrys"  name="CreditAdd" onkeyup="checkNumberOnly('CreditAdd','Please enter a valid credit amount !')" type="text"	placeholder="Credit" />
+ <INPUT style="width: 100%;" id="entrys"  name="credit" onkeyup="checkNumberOnly('credit','Please enter a valid credit amount !')" type="text"	placeholder="Credit" />
   <INPUT type="hidden" name="CustId" type="text"/>
 </td>
 </tr>
@@ -34,7 +34,7 @@ Credit:
 &nbsp;
 </td>
 <td align="left">
-	<input type="button" id="buttonAddDel" name="addCustomer" value="Add">
+	<input type="button" id="buttonAddDel" name="addCustomer" onclick="saveCustomer()" value="Add">
 </td>
 </tr>
 </table>

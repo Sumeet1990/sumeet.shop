@@ -1,4 +1,19 @@
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <script type="text/javascript">
+function saveCustomer()
+{
+	 $.ajax({
+         type: "GET",
+         url: '/shop/jsp/addCustomer',
+         data: $("#addCustomerForm").serialize(), // serializes the form's elements.
+         success: function(data)
+         {
+             alert(data); // show response from the php script.
+         }
+       });
+
+	}
+	
 	function custShowView(tabId) {
 		resetCustomerSearch();
 		if (tabId == "CustomerView") {
@@ -108,9 +123,9 @@
 			<h2>
 				<a name="EntryAdd" id="EntryAdd">Add</a>
 			</h2>
-			<form action="AddItem" method="GET">
+			<form:form commandName="saveCustomerObj" id="addCustomerForm" action="addCustomer" method="GET">
 			<li id="CustAddSection" style="width: 100%;"><%@include
 						file="/jsp/addCustomerAcc.jsp"%></li>
-			</form>
+			</form:form>
 	</span></li>
 </ul>

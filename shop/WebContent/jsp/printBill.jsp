@@ -1,5 +1,7 @@
 <%@page import="sumeet.shop.beans.Customer"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 <html>
 <head>
 <title></title>
@@ -89,8 +91,18 @@ Customer cust = (Customer)request.getAttribute("billCustObj");
 				<td align="right">Total:</td>
 				<td  align="right"><%=totalVal %></td>
 			</tr>
+			
 
 		</tbody>
+	</table>
+	<table>
+	<tr>
+			<td style="width:678px"></td>
+			<td></td>
+			<td></td>
+			<td><input type="button" id="buttonAddDel" value="Cash"></td>
+			<td><input type="button" id="buttonAddDel" value="Credit"></td>
+			</tr>
 	</table>
 </body>
 </html>

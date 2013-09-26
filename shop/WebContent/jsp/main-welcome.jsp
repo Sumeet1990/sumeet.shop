@@ -44,6 +44,7 @@
 	<script type="text/javascript"
 	src="${pageContext.request.contextPath}/javascript/searchandupd.js"></script>
 <script type="text/javascript">
+var statusLoadItems = -1;
 	var hide = true;
 	var valueArr = new Array();
 	var valuePriceArr = new Array();
@@ -56,6 +57,7 @@
 	});
   
 	$(document).ready(function() {
+		loadItemLs();
 		$("#CustUpdateSection").hide();
 		$("#Add").hide();
 		$("#View").hide();
@@ -77,24 +79,46 @@
 	var count = -1;
 	var downKeyCount = 0;
 	
+	function ajaxCallToLoadItem()
+	{
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+		  xmlhttp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+		  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp.onreadystatechange=function()
+		  {
+		  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		    {
+			  var json = JSON.parse(xmlhttp.responseText);
+			  for (var singlObj in json) {
+				  
+				  	valueId[singlObj] = json[singlObj].item_id;
+					valueArr[singlObj] = json[singlObj].item_name +'-'+json[singlObj].item_desc;
+					valuePriceArr[singlObj] = json[singlObj].sale;
+				}
+			  if(statusLoadItems != '-1')alert("item load completed !");
+		    }
+		  }
+
+		xmlhttp.open("GET","/shop/jsp/getItemsList",false);
+		xmlhttp.send();
+		
+	}
+	
 	function loadItemLs()
 	{
-		<% List<ItemDetails> itemLst = (List<ItemDetails>)session.getAttribute("itemlstobj");
-		for(int i= 0; i<itemLst.size(); i++)
-		{
-			ItemDetails item = itemLst.get(i);
-			Integer id = item.getItem_id();
-			String name = item.getItem_name();
-			String desc = item.getItem_desc();
-			Integer sale = item.getSale();
-			%>
-			valueId[<%=i%>] = <%='\''+id+'\''%>
-			valueArr[<%=i%>] = <%='\''+name+"-"+desc+'\''%>
-			valuePriceArr[<%=i%>] = <%='\''+sale+'\''%>
-			<%
-			}
-		%>
 		
+		if(statusLoadItems == '1'|| statusLoadItems == '-1')
+			{
+				ajaxCallToLoadItem();
+				statusLoadItems = 0;
+			}
+		
+				
 	}
 	function hideTab(tabId) {
 		resetSearch();
@@ -264,7 +288,6 @@
 		t = setTimeout(function() {
 			startTime();
 		}, 500);
-		
 		loadItemLs();
 	}
 

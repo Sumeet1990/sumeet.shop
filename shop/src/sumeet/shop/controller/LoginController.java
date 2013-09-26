@@ -43,8 +43,6 @@ public class LoginController {
 		String passwordDB = DatabaseController.getPassFruser(userName);
 
 		if (passwordDB.equals(password)) {
-			List<ItemDetails> itemLst = getItemsList();
-			session.setAttribute("itemlstobj",itemLst);
 			map.addAttribute("Username", userName);
 			return "SessionValidation";
 		} else if(passwordDB.equals("no user")){
@@ -90,7 +88,9 @@ public class LoginController {
 		return "password-sent";
 
 	}
-	public List<ItemDetails> getItemsList() {
+	@RequestMapping(value = "/jsp/getItemsList", method = RequestMethod.GET)
+	@ResponseBody
+	public List<ItemDetails> getItemsList(HttpSession session,ModelMap map) {
 
 		List<ItemDetails> itemLst = new ArrayList<ItemDetails>();
 		

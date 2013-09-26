@@ -14,6 +14,7 @@ function saveItem()
              alert(data); // show response from the php script.
              $("[name='submitAddate']").removeAttr("disabled");
              $("[name='submitAddate']").css("background","");
+             statusLoadItems = 1;
          }
        });
 
@@ -48,7 +49,7 @@ Item Description:
 Per Price:
 </td>
 <td> 
-<INPUT style="width: 100%;" id="entrys"  onkeyup="checkNumberOnly('PerPriceAdd','Please enter a valid per price !')" name="sale" type="text" placeholder="Per Price" />
+<INPUT style="width: 100%;" id="entrys"  onkeyup="checkNumberOnly('sale','Please enter a valid per price !')" name="sale" type="text" placeholder="Per Price" />
 </td>
 </tr>
 <tr>
@@ -56,7 +57,7 @@ Per Price:
 Buy:
 </td>
 <td>
- <INPUT style="width: 100%;" id="entrys"  onkeyup="checkNumberOnly('BuyAdd','Please enter a buy value !')" name="buy" type="text" placeholder="Buy" />
+ <INPUT style="width: 100%;" id="entrys"  onkeyup="checkNumberOnly('buy','Please enter a buy value !')" name="buy" type="text" placeholder="Buy" />
 </td>
 <!-- <td align="right">
 Sell:

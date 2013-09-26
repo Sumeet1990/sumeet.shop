@@ -7,6 +7,7 @@
 	if (userSes != null && userReq.equals(userSes)) {
 		String status = (String) sessionUser.getAttribute(userSes);
 		if (status.equals("logIn")) {
+			sessionUser.setAttribute("loadItems","1");
 			response.sendRedirect("/shop/jsp/validationSucess");
 		}/* else
 			{

@@ -52,7 +52,7 @@ public class DatabaseController {
 		item.setDate(new java.util.Date());
 		String sql = "insert into item_details( item_id,  item_name, item_desc, buy, sale, ADDED_DATE ) values (?, ?, ?, ?, ?, ?)";
 		
-		Object[] args = {item.getItem_id(),item.getItem_name(),item.getItem_desc(),item.getBuy(),item.getSale(),item.getDate()};
+		Object[] args = {item.getItem_id(),item.getItem_name().toUpperCase(),item.getItem_desc().toUpperCase(),item.getBuy(),item.getSale(),item.getDate()};
 		
 		return jdbcTemplate.update(sql, args );
 	}
@@ -80,6 +80,7 @@ public class DatabaseController {
 			item.setItem_code((String) row.get("ITEM_CODE"));
 			item.setItem_desc((String) row.get("ITEM_DESC"));
 			item.setItem_name((String) row.get("ITEM_NAME"));
+			//item.setDate((String) row.get("ADDED_DATE"));
 			item.setSale(Integer.valueOf(((BigDecimal) row.get("BUY")).toPlainString()));
 			item.setBuy(Integer.valueOf(((BigDecimal) row.get("SALE")).toPlainString()));
 			itemLst.add(item);

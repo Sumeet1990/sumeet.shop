@@ -230,8 +230,9 @@ var statusLoadItems = -1;
 					for ( var i = 0; i < valueArr.length; i++) {
 
 						var singleVal = valueArr[i];
-						if ((singleVal.toUpperCase().indexOf(value
-								.toUpperCase())) == 0) {
+						var descStart = singleVal.indexOf('-') + 1;
+						var entrValInd = singleVal.toUpperCase().indexOf(value.toUpperCase());
+						if ( entrValInd== 0 || entrValInd == descStart) {
 							var li = document.createElement('li');
 
 							ul.appendChild(li);

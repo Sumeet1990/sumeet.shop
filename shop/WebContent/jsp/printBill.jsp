@@ -6,6 +6,9 @@
 <head>
 <title></title>
 </head>
+<%
+Customer cust = (Customer)request.getAttribute("billCustObj");
+%>
 <script type="text/javascript">
 function printpage()
 {
@@ -27,14 +30,47 @@ var m = today.getMinutes();
 
 document.getElementById("displayTime").innerHTML = curr_year+" "+h+":"+m;
 }
+function cashPay()
+{
+	
+}
+	
+function creditPay()
+{
+	var custId = <%=request.getAttribute("custId")%>;
+	var exitStatus;
+	var createStatus;
+if( custId == -1)
+	{
+		 createStatus = confirm("Do you want to create a new cutomer account !");
+	}else
+		{
+		 exitStatus = confirm("Customer already exist, Please select Cancel for creating new account !");
+		}
+var status = createStatus || !exitStatus;
+	if(window.XMLHttpRequest)
+		{
+		xmlhttp = new XMLHttpRequest(); 
+		}
+	else
+		{
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+	xmlhttp.onreadystatechange=function(){
+		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+	    {
+			alert(xmlhttp.responseText);
+			}
+	};
+	xmlhttp.open('GET','/shop/jsp/payCredit?custId='+custId+'&createStatus='+status,false);
+	xmlhttp.send();
+}
 </script>
-<%
-Customer cust = (Customer)request.getAttribute("billCustObj");
-%>
+
 <body onload="displayTime()" style="background: none repeat scroll 0% 0% lightblue;">
 	<p style="text-align: right;">
-		<input name="Print"type="button" onclick="printpage()" value="Print" />
-		<input name="Done" type="button" onclick="goBack()" value="Close" />
+		<input name="Print" id="buttonAddDel" type="button" onclick="printpage()" value="Print" />
+		<input name="Done"  id="buttonAddDel" type="button" onclick="goBack()" value="Close" />
 	</p>
 	<h1 style="text-align: center;">Welcome</h1>
 	<h3 id="displayTime" style="text-align: right;"></h3>
@@ -52,9 +88,6 @@ Customer cust = (Customer)request.getAttribute("billCustObj");
 				</tr>
 			</tbody>
 		</table>
-		<p>
-			<input alt="" src="as" style="float: right;" type="image" />
-		</p>
 	</div>
 	</br>
 	</br>
@@ -100,8 +133,8 @@ Customer cust = (Customer)request.getAttribute("billCustObj");
 			<td style="width:678px"></td>
 			<td></td>
 			<td></td>
-			<td><input type="button" id="buttonAddDel" value="Cash"></td>
-			<td><input type="button" id="buttonAddDel" value="Credit"></td>
+			<td><input type="button" id="buttonAddDel"  onclick="cashPay()" value="Cash"></td>
+			<td><input type="button" id="buttonAddDel" onclick="creditPay()" value="Credit"></td>
 			</tr>
 	</table>
 </body>

@@ -61,12 +61,19 @@ public class MainPageController {
 				moveOut = false;
 			i++;
 		}
+		int customerId = getCustId(customer);
 		map.addAttribute("total", new BigDecimal(total).toPlainString());
 		map.addAttribute("billCustObj", customer);
 		map.addAttribute("list", customer.getItemsLst());
+		map.addAttribute("custId", customerId);
 		return "printBill";
 	}
 	
+	private int getCustId(Customer customer) {
+		DatabaseController.getCustomerId(customer.getCustomername(),customer.getPhonenumber());
+		return 0;
+	}
+
 	@RequestMapping(value = "/SearchUpdItem", method = RequestMethod.GET)
 	@ResponseBody
 	public String searchItem(@RequestParam("itemCd") String itemCode,
@@ -239,6 +246,14 @@ public class MainPageController {
 		DatabaseController.insertCustomer(custAcc );
 		
 		return "Saved sucessfully !";
+	
+	}
+	@RequestMapping(value = "/jsp/payCredit", method = RequestMethod.GET)
+	@ResponseBody
+	public String payCredit(@RequestParam("custId") Integer custId ,@RequestParam("createStatus") boolean createStatus, ModelMap map) {
+
+		
+		return ""+custId+"--"+createStatus;
 	
 	}
 }

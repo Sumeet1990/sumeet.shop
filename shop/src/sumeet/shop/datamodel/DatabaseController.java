@@ -88,4 +88,16 @@ public class DatabaseController {
 		
 		return itemLst;
 	}
+
+	public static int getCustomerId(String customername, Integer phonenumber) {
+		
+		String sql = "select cust_id from customer_accounts where contact_no = ? and cust_name = ? ";
+		Object[] values = {phonenumber,customername};
+		try{
+			return jdbcTemplate.queryForInt(sql,values);
+		}catch (Exception e)
+		{
+			return -1;
+		}
+	}
 }

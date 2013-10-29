@@ -62,7 +62,6 @@ function saveCustomer()
 		$("#CustsearchResults").hide();
 		$("#CustUpdateSection").show();
 
-		var custIdVal = $("#CustId" + custId).html();
 		var xmlhttp;
 		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
 			xmlhttp = new XMLHttpRequest();
@@ -71,15 +70,15 @@ function saveCustomer()
 		}
 		xmlhttp.onreadystatechange = function() {
 			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				var val = xmlhttp.responseText;
-				$('[name="CustNameUpd"]').val(val);
-				$('[name="MobileNoUpd"]').val(val);
-				/*document.getElementById("ItemCodeUpd").innerHTML=xmlhttp.responseText;*/
+				var jsonObj = JSON.parse(xmlhttp.responseText);
+				$('[name="CustNameUpd"]').val(jsonObj.cust_name);
+				$('[name="MobileNoUpd"]').val(jsonObj.contact_no);
+				$('[name="CreditUpd"]').val(jsonObj.credit);
 			}
 		};
 
 		xmlhttp.open("GET", "/shop/getCustomerAccDetails?custIdVal="
-				+ custIdVal, true);
+				+ custId, true);
 		xmlhttp.send();
 	}
 

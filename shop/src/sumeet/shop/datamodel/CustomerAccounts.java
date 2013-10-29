@@ -8,6 +8,13 @@ public class CustomerAccounts {
 	String cust_name;
 	Integer contact_no;
 	Integer credit;
+	Integer trans_type_id;
+	public Integer getTrans_type_id() {
+		return trans_type_id;
+	}
+	public void setTrans_type_id(Integer trans_type_id) {
+		this.trans_type_id = trans_type_id;
+	}
 	String date;
 	
 	public Integer getCust_id() {
@@ -42,5 +49,7 @@ public class CustomerAccounts {
 		SimpleDateFormat format = new SimpleDateFormat("EEE-MMM-dd-yyyy hh:mm");
 		this.date = format.format(date);
 	}
-
+	public void setDate(String date) {
+		this.date = date;
+	}
 }

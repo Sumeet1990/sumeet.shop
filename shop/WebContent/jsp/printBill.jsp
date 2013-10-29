@@ -38,16 +38,15 @@ function cashPay()
 function creditPay()
 {
 	var custId = <%=request.getAttribute("custId")%>;
-	var exitStatus;
-	var createStatus;
+	var status=false;
 if( custId == -1)
 	{
-		 createStatus = confirm("Do you want to create a new cutomer account !");
+		status = confirm("Do you want to create a new cutomer account !");
 	}else
 		{
-		 exitStatus = confirm("Customer already exist, Please select Cancel for creating new account !");
+		status = !(confirm("Customer already exist, Please select Cancel for creating new account !"));
 		}
-var status = createStatus || !exitStatus;
+
 	if(window.XMLHttpRequest)
 		{
 		xmlhttp = new XMLHttpRequest(); 
@@ -62,7 +61,11 @@ var status = createStatus || !exitStatus;
 			alert(xmlhttp.responseText);
 			}
 	};
-	xmlhttp.open('GET','/shop/jsp/payCredit?custId='+custId+'&createStatus='+status,false);
+	var custName = '<%=cust.getCustomername()%>';
+	var phoneNumber = <%=cust.getPhonenumber()%>;
+	var totalamt = document.getElementById("totalAmount").innerHTML;
+	
+	xmlhttp.open('GET','/shop/jsp/payCredit?custId='+custId+'&createStatus='+status+'&custName='+custName+'&phoneNumber='+phoneNumber+'&totalamt='+totalamt,false);
 	xmlhttp.send();
 }
 </script>
@@ -122,7 +125,7 @@ var status = createStatus || !exitStatus;
 				<td align="center">-</td>
 				<td align="center">-</td>
 				<td align="right">Total:</td>
-				<td  align="right"><%=totalVal %></td>
+				<td id="totalAmount" align="right"><%=totalVal %></td>
 			</tr>
 			
 

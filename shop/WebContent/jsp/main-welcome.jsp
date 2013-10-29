@@ -461,8 +461,6 @@ try{
 						<li id="searchOption">
 						<input id="entrys" name="Itemname" type="text" placeholder="Item Name">
 						&nbsp;&nbsp;
-						<input id="entrys" name="ItemCode" type="text" placeholder="Item Code">
-						&nbsp;&nbsp;
 						<INPUT id="entrys" name="Description" type="text"	placeholder="Item Description" />
 						<fieldset id="actions">
 							<input type="button" id="submit" onclick="search()" value="Search">

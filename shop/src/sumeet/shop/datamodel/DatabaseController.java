@@ -1,11 +1,9 @@
 package sumeet.shop.datamodel;
 
 import java.math.BigDecimal;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class DatabaseController {
@@ -62,11 +60,13 @@ public class DatabaseController {
 		String getAccId = "select CUST_ACC_SEQ_ID.nextval from dual";
 		custAcc.setCust_id(jdbcTemplate.queryForInt(getAccId));
 		custAcc.setDate(new java.util.Date());
-		String sql = "insert into customer_accounts (cust_id, cust_name, credit,contact_no, register_date) values (?,?,?,?,?)";
+		String sql = "insert into customer_accounts (cust_id, cust_name, credit,contact_no, register_date,TRANS_TYPE_ID) values (?,?,?,?,?,?)";
 		
-		Object[] args = {custAcc.getCust_id(),custAcc.getCust_name(), custAcc.getCredit(),custAcc.getContact_no() ,custAcc.getDate()};
+		Object[] args = {custAcc.getCust_id(),custAcc.getCust_name(), custAcc.getCredit(),custAcc.getContact_no() ,custAcc.getDate(),custAcc.getTrans_type_id()
+				};
 		
-		return jdbcTemplate.update(sql, args );
+		jdbcTemplate.update(sql, args );
+		return custAcc.getCust_id();
 	}
 
 	public static List<ItemDetails> getAllTheItemsLst() {
@@ -99,5 +99,49 @@ public class DatabaseController {
 		{
 			return -1;
 		}
+	}
+
+	public static int makeBillingEntry(Integer totalamt, Integer custId, Integer discount, Integer ItemId , Integer quantity, Integer transType) {
+		String billId = "select BILL_ID_SEQ.nextval from dual";
+		int billIdVal = jdbcTemplate.queryForInt(billId);
+		String sql = "insert into billing_entry(bill_id, cust_id, discount, item_id, quantity, total_amount, trans_type_id) values (?,?,?,?,?,?,?)";
+		Object[] values = {billIdVal,custId,discount,ItemId,quantity,totalamt,transType};
+		try{
+			return jdbcTemplate.update(sql,values);
+		}catch (Exception e)
+		{
+			org.apache.log4j.Logger.getLogger(DatabaseController.class).error(e);
+			return -1;
+		}
+	}
+
+	public static List<CustomerAccounts> getAllCustomers(String customername, String mobileNo) {
+		
+		String whereClause = "";
+		
+		if(customername != null && !customername.trim().equals(""))
+		{
+			whereClause = "cust_name like '%"+customername+"%' "; 
+		}else
+		{
+			whereClause ="contact_no = "+mobileNo;
+		}
+		
+
+		String sql = "select * from customer_accounts where "+whereClause;
+
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+		List<CustomerAccounts> custLst = new ArrayList<CustomerAccounts>();
+		for (Map<String, Object> row : rows) {
+			CustomerAccounts cust = new CustomerAccounts();
+			cust.setCust_id(Integer.valueOf(((BigDecimal) row.get("CUST_ID")).toPlainString()));
+			cust.setCust_name((String)row.get("CUST_NAME"));
+			cust.setContact_no(Integer.valueOf(((BigDecimal) row.get("CONTACT_NO")).toPlainString()));
+			cust.setCredit(Integer.valueOf(((BigDecimal) row.get("CREDIT")).toPlainString()));
+			cust.setDate((String)row.get("REGISTER_DATE"));
+			cust.setTrans_type_id(Integer.valueOf(((BigDecimal) row.get("TRANS_TYPE_ID")).toPlainString()));
+			custLst.add(cust);
+		}
+		return custLst;
 	}
 }

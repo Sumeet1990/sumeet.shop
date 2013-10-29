@@ -7,10 +7,10 @@ Item Name:
 <input style="width: 100%;" id="entrys"  name="ItemnameUpd" type="text" placeholder="Item Name">
 </td>
 <td align="right">
-Item Code:
+Buy:
 </td>
-<td> 
-<input style="width: 100%;" id="entrys"  name="ItemCodeUpd" type="text" placeholder="Item Code">
+<td>
+ <INPUT style="width: 100%;" id="entrys"  onkeyup="checkNumberOnly('BuyUpd','Please enter a buy value !')" name="BuyUpd" type="text" placeholder="Buy" />
 </td>
 </tr>
 <tr>
@@ -28,18 +28,6 @@ Per Price:
 </td>
 </tr>
 <tr>
-<td align="right">
-Buy:
-</td>
-<td>
- <INPUT style="width: 100%;" id="entrys"  onkeyup="checkNumberOnly('BuyUpd','Please enter a buy value !')" name="BuyUpd" type="text" placeholder="Buy" />
-</td>
-<td align="right">
-Sell:
-</td>
-<td>
-<INPUT style="width: 100%;" id="entrys" onkeyup="checkNumberOnly('SellUpd','Please enter a valid sell value !')" name="SellUpd" type="text" placeholder="Sell" />
-</td>
 </tr>
 </table>
 <table style="width: 80%;">

@@ -2,6 +2,8 @@ package sumeet.shop.controller;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +24,9 @@ import sumeet.shop.datamodel.ItemDetails;
 
 @Controller
 public class MainPageController {
+	
+	HashMap<Integer, ItemDetails> searchedItemsMap = null;
+	HashMap<Integer, CustomerAccounts> searchedCustomerMap = null;
 
 	@RequestMapping(value = "/jsp/makeBill", method = RequestMethod.GET)
 	public String makeBillAndUpdateRecord(HttpServletRequest request,
@@ -70,52 +75,69 @@ public class MainPageController {
 	}
 	
 	private int getCustId(Customer customer) {
-		DatabaseController.getCustomerId(customer.getCustomername(),customer.getPhonenumber());
-		return 0;
+		int value = DatabaseController.getCustomerId(customer.getCustomername(),customer.getPhonenumber());
+		return value;
 	}
 
 	@RequestMapping(value = "/SearchUpdItem", method = RequestMethod.GET)
 	@ResponseBody
-	public String searchItem(@RequestParam("itemCd") String itemCode,
-							@RequestParam("itemDesc") String itemDesc,
+	public String searchItem(@RequestParam("itemDesc") String itemDesc,
 							@RequestParam("itemName") String itemName,
 								HttpServletRequest request, ModelMap map) {
 
-		int count =1;
-		String table ="<table id=\"searchtable\">"+
-				"<thead>"
-				+"<tr>"
-				+"<th scope=\"col\">SNO</th>"
-				+"<th scope=\"col\">Item Code&nbsp;</th>"
-				+"<th scope=\"col\">Description</th>"
-				+"<th scope=\"col\">Item Name</th>"
-				+"<th scope=\"col\" style=\"width: 15%;\">Action</th>"
-				+"</thead>"
-				+"<tbody >"
-				+"<tr>"
-				+"	<td align=\"right\">"+count+"</td>"
-				+"	<td id=\"itemCode"+count+"\" align=\"center\">"+itemCode+"</td>"
-				+"	<td align=\"center\">"+itemDesc+"</td>"
-				+"	<td align=\"center\">"+itemName+"</td>"
-				+"	<td align=\"right\"><input type=\"button\" onclick=\"updateRecord("+count+")\" id=\"buttonAddDel\" value=\"View\"></td>"
-				+"</tr>"
-				+"<tr>"
-				+"	<td align=\"right\">"+2+"</td>"
-				+"	<td id=\"itemCode"+2+"\" align=\"center\">"+itemCode+"2</td>"
-				+"	<td align=\"center\">"+itemDesc+"2</td>"
-				+"	<td align=\"center\" >"+itemName+"2</td>"
-				+"	<td align=\"right\"><input type=\"button\" onclick=\"updateRecord("+2+")\" id=\"buttonAddDel\" value=\"View\"></td>"
-				+"</tr>"
-				+"</tbody>"
-				+"</table>";
+		List<ItemDetails> itemsLst = DatabaseController.getAllTheItemsLst();
+		String table = "";
+		int count = 1;
+
+			searchedItemsMap = new HashMap<Integer, ItemDetails>();
+			table ="<table id=\"searchtable\">"+
+					"<thead>"
+					+"<tr>"
+					+"<th scope=\"col\">SNO</th>"
+					+"<th scope=\"col\">Item Name</th>"
+					+"<th scope=\"col\">Description</th>"
+					+"<th scope=\"col\" style=\"width: 15%;\">Action</th>"
+					+"</thead>"
+					+"<tbody >";
+		for(ItemDetails item : itemsLst)
+		{
+			String desc =  item.getItem_desc().trim() ;
+			String name =  item.getItem_name().trim() ;
+			itemDesc = (itemDesc.trim().equals(""))? "No item found" : itemDesc.trim() ;
+			 itemName = (itemName.trim().equals(""))? "No item found" : itemName.trim() ;
+			
+			if(name.startsWith(itemName) || desc.startsWith(itemDesc))
+			{
+				table = table	+"<tr>"
+								+"	<td align=\"right\">"+count+"</td>"
+								+"	<td align=\"center\">"+name+"</td>"
+								+"	<td align=\"center\">"+desc+"</td>"
+								+"	<td align=\"right\"><input type=\"button\" onclick=\"updateRecord("+item.getItem_id()+")\" id=\"buttonAddDel\" value=\"View\"></td>"
+								+"</tr>"
+								+"<tr>";
+				searchedItemsMap.put(item.getItem_id(), item);
+				count++;
+			}
+		}
+		
+		if(count > 1 )
+		{
+		table = table	+"</tbody>"
+						+"</table>";
+		}else
+		{
+			table = "No item found !";
+		}
 		
 		return table;
 	}
 	
 	@RequestMapping(value = "/getItemDetails", method = RequestMethod.GET)
 	@ResponseBody
-	public String getItemDetails(@RequestParam("itemCd") String itemCode, ModelMap map) {
-		return itemCode;
+	public ItemDetails getItemDetails(@RequestParam("itemId") String itemCode, ModelMap map) {
+		
+		
+		return searchedItemsMap.get(Integer.valueOf(itemCode));
 	
 	}
 	
@@ -125,38 +147,54 @@ public class MainPageController {
 							@RequestParam("MobileNo") String MobileNo,
 								HttpServletRequest request, ModelMap map) {
 
-		int count =1;
-		String table ="<table id=\"searchtable\">"+
-				"<thead>"
-				+"<tr>"
-				+"<th scope=\"col\">SNO</th>"
-				+"<th scope=\"col\">Customer Name</th>"
-				+"<th scope=\"col\">Mobile Number</th>"
-				+"<th scope=\"col\" style=\"width: 15%;\">Action</th>"
-				+"</thead>"
-				+"<tbody >"
-				+"<tr>"
-				+"	<td align=\"right\">"+count+"</td>"
-				+"	<td id=\"CustId"+count+"\" align=\"center\">"+Customername+"</td>"
-				+"	<td align=\"center\">"+MobileNo+"</td>"
-				+"	<td align=\"right\"><input type=\"button\" onclick=\"viewCustomerAcc("+count+")\" id=\"buttonAddDel\" value=\"View\"></td>"
-				+"</tr>"
-				+"<tr>"
-				+"	<td align=\"right\">"+2+"</td>"
-				+"	<td id=\"CustId"+2+"\" align=\"center\">"+Customername+"2</td>"
-				+"	<td align=\"center\">"+MobileNo+"2</td>"
-				+"	<td align=\"right\"><input type=\"button\" onclick=\"viewCustomerAcc("+2+")\" id=\"buttonAddDel\" value=\"View\"></td>"
-				+"</tr>"
-				+"</tbody>"
-				+"</table>";
+		List<CustomerAccounts> customerAcc = DatabaseController.getAllCustomers(Customername, MobileNo);
+		String table = "";
+		int count = 1;
+		searchedCustomerMap = new HashMap<Integer, CustomerAccounts>();
+
+			table ="<table id=\"searchtable\">"+
+					"<thead>"
+					+"<tr>"
+					+"<th scope=\"col\">SNO</th>"
+					+"<th scope=\"col\">Customer Name</th>"
+					+"<th scope=\"col\">Mobile Number</th>"
+					+"<th scope=\"col\" style=\"width: 15%;\">Action</th>"
+					+"</thead>"
+					+"<tbody >";
+			
+		for(CustomerAccounts customer : customerAcc)
+		{
+			
+				table = table	+"<tr>"
+						+"	<td align=\"right\">"+count+"</td>"
+						+"	<td id=\"CustId"+count+"\" align=\"center\">"+customer.getCust_name()+"</td>"
+						+"	<td align=\"center\">"+customer.getContact_no()+"</td>"
+						+"	<td align=\"right\"><input type=\"button\" onclick=\"viewCustomerAcc("+customer.getCust_id()+")\" id=\"buttonAddDel\" value=\"View\"></td>"
+						+"</tr>";
+				searchedCustomerMap.put(customer.getCust_id(), customer);
+				count++;
+		}
+		
+		if(count > 1 )
+		{
+		table = table	+"</tbody>"
+						+"</table>";
+		}else
+		{
+			table = "No item found !";
+		}
 		
 		return table;
 	}
 	
 	@RequestMapping(value = "/getCustomerAccDetails", method = RequestMethod.GET)
 	@ResponseBody
-	public String getCustomerAccDetails(@RequestParam("custIdVal") String custIdVal, ModelMap map) {
-		return custIdVal;
+	public CustomerAccounts getCustomerAccDetails(@RequestParam("custIdVal") String custIdVal, ModelMap map) {
+		
+		
+		CustomerAccounts customer = searchedCustomerMap.get(Integer.valueOf(custIdVal));
+		
+		return customer;
 	
 	}
 	
@@ -165,6 +203,8 @@ public class MainPageController {
 	public String getCustomerAccStatement(@RequestParam("custId") String custId,
 								HttpServletRequest request, ModelMap map) {
 
+		CustomerAccounts customer = searchedCustomerMap.get(custId);
+		
 		int count =1;
 		String credit = "<tr>"
 				+"	<td align=\"right\">"+2+"</td>"
@@ -250,10 +290,21 @@ public class MainPageController {
 	}
 	@RequestMapping(value = "/jsp/payCredit", method = RequestMethod.GET)
 	@ResponseBody
-	public String payCredit(@RequestParam("custId") Integer custId ,@RequestParam("createStatus") boolean createStatus, ModelMap map) {
+	public String payCredit(@RequestParam("custId") Integer custId ,@RequestParam("createStatus") boolean createStatus, @RequestParam("custName") String custName ,@RequestParam("phoneNumber") Integer phoneNumber , @RequestParam("totalamt") Integer totalamt  ,ModelMap map) {
 
+		CustomerAccounts custAcc = new CustomerAccounts();
+		custAcc.setContact_no(phoneNumber);
+		custAcc.setCust_name(custName);
+		custAcc.setCredit(totalamt);
+		custAcc.setTrans_type_id(1);
 		
-		return ""+custId+"--"+createStatus;
+		if(createStatus)
+		{
+		 custId = DatabaseController.insertCustomer(custAcc );
+		}
+		int stst = DatabaseController.makeBillingEntry( totalamt, custId,  0, 0 ,0,  1 );
+		
+		return stst+"";
 	
 	}
 }

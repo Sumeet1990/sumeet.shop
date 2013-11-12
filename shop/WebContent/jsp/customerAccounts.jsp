@@ -101,6 +101,24 @@ function saveCustomer()
 		$("[name='MobileNo']").val("");
 		resetCustomerUpdFeilds();
 	}
+	function deleteCustomer( cust_id) {
+		var xmlhttpDelete;
+		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttpDelete = new XMLHttpRequest();
+		} else {// code for IE6, IE5
+			xmlhttpDelete = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttpDelete.onreadystatechange = function() {
+			if (xmlhttpDelete.readyState == 4 && xmlhttpDelete.status == 200) {
+				alert(xmlhttpDelete.responseText);
+				searchCustomers();
+			}
+		};
+
+		xmlhttpDelete.open("GET", "/shop/deleteCustomer?cust_id="
+				+ cust_id, true);
+		xmlhttpDelete.send();
+	}
 </script>
 
 <ul style="padding: 0.1%;">

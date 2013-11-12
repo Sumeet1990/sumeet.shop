@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 
 public class DatabaseController {
 
@@ -62,7 +63,7 @@ public class DatabaseController {
 		custAcc.setDate(new java.util.Date());
 		String sql = "insert into customer_accounts (cust_id, cust_name, credit,contact_no, register_date,TRANS_TYPE_ID) values (?,?,?,?,?,?)";
 		
-		Object[] args = {custAcc.getCust_id(),custAcc.getCust_name(), custAcc.getCredit(),custAcc.getContact_no() ,custAcc.getDate(),custAcc.getTrans_type_id()
+		Object[] args = {custAcc.getCust_id(),custAcc.getCust_name(), custAcc.getCredit(),custAcc.getContact_no() ,custAcc.getDate(),custAcc.getTrans_type_id() == null ? 0 :custAcc.getTrans_type_id() 
 				};
 		
 		jdbcTemplate.update(sql, args );
@@ -177,4 +178,21 @@ public class DatabaseController {
 		
 		return "Updated--"+status;
 	}
+
+	public static String deleteCustomer(Integer cust_id) {
+		
+		String sql = "DELETE FROM CUSTOMER_ACCOUNTS WHERE CUST_ID = ?";
+		Object[] args = {cust_id};
+		int valid = jdbcTemplate.update(sql , args );
+		return "Deleted -- "+valid;
+		
+	}
+	public static String deleteItem(Integer itemId) {
+			
+			String sql = "DELETE FROM ITEM_DETAILS WHERE ITEM_ID = ?";
+			Object[] args = {itemId};
+			int valid = jdbcTemplate.update(sql , args );
+			return "Deleted -- "+valid;
+			
+		}
 }

@@ -1,5 +1,6 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/javascript/jQuery1.9.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/javascript/commonfuctions.js"></script>
 <script type="text/javascript">
 function saveItem()
 {
@@ -29,7 +30,7 @@ function saveItem()
 Item Name:
 </td>
 <td > 
-<input style="width: 100%;" id="entrys"  name="item_name" type="text" placeholder="Item Name">
+<input style="width: 100%;" id="entrys" onkeyup="upperCaseThetext('item_name')" name="item_name" type="text" placeholder="Item Name">
 </td>
 <td align="right">
 Buy:
@@ -42,7 +43,7 @@ Buy:
 Item Description:
 </td>
 <td align="right">
- <INPUT style="width: 100%;" id="entrys"  name="item_desc" type="text"	placeholder="Item Description" />
+ <INPUT style="width: 100%;" id="entrys"  name="item_desc" onkeyup="upperCaseThetext('item_desc')" type="text"	placeholder="Item Description" />
 </td>
 <td align="right">
 Per Price:

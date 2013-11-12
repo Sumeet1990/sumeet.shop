@@ -1,10 +1,14 @@
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/javascript/jQuery1.9.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/javascript/commonfuctions.js"></script>
+
 <table  id="AccountsTable" style="width: 80%;">
 <tr>
 <td align="right" style="width: 20%;">
 Customer Name:
 </td>
 <td > 
-<input style="width: 100%;" id="entrys"  name="cust_name" type="text" placeholder="Customer Name">
+<input style="width: 100%;" id="entrys" onkeyup="upperCaseThetext('cust_name')"  name="cust_name" type="text" placeholder="Customer Name">
 </td>
 <td align="right">
 Mobile Number:

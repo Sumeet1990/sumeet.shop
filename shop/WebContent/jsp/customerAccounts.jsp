@@ -1,4 +1,8 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/javascript/jQuery1.9.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/javascript/commonfuctions.js"></script>
+
 <script type="text/javascript">
 function saveCustomer()
 {
@@ -61,6 +65,8 @@ function saveCustomer()
 	function viewCustomerAcc(custId) {
 		$("#CustsearchResults").hide();
 		$("#CustUpdateSection").show();
+		$("#AccountsTable :input").attr("disabled", "disabled");
+		$('[name="showStatement"]').removeAttr('disabled');
 
 		var xmlhttp;
 		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -74,6 +80,7 @@ function saveCustomer()
 				$('[name="CustNameUpd"]').val(jsonObj.cust_name);
 				$('[name="MobileNoUpd"]').val(jsonObj.contact_no);
 				$('[name="CreditUpd"]').val(jsonObj.credit);
+				$('[name="custUpdId"]').val(jsonObj.cust_id);
 			}
 		};
 
@@ -104,7 +111,7 @@ function saveCustomer()
 			</h2>
 			<form action="CustomerAccList" method="GET">
 				<li id="CustsearchResults"></li>
-				<li id="CustsearchOption"><input id="entrys"
+				<li id="CustsearchOption"><input id="entrys" onkeyup="upperCaseThetext('Customername')"
 					name="Customername" type="text" placeholder="Customer Name">
 					&nbsp;&nbsp; <input id="entrys" name="MobileNo" type="text"
 					onkeyup="checkNumberOnly('MobileNo','Please enter a valid mobile number !')"

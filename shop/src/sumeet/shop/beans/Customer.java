@@ -7,7 +7,7 @@ import sumeet.shop.datamodel.ItemDetails;
 
 public class Customer {
 	String customername;
-	Integer phonenumber;
+	String phonenumber;
 	List<Item> itemsLst;
 
 	public Customer() {
@@ -30,11 +30,11 @@ public class Customer {
 		this.customername = customername;
 	}
 
-	public Integer getPhonenumber() {
+	public String getPhonenumber() {
 		return phonenumber;
 	}
 
-	public void setPhonenumber(Integer phonenumber) {
+	public void setPhonenumber(String phonenumber) {
 		this.phonenumber = phonenumber;
 	}
 

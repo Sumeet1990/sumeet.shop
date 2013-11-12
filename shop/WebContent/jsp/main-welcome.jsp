@@ -26,16 +26,6 @@
 	href="${pageContext.request.contextPath}/css/searchContainer.css"
 	type="text/css">
 
-<!--[if gt IE 6]>
-	<style type="text/css">
-		html>body ul.domtabs a:link,
-		html>body ul.domtabs a:visited,
-		html>body ul.domtabs a:active,
-		html>body ul.domtabs a:hover{
-			height:3em;
-		}
-	</style>
-<![endif]-->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/javascript/domtab.js"></script>
 <script type="text/javascript"
@@ -410,7 +400,7 @@ try{
 			</h2>
 			<form action="makeBill" onsubmit="return validateInputs();" method="GET" id="makeBillSubmit">
 
-				<input id="inputs" name="customername" type="text"
+				<input id="inputs" name="customername" onkeyup="upperCaseThetext('customername')" type="text"
 					placeholder="Customer Name" autofocus="" required=""><br>
 				<input id="inputs" name="phonenumber" type="text" class="numberOnly"
 					placeholder="Phone Number"><br> <INPUT
@@ -459,9 +449,9 @@ try{
 						<li id="searchResults">
 						</li>
 						<li id="searchOption">
-						<input id="entrys" name="Itemname" type="text" placeholder="Item Name">
+						<input id="entrys" onkeyup="upperCaseThetext('Itemname')" name="Itemname" type="text" placeholder="Item Name">
 						&nbsp;&nbsp;
-						<INPUT id="entrys" name="Description" type="text"	placeholder="Item Description" />
+						<INPUT id="entrys" name="Description" onkeyup="upperCaseThetext('Description')" type="text"	placeholder="Item Description" />
 						<fieldset id="actions">
 							<input type="button" id="submit" onclick="search()" value="Search">
 						</fieldset>

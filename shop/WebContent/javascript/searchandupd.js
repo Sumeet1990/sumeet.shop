@@ -44,6 +44,7 @@ function updateRecord(itemId) {
 				  $('[name="BuyUpd"]').val(json.buy);
 				  $('[name="DescriptionUpd"]').val(json.item_desc);
 				  $('[name="PerPriceUpd"]').val(json.sale);
+				  $('[name="itemIdUpd"]').val(json.item_id);
 					
 		};
 	};
@@ -56,11 +57,17 @@ function changeButton() {
 	try {
 		if ($('[name="submitUpdate"]').val() == 'Edit') {
 			$('[name="submitUpdate"]').prop('value', 'Update');
+			$("#updateTable :input").removeAttr("disabled");
 		}else if ($('[name="submitUpdate"]').val() == 'Update') 
 			{
-			 alert("Updated !");
+			 $("#updateTable :input").attr("disabled", "disabled");
+			 $('[name="submitUpdate"]').css('background', 'none');
+			 $('[name="submitUpdate"]').attr('disabled', 'disabled');
+			updateItemDetails();
+			$('[name="submitUpdate"]').css('background', '');
+			$('[name="submitUpdate"]').removeAttr('disabled');
+			$('[name="submitUpdate"]').prop('value', 'Edit');
 			}
-		$("#updateTable :input").removeAttr("disabled");
 	} catch (err) {
 		alert(err);
 	}
@@ -68,6 +75,30 @@ function changeButton() {
 	 * try{ $('[name="submitUpdate"]' ).val('Update'); }catch(err) { alert(err); }
 	 */
 }
+function updateItemDetails()
+{
+	var ItemnameUpd = $('[name="ItemnameUpd"]').val();
+	var BuyUpd = $('[name="BuyUpd"]').val();
+	var DescriptionUpd = $('[name="DescriptionUpd"]').val();
+	var PerPriceUpd = $('[name="PerPriceUpd"]').val();
+	var itemIdUpd  = $('[name="itemIdUpd"]').val();
+
+	var xmlhttpItem;
+	if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttpItem = new XMLHttpRequest();
+	} else {// code for IE6, IE5
+		xmlhttpItem = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttpItem.onreadystatechange = function() {
+		if (xmlhttpItem.readyState == 4 && xmlhttp.status == 200) {
+			
+			alert(xmlhttpItem.responseText);
+		};
+	};
+
+	xmlhttpItem.open("GET", "/shop/updateItemDetails?ItemnameUpd=" + ItemnameUpd+"&BuyUpd="+BuyUpd+"&DescriptionUpd="+DescriptionUpd+"&PerPriceUpd="+PerPriceUpd+"&itemIdUpd="+itemIdUpd, true);
+	xmlhttpItem.send();
+	}
 function showList() {
 	$("#updateSection").hide();
 	search();

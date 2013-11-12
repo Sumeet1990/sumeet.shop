@@ -1,5 +1,7 @@
 <%@page import="sumeet.shop.beans.Customer"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/javascript/jQuery1.9.js"></script>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css" type="text/css">
 <html>
@@ -38,13 +40,18 @@ function cashPay()
 function creditPay()
 {
 	var custId = <%=request.getAttribute("custId")%>;
+	var validation=false;
 	var status=false;
 if( custId == -1)
 	{
-		status = confirm("Do you want to create a new cutomer account !");
+		validation = $('#saveCustData').is(':checked');
+		if(!validation)
+			{
+			$('#errorMsg').html("<blink>* Please check the box </blink>");
+			}
 	}else
 		{
-		status = !(confirm("Customer already exist, Please select Cancel for creating new account !"));
+		status = confirm("Customer already exist, Please select Cancel for creating new account !");
 		}
 
 	if(window.XMLHttpRequest)
@@ -64,9 +71,13 @@ if( custId == -1)
 	var custName = '<%=cust.getCustomername()%>';
 	var phoneNumber = <%=cust.getPhonenumber()%>;
 	var totalamt = document.getElementById("totalAmount").innerHTML;
-	
-	xmlhttp.open('GET','/shop/jsp/payCredit?custId='+custId+'&createStatus='+status+'&custName='+custName+'&phoneNumber='+phoneNumber+'&totalamt='+totalamt,false);
+	if(validation || status)
+		{
+    	$("[name='creditButton']").css("background","none");
+    	$("[name='creditButton']").attr("disabled","disabled");
+	xmlhttp.open('GET','/shop/jsp/payCredit?custId='+custId+'&createStatus='+validation+'&custName='+custName+'&phoneNumber='+phoneNumber+'&totalamt='+totalamt,false);
 	xmlhttp.send();
+		}
 }
 </script>
 
@@ -87,14 +98,11 @@ if( custId == -1)
 				</tr>
 				<tr>
 					<td style="width: 30%;">Mobile No:</td>
-					<td style="width: 50%;">&nbsp;<%=cust.getPhonenumber() == 0 ? "-" : cust.getPhonenumber() %>&nbsp;</td>
+					<td style="width: 50%;">&nbsp;<%=cust.getPhonenumber() %>&nbsp;</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-	</br>
-	</br>
-	</br>
 	</br>
 	</br>
 	</br>
@@ -133,11 +141,21 @@ if( custId == -1)
 	</table>
 	<table>
 	<tr>
-			<td style="width:678px"></td>
+			<td ></td>
 			<td></td>
 			<td></td>
-			<td><input type="button" id="buttonAddDel"  onclick="cashPay()" value="Cash"></td>
-			<td><input type="button" id="buttonAddDel" onclick="creditPay()" value="Credit"></td>
+			</tr>
+			<tr>
+			<td align="left"><input type="checkbox" id="saveCustData"> Ask Customer does he wants to get registered with us, If yes Please check this box</td></br>
+			</tr>
+			<tr>
+			<td align="left" style="color: red;"> * In case of credit transaction, registration is mandatory.<div id="errorMsg" style="
+    font-style: italic;"></div></td></br>
+			</tr>
+			<tr>
+			<td style="width:690px"></td>
+			<td><input type="button" id="buttonAddDel"  onclick="cashPay()" name="cashButton" value="Cash"></td>
+			<td><input type="button" id="buttonAddDel" onclick="creditPay()"  name="creditButton" value="Credit"></td>
 			</tr>
 	</table>
 </body>

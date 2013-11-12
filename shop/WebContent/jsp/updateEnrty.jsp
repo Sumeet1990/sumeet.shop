@@ -1,10 +1,13 @@
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/javascript/jQuery1.9.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/javascript/commonfuctions.js"></script>
 <table  id="updateTable" style="width: 80%;">
 <tr>
 <td align="right" style="width: 20%;">
 Item Name:
 </td>
 <td > 
-<input style="width: 100%;" id="entrys"  name="ItemnameUpd" type="text" placeholder="Item Name">
+<input style="width: 100%;" id="entrys" onkeyup="upperCaseThetext('ItemnameUpd')" name="ItemnameUpd" type="text" placeholder="Item Name">
 </td>
 <td align="right">
 Buy:
@@ -18,7 +21,7 @@ Buy:
 Item Description:
 </td>
 <td align="right">
- <INPUT style="width: 100%;" id="entrys"  name="DescriptionUpd" type="text"	placeholder="Item Description" />
+ <INPUT style="width: 100%;" id="entrys" onkeyup="upperCaseThetext('DescriptionUpd')" name="DescriptionUpd" type="text"	placeholder="Item Description" />
 </td>
 <td align="right">
 Per Price:
@@ -28,6 +31,9 @@ Per Price:
 </td>
 </tr>
 <tr>
+<td> 
+<INPUT name="itemIdUpd" type="hidden" />
+</td>
 </tr>
 </table>
 <table style="width: 80%;">

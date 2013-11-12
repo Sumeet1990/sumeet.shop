@@ -11,3 +11,9 @@ function checkNumberOnly(nameTextBx,msg){
 		return true;
 		}
 }
+
+function upperCaseThetext(nameTextBx){
+	var value = $("[name='"+nameTextBx+"']").val();
+
+		$("[name='"+nameTextBx+"']").val(value.toUpperCase());
+}

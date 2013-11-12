@@ -27,6 +27,7 @@ public class MainPageController {
 	
 	HashMap<Integer, ItemDetails> searchedItemsMap = null;
 	HashMap<Integer, CustomerAccounts> searchedCustomerMap = null;
+	Customer customer = null;
 
 	@RequestMapping(value = "/jsp/makeBill", method = RequestMethod.GET)
 	public String makeBillAndUpdateRecord(HttpServletRequest request,
@@ -34,9 +35,9 @@ public class MainPageController {
 		String customerName = request.getParameter("customername");
 		String phNm = request.getParameter("phonenumber");
 
-		Customer customer = new Customer();
+		customer = new Customer();
 		customer.setCustomername(customerName);
-		customer.setPhonenumber(Integer.valueOf(phNm.trim().equals("") ? "0" : phNm));
+		customer.setPhonenumber(phNm.trim().equals("") ? "0" : phNm);
 
 		System.out.println(">>>>>>>>>>>>>>>>>" + customerName);
 		boolean moveOut = true;
@@ -204,8 +205,8 @@ public class MainPageController {
 								HttpServletRequest request, ModelMap map) {
 
 		CustomerAccounts customer = searchedCustomerMap.get(custId);
-		
-		int count =1;
+		String table = DatabaseController.getCustomerStmt(custId);
+		/*int count =1;
 		String credit = "<tr>"
 				+"	<td align=\"right\">"+2+"</td>"
 				+"	<td id=\"CustId"+2+"\" align=\"center\">"+new Date()+"2</td>"
@@ -264,7 +265,7 @@ public class MainPageController {
 				+"<td> <input type=\"button\"  id=\"buttonAddDel\"  onclick=\"printCustomerAccStmt()\"  value=\"Print\"></td>"
 				+"</tr>"
 				+"</tbody>"
-				+"</tbody>";
+				+"</tbody>";*/
 		
 		return table;
 	}
@@ -290,21 +291,48 @@ public class MainPageController {
 	}
 	@RequestMapping(value = "/jsp/payCredit", method = RequestMethod.GET)
 	@ResponseBody
-	public String payCredit(@RequestParam("custId") Integer custId ,@RequestParam("createStatus") boolean createStatus, @RequestParam("custName") String custName ,@RequestParam("phoneNumber") Integer phoneNumber , @RequestParam("totalamt") Integer totalamt  ,ModelMap map) {
+	public String payCredit(@RequestParam("custId") Integer custId ,@RequestParam("createStatus") boolean createStatus, @RequestParam("custName") String custName ,@RequestParam("phoneNumber") String phoneNumber , @RequestParam("totalamt") Integer totalamt  ,ModelMap map) {
 
 		CustomerAccounts custAcc = new CustomerAccounts();
 		custAcc.setContact_no(phoneNumber);
 		custAcc.setCust_name(custName);
 		custAcc.setCredit(totalamt);
 		custAcc.setTrans_type_id(1);
+		String itemCode = "";
+		String Quantiy = "";
+		List<Item> itemLst = customer.getItemsLst();
+		for (Item itemObj : itemLst)
+		{
+			itemCode =  itemCode + itemObj.getItemCode()+ " , ";
+			Quantiy =  Quantiy + itemObj.getQuantity() + " , ";
+		}
+		Quantiy = Quantiy.substring(0, Quantiy.lastIndexOf(" , "));
+		itemCode = itemCode.substring(0, itemCode.lastIndexOf(" , "));
 		
 		if(createStatus)
 		{
 		 custId = DatabaseController.insertCustomer(custAcc );
 		}
-		int stst = DatabaseController.makeBillingEntry( totalamt, custId,  0, 0 ,0,  1 );
+		int stst = DatabaseController.makeBillingEntry( totalamt, custId,  0, itemCode ,Quantiy,  1 );
 		
 		return stst+"";
 	
+	}
+	@RequestMapping(value = "/updateItemDetails", method = RequestMethod.GET)
+	@ResponseBody
+	public String updateItemDetails(@RequestParam("ItemnameUpd") String ItemnameUpd ,@RequestParam("BuyUpd") Integer BuyUpd, @RequestParam("DescriptionUpd") String DescriptionUpd ,@RequestParam("PerPriceUpd") String PerPriceUpd,@RequestParam("itemIdUpd") Integer  itemIdUpd ,ModelMap map) {
+
+		String status = DatabaseController.updateItemDetails(itemIdUpd,ItemnameUpd,BuyUpd,PerPriceUpd,DescriptionUpd);
+		
+	return status;
+	}
+	
+	@RequestMapping(value = "/updateCustomerDetails", method = RequestMethod.GET)
+	@ResponseBody
+	public String updateCustomerDetails(@RequestParam("CustNameUpd") String CustNameUpd ,@RequestParam("MobileNoUpd") String MobileNoUpd, @RequestParam("CreditUpd") Long CreditUpd ,@RequestParam("custUpdId") String custUpdId ,ModelMap map) {
+
+		String status = DatabaseController.updateCustomerDetails(custUpdId,CustNameUpd,MobileNoUpd,CreditUpd);
+		
+	return status;
 	}
 }

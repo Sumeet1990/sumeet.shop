@@ -50,14 +50,14 @@ function resestSubmit()
 <form:form  commandName="userDetails" id="register" action="registerUser" method="POST" onsubmit="return checkFrSamePassword()">
     <h1>Register</h1>
 
-    <input id="inputsnormal" name="name" type="text" placeholder="Name/Owner" autofocus required><br>
-    <input id="inputsnormal" name="company" type="text" placeholder="Company" required><br>
+    <input id="inputsnormal" name="name" onkeyup="upperCaseThetext('name')" type="text" placeholder="Name/Owner" autofocus required><br>
+    <input id="inputsnormal" name="company" onkeyup="upperCaseThetext('company')" type="text" placeholder="Company" required><br>
     <input id="inputsnormal" name="contact_no" type="number" placeholder="PhoneNumber"><br>
   	<input id="inputsnormal" name="address1" type="text" placeholder="Address Line 1" required>
   	<input id="inputsnormal" name="address2" type="text" placeholder="Address Line 2">
   	<input id="inputsnormal" name="address3" type="text" placeholder="Address Line 3"><br>
     <input id="inputsnormal" name="email" type="email" placeholder="EmailId"><br>
-    <input id="inputsnormal" name="user_name" type="text" placeholder="Username" required>   
+    <input id="inputsnormal" name="user_name" onkeyup="upperCaseThetext('user_name')" type="text" placeholder="Username" required>   
     <br><input id="inputsnormal" name="password" type="password" placeholder="Password" required><br>
     <input id="inputsnormal" name="confirmpassword" type="password" placeholder="Confirm Password" required><br>
 

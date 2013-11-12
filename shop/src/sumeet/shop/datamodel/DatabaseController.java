@@ -89,7 +89,7 @@ public class DatabaseController {
 		return itemLst;
 	}
 
-	public static int getCustomerId(String customername, Integer phonenumber) {
+	public static int getCustomerId(String customername, String phonenumber) {
 		
 		String sql = "select cust_id from customer_accounts where contact_no = ? and cust_name = ? ";
 		Object[] values = {phonenumber,customername};
@@ -101,11 +101,11 @@ public class DatabaseController {
 		}
 	}
 
-	public static int makeBillingEntry(Integer totalamt, Integer custId, Integer discount, Integer ItemId , Integer quantity, Integer transType) {
+	public static int makeBillingEntry(Integer totalamt, Integer custId, Integer discount, String itemCode , String quantiy, Integer transType) {
 		String billId = "select BILL_ID_SEQ.nextval from dual";
 		int billIdVal = jdbcTemplate.queryForInt(billId);
-		String sql = "insert into billing_entry(bill_id, cust_id, discount, item_id, quantity, total_amount, trans_type_id) values (?,?,?,?,?,?,?)";
-		Object[] values = {billIdVal,custId,discount,ItemId,quantity,totalamt,transType};
+		String sql = "insert into billing_entry(bill_id, cust_id, discount, ITEM_DESC, quantity, total_amount, trans_type_id) values (?,?,?,?,?,?,?)";
+		Object[] values = {billIdVal,custId,discount,itemCode,quantiy,totalamt,transType};
 		try{
 			return jdbcTemplate.update(sql,values);
 		}catch (Exception e)
@@ -136,12 +136,45 @@ public class DatabaseController {
 			CustomerAccounts cust = new CustomerAccounts();
 			cust.setCust_id(Integer.valueOf(((BigDecimal) row.get("CUST_ID")).toPlainString()));
 			cust.setCust_name((String)row.get("CUST_NAME"));
-			cust.setContact_no(Integer.valueOf(((BigDecimal) row.get("CONTACT_NO")).toPlainString()));
+			cust.setContact_no((String)row.get("CONTACT_NO"));
 			cust.setCredit(Integer.valueOf(((BigDecimal) row.get("CREDIT")).toPlainString()));
 			cust.setDate((String)row.get("REGISTER_DATE"));
 			cust.setTrans_type_id(Integer.valueOf(((BigDecimal) row.get("TRANS_TYPE_ID")).toPlainString()));
 			custLst.add(cust);
 		}
 		return custLst;
+	}
+
+	public static String getCustomerStmt(String custId) {
+		
+		String sql = "select get_cust_stmt_dtils_fn(?) from dual";
+		Object[] values = {Integer.valueOf(custId)};
+		String table = jdbcTemplate.queryForObject(sql,values, String.class);
+		
+		return table;
+		
+	}
+
+	public static String updateItemDetails(Integer itemIdUpd,
+			String itemnameUpd, Integer buyUpd, String perPriceUpd,
+			String descriptionUpd) {
+
+		String sql = "UPDATE ITEM_DETAILS SET ITEM_DESC = ? , item_name= ? , buy = ?,  sale = ? where item_id = ? ";
+		Object[] values = {descriptionUpd,itemnameUpd,buyUpd,perPriceUpd,itemIdUpd};
+		
+		int status =  jdbcTemplate.update(sql, values);
+		
+		return "Updated--"+status;
+	}
+
+	public static String updateCustomerDetails(String custUpdId,
+			String custNameUpd, String mobileNoUpd, Long creditUpd) {
+		
+		String sql = "UPDATE CUSTOMER_ACCOUNTS SET CUST_NAME = ?, CONTACT_NO = ? , credit = ? WHERE cust_id = ?";
+		Object[] values = {custNameUpd,mobileNoUpd,creditUpd,custUpdId};
+		
+		int status =  jdbcTemplate.update(sql, values);
+		
+		return "Updated--"+status;
 	}
 }

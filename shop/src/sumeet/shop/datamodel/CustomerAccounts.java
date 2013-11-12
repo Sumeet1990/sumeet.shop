@@ -6,7 +6,7 @@ import java.util.Date;
 public class CustomerAccounts {
 	Integer cust_id;
 	String cust_name;
-	Integer contact_no;
+	String contact_no;
 	Integer credit;
 	Integer trans_type_id;
 	public Integer getTrans_type_id() {
@@ -29,10 +29,10 @@ public class CustomerAccounts {
 	public void setCust_name(String cust_name) {
 		this.cust_name = cust_name;
 	}
-	public Integer getContact_no() {
+	public String getContact_no() {
 		return contact_no;
 	}
-	public void setContact_no(Integer contact_no) {
+	public void setContact_no(String contact_no) {
 		this.contact_no = contact_no;
 	}
 	
